@@ -15,21 +15,27 @@ namespace Dominio
 
         public Peca(Point posicaoInicial, Cor cor)
         {
-            this.PosicaoInicial = posicaoInicial;
+            this.PosicaoAtual = posicaoInicial;
             this.Cor = cor;
-            this.posicoesPossiveis = new List<Point>();
+            this.PosicoesPossiveis = new List<Point>();
+            this.Descartada = false;
         }
 
-        public Point PosicaoInicial { get; private set; }
+        public Point PosicaoAtual { get; private set; }
 
         public Cor Cor { get; private set; }
 
-        public List<Point> posicoesPossiveis { get; private set; }
+        public List<Point> PosicoesPossiveis { get; private set; }
 
-        public void salvarPosicao(Point novaPosicao)
+        public bool Descartada { get; private set; }
+
+        public void AdicionarPosicao(Point novaPosicao)
         {
-            this.posicoesPossiveis.Add(novaPosicao);
+            this.PosicoesPossiveis.Add(novaPosicao);
         }
-
+        public void Descartar()
+        {
+            this.Descartada = true;
+        }
     }
 }

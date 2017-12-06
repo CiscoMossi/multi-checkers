@@ -12,7 +12,8 @@ namespace Dominio.Entidades
         {
 
         }
-        public string GenerateUrl() {
+        public string GenerateUrl()
+        {
             string URL = "";
             List<int> numbers = new List<int>() { 1, 2, 3, 4, 5, 6, 7, 8, 9, 0 };
             List<char> characters = new List<char>()
@@ -36,6 +37,5 @@ namespace Dominio.Entidades
 
             return URL;
         }
-
     }
 }
