@@ -13,14 +13,23 @@ namespace Dominio
         private Peca()
         { }
 
-        public Peca(System.Drawing.Point posicaoInicial, Cor cor)
+        public Peca(Point posicaoInicial, Cor cor)
         {
             this.PosicaoInicial = posicaoInicial;
             this.Cor = cor;
+            this.posicoesPossiveis = new List<Point>();
         }
 
         public Point PosicaoInicial { get; private set; }
 
         public Cor Cor { get; private set; }
+
+        public List<Point> posicoesPossiveis { get; private set; }
+
+        public void salvarPosicao(Point novaPosicao)
+        {
+            this.posicoesPossiveis.Add(novaPosicao);
+        }
+
     }
 }

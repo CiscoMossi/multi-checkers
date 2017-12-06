@@ -8,5 +8,13 @@ namespace Dominio
 {
     class Tabuleiro
     {
+        private static int LIMITE_MIN = 0;
+        private static int LIMITE_MAX = 8;
+
+        public Tabuleiro()
+        { }
+
+        public List<Peca> pecas { get; private set; }
+        
     }
 }
