@@ -16,10 +16,44 @@ body {
     width: 100%;
 }
 
-.tabuleiro {
-    width: 500px;
-    height: 500px;
-    background-color: #fff;
+.novo-jogo{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.is-not-first{
+    margin-top: 10px;
+}
+
+.add{
+    color: #fff;
+    font-size: 40px;
+    font-weight: bold;
+    background-color: #209cee;
+    width: 70px;
+    height: 70px;
+    padding-left: 22px;
+    -webkit-box-shadow: 7px 10px 19px 0px rgba(0,0,0,0.59);
+    -moz-box-shadow: 7px 10px 19px 0px rgba(0,0,0,0.59);
+    box-shadow: 7px 10px 19px 0px rgba(0,0,0,0.59);
+}
+
+.add:hover{
+    background-color: #187abc;
+    transition: .2s;
+    color: #fff;
+}
+
+.notification {
+    -webkit-box-shadow: 0px 0px 38px 10px rgba(0,0,0,0.59);
+    -moz-box-shadow: 0px 0px 38px 10px rgba(0,0,0,0.59);
+    box-shadow: 0px 0px 38px 10px rgba(0,0,0,0.59);
+}
+
+.delete{
+    margin: 5px;
 }
 
 .luz{
@@ -33,13 +67,71 @@ body {
     justify-content: center;
 }
 
-.novo-jogo{
+.tabuleiro {
+    width: 40vw;
+	height: 40vw;
+    background-image: url("images/tabuleiro.jpg");
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.borda {
+    width: 90%;
+    height: 90%;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
+    position: relative;
+    border: 2px solid rgb(43, 15, 4);
 }
 
-.is-not-first{
-    margin-top: 10px;
+.linha {
+    display: flex;
+    width: 100%;
+    height: 12.5%;
 }
+
+.quadrado{
+    width: 12.5%;
+    height: 100%;
+    float: left;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.black {
+    background-image: url("images/blacksquare.jpg")
+}
+
+.white {
+    background-color: #fff;
+}
+
+.peca {
+    width: 12.5%;
+    height: 12.5%;
+    border-radius: 50%;
+    background-color: red;
+}
+
+.a {
+    background-color: blue
+}
+
+/* @media screen and (max-width: 800px){
+    .tabuleiro {
+        width: 400px;
+        height: 400px;
+    }
+}
+
+@media screen and (max-width: 630px){
+    .tabuleiro {
+        width: 300px;
+        height: 300px;
+    }
+} */
