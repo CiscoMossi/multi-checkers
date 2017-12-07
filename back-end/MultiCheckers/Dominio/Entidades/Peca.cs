@@ -18,7 +18,6 @@ namespace Dominio
             this.PosicaoAtual = posicaoInicial;
             this.Cor = cor;
             this.PosicoesPossiveis = new List<Point>();
-            this.Descartada = false;
         }
 
         public Point PosicaoAtual { get; private set; }
@@ -27,15 +26,10 @@ namespace Dominio
 
         public List<Point> PosicoesPossiveis { get; private set; }
 
-        public bool Descartada { get; private set; }
-
         public void AdicionarPosicao(Point novaPosicao)
         {
             this.PosicoesPossiveis.Add(novaPosicao);
         }
-        public void Descartar()
-        {
-            this.Descartada = true;
-        }
+
     }
 }

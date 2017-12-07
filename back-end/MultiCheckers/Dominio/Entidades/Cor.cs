@@ -8,7 +8,7 @@ namespace Dominio.Entidades
 {
     public enum Cor
     {
-        PRETA = 0,
-        BRANCA = 1
+        BRANCA = 0,
+        PRETA = 1        
     }
 }
