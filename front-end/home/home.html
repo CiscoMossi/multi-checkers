@@ -1,0 +1,14 @@
+<div class="novo-jogo">
+    <a class="button is-success" ng-click="gerarPartida()">Gerar Partida</a>
+
+    <div class="field has-addons is-not-first" ng-show="gerado">
+        <div class="control">
+            <input class="input" type="text" ng-model="url" disabled>
+        </div>
+        <div class="control">
+            <a class="button is-info" ng-click="copiar(url)">
+                Copiar
+            </a>
+        </div>
+    </div>
+</div>

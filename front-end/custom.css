@@ -5,4 +5,41 @@
 body {
     margin: 0;
     height: 100vh;
+    background-image: url("https://static1.squarespace.com/static/54e5f8d8e4b0c694a3dc90e4/t/5604087fe4b0d28c824e3a2a/1443104899453/Substation+Wood+Texture.jpg?format=2500w");
+}
+
+.main {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+}
+
+.tabuleiro {
+    width: 500px;
+    height: 500px;
+    background-color: #fff;
+}
+
+.luz{
+    width: 750px;
+    height: 750px;
+    background-color: rgba(242, 195, 19, .5);
+    border-radius: 50%;
+    position: fixed;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.novo-jogo{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.is-not-first{
+    margin-top: 10px;
 }
