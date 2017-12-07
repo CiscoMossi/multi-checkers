@@ -12,10 +12,15 @@ namespace Dominio.Entidades
         {
 
         }
-        public string GenerateUrl() {
+<<<<<<< HEAD:back-end/MultiCheckers/Dominio/Entidades/Url.cs
+        public string GenerateUrl()
+        {
+=======
+        public string GeradorDeUrl() {
+>>>>>>> f2078ec8497e83f8e48a517974d5dee88710e762:back-end/MultiCheckers/Dominio/Entidades/GeradorUrl.cs
             string URL = "";
-            List<int> numbers = new List<int>() { 1, 2, 3, 4, 5, 6, 7, 8, 9, 0 };
-            List<char> characters = new List<char>()
+            List<int> numeros = new List<int>() { 1, 2, 3, 4, 5, 6, 7, 8, 9, 0 };
+            List<char> caracteres = new List<char>()
 {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', '-', '_'};
 
             Random rand = new Random();
@@ -24,18 +29,17 @@ namespace Dominio.Entidades
                 int random = rand.Next(0, 3);
                 if (random == 1)
                 {
-                    random = rand.Next(0, numbers.Count);
-                    URL += numbers[random].ToString();
+                    random = rand.Next(0, numeros.Count);
+                    URL += numeros[random].ToString();
                 }
                 else
                 {
-                    random = rand.Next(0, characters.Count);
-                    URL += characters[random].ToString();
+                    random = rand.Next(0, caracteres.Count);
+                    URL += caracteres[random].ToString();
                 }
             }
 
             return URL;
         }
-
     }
 }
