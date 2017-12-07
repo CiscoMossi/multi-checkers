@@ -10,7 +10,7 @@ namespace Dominio
 {
     public class Tabuleiro
     {
-        private static int LIMITE_MIN = 0;
+        private static int LIMITE_MIN = 1;
         private static int LIMITE_MAX = 8;
 
         public Tabuleiro()
@@ -73,34 +73,58 @@ namespace Dominio
                                                   p.PosicaoAtual.Y == posicaoDesejada.Y).Cor != peca.Cor;
         }
 
-        public Peca EncontrarPeca(Point posicaoDesejada)
+        private bool ValidarERefazerMovimento(Peca peca, Point posicaoDesejada)
         {
-            return this.Pecas.FirstOrDefault(p => p.PosicaoAtual.X == posicaoDesejada.X &&
-                                                  p.PosicaoAtual.Y == posicaoDesejada.Y);
+            if(this.ValidarPecaDentroTabuleiro(posicaoDesejada))
+            {
+                if (this.ValidarOutraPecaNoLocal(peca, posicaoDesejada))
+                {
+                    if (this.ValidarPecaInimiga(peca, posicaoDesejada))
+                        return true;
+                }
+                else
+                    peca.AdicionarPosicao(posicaoDesejada);
+            }
+            return false;
         }
 
-        public void CalcularMovimentos(Peca peca)
+        private void AplicarMovimentos(Peca peca, Point movimentacao)
         {
-            Point posicaoDesejadaEsquerda = new Point(peca.PosicaoAtual.X + 1, peca.PosicaoAtual.Y + 1);
-            Point posicaoDesejadaDireita = new Point(peca.PosicaoAtual.X + 1, peca.PosicaoAtual.Y + 1);
-
-            if(this.ValidarPecaDentroTabuleiro(posicaoDesejadaDireita))
+            if (this.ValidarERefazerMovimento(peca, new Point(peca.PosicaoAtual.X + movimentacao.X,
+                                                              peca.PosicaoAtual.Y + movimentacao.Y)))
             {
-                if (this.ValidarOutraPecaNoLocal(peca, posicaoDesejadaDireita))
-                {
-                    if (this.ValidarPecaInimiga(peca, posicaoDesejadaDireita))
-                    {
-                        // TO-DO: estruturar métodos para poder chamar de novo CalcularMovimentos com a nova posição
-                    }
-                } else
-                    peca.AdicionarPosicao(posicaoDesejadaDireita);
+                peca.AdicionarPosicao(new Point(peca.PosicaoAtual.X + 2* movimentacao.X,
+                                                peca.PosicaoAtual.Y + 2* movimentacao.Y));
             }
-        } // TO-DO: estruturar métodos para só fazer essa lógica uma vez, sem precisar criar dois Point aqui dentro.
+        }
+
+        private void CalcularMovimentos(Peca peca)
+        {
+            Point avancoDireita = new Point(1, 1);
+            Point avancoEsquerda = new Point(-1, 1);
+
+            this.AplicarMovimentos(peca, avancoDireita);
+            this.AplicarMovimentos(peca, avancoEsquerda);
+
+            if (peca.IsDama)
+            {
+                Point recuoDireita = new Point(1, -1);
+                Point recuoEsquerda = new Point(-1, -1);
+
+                this.AplicarMovimentos(peca, recuoDireita);
+                this.AplicarMovimentos(peca, recuoEsquerda);
+            }
+        }
 
         public void PercorrerTabuleiro(Cor cor)
         {
             List<Peca> pecasAmigas = this.Pecas.FindAll(p => p.Cor == cor);
             pecasAmigas.ForEach(p => this.CalcularMovimentos(p));
+        }
+
+        public void AdicionarPeca(Peca peca)
+        {
+            this.Pecas.Add(peca);
         }
 
     }

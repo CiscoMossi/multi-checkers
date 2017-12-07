@@ -9,15 +9,32 @@ using System.Web.Http;
 
 namespace WebApi.Controllers
 {
-    [RoutePrefix("api/tabuleiro")]
+    [RoutePrefix("tabuleiro")]
     public class TabuleiroController : BaseController
     {
-        [HttpPost]
-        public HttpResponseMessage EditarClasseVoo([FromBody] Tabuleiro tabuleiro, int cor)
+        [HttpGet]
+        public HttpResponseMessage IniciarPartida()
         {
-            tabuleiro.PercorrerTabuleiro((Cor) cor);
+            Tabuleiro tabuleiro = new Tabuleiro();
+            tabuleiro.PosicionarInicioPartida();
 
             return ResponderOK(tabuleiro);
+        }
+
+        [HttpPost]
+        public HttpResponseMessage CarregarMovimentos([FromBody] Tabuleiro tabuleiro, int cor)
+        {
+            tabuleiro.PercorrerTabuleiro((Cor)cor);
+
+            return ResponderOK(tabuleiro);
+        }
+
+        [HttpPost]
+        [Route("teste")]
+        public HttpResponseMessage Teste([FromBody] Point teste)
+        {
+
+            return ResponderOK(teste);
         }
     }
 }
