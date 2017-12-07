@@ -5,5 +5,9 @@ angular.module('app')
             templateUrl: 'home/home.html',
             controller: 'HomeCtrl'
         })
+        .when('/sala', {
+            templateUrl: 'jogo/jogo.html',
+            controller: 'JogoCtrl'
+        })
         .otherwise('/home');
 })
