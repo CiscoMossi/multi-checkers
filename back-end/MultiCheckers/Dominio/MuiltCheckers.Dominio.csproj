@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Entidades\Cor.cs" />
+    <Compile Include="Entidades\GeradorUrl.cs" />
     <Compile Include="Entidades\Peca.cs" />
     <Compile Include="Entidades\Point.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
