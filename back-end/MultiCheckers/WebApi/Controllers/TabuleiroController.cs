@@ -28,13 +28,5 @@ namespace WebApi.Controllers
 
             return ResponderOK(tabuleiro);
         }
-
-        [HttpPost]
-        [Route("teste")]
-        public HttpResponseMessage Teste([FromBody] Point teste)
-        {
-
-            return ResponderOK(teste);
-        }
     }
 }

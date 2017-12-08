@@ -8,16 +8,14 @@ namespace Dominio.Entidades
 {
     public class Point
     {
-        public Point() { }
-
-        public Point(int X, int Y)
+        public Point(int x, int y)
         {
-            this.X = X;
-            this.Y = Y;
+            this.X = x;
+            this.Y = y;
         }
 
-        public int X { get; set; }
+        public int X { get; private set; }
 
-        public int Y { get; set; }
+        public int Y { get; private set; }
     }
 }

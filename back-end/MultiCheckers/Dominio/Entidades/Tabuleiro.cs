@@ -21,36 +21,43 @@ namespace Dominio
         public List<Peca> Pecas { get; private set; }
 
         public void PosicionarInicioPartida()
-        {
+        {            
             Pecas.Add(new Peca(new Point(1,1), Cor.BRANCA));
-            Pecas.Add(new Peca(new Point(1,3), Cor.BRANCA));
-            Pecas.Add(new Peca(new Point(1,5), Cor.BRANCA));
-            Pecas.Add(new Peca(new Point(1,7), Cor.BRANCA));
+            Pecas.Add(new Peca(new Point(3,1), Cor.BRANCA));
+            Pecas.Add(new Peca(new Point(5,1), Cor.BRANCA));
+            Pecas.Add(new Peca(new Point(7,1), Cor.BRANCA));
 
             Pecas.Add(new Peca(new Point(2,2), Cor.BRANCA));
-            Pecas.Add(new Peca(new Point(2,4), Cor.BRANCA));
-            Pecas.Add(new Peca(new Point(2,6), Cor.BRANCA));
-            Pecas.Add(new Peca(new Point(2,8), Cor.BRANCA));
+            Pecas.Add(new Peca(new Point(4,2), Cor.BRANCA));
+            Pecas.Add(new Peca(new Point(6,2), Cor.BRANCA));
+            Pecas.Add(new Peca(new Point(8,2), Cor.BRANCA));
 
-            Pecas.Add(new Peca(new Point(3,1), Cor.BRANCA));
+            Pecas.Add(new Peca(new Point(1,3), Cor.BRANCA));
             Pecas.Add(new Peca(new Point(3,3), Cor.BRANCA));
-            Pecas.Add(new Peca(new Point(3,5), Cor.BRANCA));
-            Pecas.Add(new Peca(new Point(3,7), Cor.BRANCA));
+            Pecas.Add(new Peca(new Point(5,3), Cor.BRANCA));
+            Pecas.Add(new Peca(new Point(7,3), Cor.BRANCA));
 
-            Pecas.Add(new Peca(new Point(6,2), Cor.PRETA));
-            Pecas.Add(new Peca(new Point(6,4), Cor.PRETA));
+            Pecas.Add(new Peca(new Point(2,6), Cor.PRETA));
+            Pecas.Add(new Peca(new Point(4,6), Cor.PRETA));
             Pecas.Add(new Peca(new Point(6,6), Cor.PRETA));
-            Pecas.Add(new Peca(new Point(6,8), Cor.PRETA));
+            Pecas.Add(new Peca(new Point(8,6), Cor.PRETA));
 
-            Pecas.Add(new Peca(new Point(7,1), Cor.PRETA));
-            Pecas.Add(new Peca(new Point(7,3), Cor.PRETA));
-            Pecas.Add(new Peca(new Point(7,5), Cor.PRETA));
+            Pecas.Add(new Peca(new Point(1,7), Cor.PRETA));
+            Pecas.Add(new Peca(new Point(3,7), Cor.PRETA));
+            Pecas.Add(new Peca(new Point(5,7), Cor.PRETA));
             Pecas.Add(new Peca(new Point(7,7), Cor.PRETA));
 
-            Pecas.Add(new Peca(new Point(8,2), Cor.PRETA));
-            Pecas.Add(new Peca(new Point(8,4), Cor.PRETA));
-            Pecas.Add(new Peca(new Point(8,6), Cor.PRETA));
+            Pecas.Add(new Peca(new Point(2,8), Cor.PRETA));
+            Pecas.Add(new Peca(new Point(4,8), Cor.PRETA));
+            Pecas.Add(new Peca(new Point(6,8), Cor.PRETA));
             Pecas.Add(new Peca(new Point(8,8), Cor.PRETA));
+        }
+
+        private void ValidarDama(Peca peca)
+        {
+            if ((peca.Cor == Cor.BRANCA && peca.PosicaoAtual.Y == 8) ||
+                (peca.Cor == Cor.PRETA && peca.PosicaoAtual.Y == 1))
+                peca.TransformarEmDama();
         }
 
         private bool ValidarPecaDentroTabuleiro(Point posicaoDesejada)
@@ -114,6 +121,7 @@ namespace Dominio
                 this.AplicarMovimentos(peca, recuoDireita);
                 this.AplicarMovimentos(peca, recuoEsquerda);
             }
+            this.ValidarDama(peca);
         }
 
         public void PercorrerTabuleiro(Cor cor)
