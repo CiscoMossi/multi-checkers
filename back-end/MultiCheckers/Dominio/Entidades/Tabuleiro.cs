@@ -10,8 +10,8 @@ namespace Dominio
 {
     public class Tabuleiro
     {
-        private static int LIMITE_MIN = 1;
-        private static int LIMITE_MAX = 8;
+        private int LIMITE_MIN = 1;
+        private int LIMITE_MAX = 8;
 
         public Tabuleiro()
         {
@@ -20,37 +20,53 @@ namespace Dominio
 
         public List<Peca> Pecas { get; private set; }
 
-        public void PosicionarInicioPartida()
+        public bool Validar(Tabuleiro tabuleiro)
         {
+            var diferentes = this.Pecas
+                               .Select(a => a.PosicaoAtual)
+                               .Except(tabuleiro.Pecas.Select(b => b.PosicaoAtual));
+
+            return diferentes.Count() != 1;
+        }
+
+        public void PosicionarInicioPartida()
+        {            
             Pecas.Add(new Peca(new Point(1,1), Cor.BRANCA));
-            Pecas.Add(new Peca(new Point(1,3), Cor.BRANCA));
-            Pecas.Add(new Peca(new Point(1,5), Cor.BRANCA));
-            Pecas.Add(new Peca(new Point(1,7), Cor.BRANCA));
+            Pecas.Add(new Peca(new Point(3,1), Cor.BRANCA));
+            Pecas.Add(new Peca(new Point(5,1), Cor.BRANCA));
+            Pecas.Add(new Peca(new Point(7,1), Cor.BRANCA));
 
             Pecas.Add(new Peca(new Point(2,2), Cor.BRANCA));
-            Pecas.Add(new Peca(new Point(2,4), Cor.BRANCA));
-            Pecas.Add(new Peca(new Point(2,6), Cor.BRANCA));
-            Pecas.Add(new Peca(new Point(2,8), Cor.BRANCA));
+            Pecas.Add(new Peca(new Point(4,2), Cor.BRANCA));
+            Pecas.Add(new Peca(new Point(6,2), Cor.BRANCA));
+            Pecas.Add(new Peca(new Point(8,2), Cor.BRANCA));
 
-            Pecas.Add(new Peca(new Point(3,1), Cor.BRANCA));
+            Pecas.Add(new Peca(new Point(1,3), Cor.BRANCA));
             Pecas.Add(new Peca(new Point(3,3), Cor.BRANCA));
-            Pecas.Add(new Peca(new Point(3,5), Cor.BRANCA));
-            Pecas.Add(new Peca(new Point(3,7), Cor.BRANCA));
+            Pecas.Add(new Peca(new Point(5,3), Cor.BRANCA));
+            Pecas.Add(new Peca(new Point(7,3), Cor.BRANCA));
 
-            Pecas.Add(new Peca(new Point(6,2), Cor.PRETA));
-            Pecas.Add(new Peca(new Point(6,4), Cor.PRETA));
+            Pecas.Add(new Peca(new Point(2,6), Cor.PRETA));
+            Pecas.Add(new Peca(new Point(4,6), Cor.PRETA));
             Pecas.Add(new Peca(new Point(6,6), Cor.PRETA));
-            Pecas.Add(new Peca(new Point(6,8), Cor.PRETA));
+            Pecas.Add(new Peca(new Point(8,6), Cor.PRETA));
 
-            Pecas.Add(new Peca(new Point(7,1), Cor.PRETA));
-            Pecas.Add(new Peca(new Point(7,3), Cor.PRETA));
-            Pecas.Add(new Peca(new Point(7,5), Cor.PRETA));
+            Pecas.Add(new Peca(new Point(1,7), Cor.PRETA));
+            Pecas.Add(new Peca(new Point(3,7), Cor.PRETA));
+            Pecas.Add(new Peca(new Point(5,7), Cor.PRETA));
             Pecas.Add(new Peca(new Point(7,7), Cor.PRETA));
 
-            Pecas.Add(new Peca(new Point(8,2), Cor.PRETA));
-            Pecas.Add(new Peca(new Point(8,4), Cor.PRETA));
-            Pecas.Add(new Peca(new Point(8,6), Cor.PRETA));
+            Pecas.Add(new Peca(new Point(2,8), Cor.PRETA));
+            Pecas.Add(new Peca(new Point(4,8), Cor.PRETA));
+            Pecas.Add(new Peca(new Point(6,8), Cor.PRETA));
             Pecas.Add(new Peca(new Point(8,8), Cor.PRETA));
+        }
+
+        private void ValidarDama(Peca peca)
+        {
+            if ((peca.Cor == Cor.BRANCA && peca.PosicaoAtual.Y == 8) ||
+                (peca.Cor == Cor.PRETA && peca.PosicaoAtual.Y == 1))
+                peca.TransformarEmDama();
         }
 
         private bool ValidarPecaDentroTabuleiro(Point posicaoDesejada)
@@ -100,24 +116,27 @@ namespace Dominio
 
         private void CalcularMovimentos(Peca peca)
         {
-            Point avancoDireita = new Point(1, 1);
-            Point avancoEsquerda = new Point(-1, 1);
+            Point avancoDireita = new Point(1, peca.Cor == Cor.BRANCA ? 1 : -1);
+            Point avancoEsquerda = new Point(-1, peca.Cor == Cor.BRANCA ? 1 : -1);
 
             this.AplicarMovimentos(peca, avancoDireita);
             this.AplicarMovimentos(peca, avancoEsquerda);
 
             if (peca.IsDama)
             {
-                Point recuoDireita = new Point(1, -1);
-                Point recuoEsquerda = new Point(-1, -1);
+                Point recuoDireita = new Point(1, peca.Cor == Cor.BRANCA ? -1 : 1);
+                Point recuoEsquerda = new Point(-1, peca.Cor == Cor.BRANCA ? -1 : 1);
 
                 this.AplicarMovimentos(peca, recuoDireita);
                 this.AplicarMovimentos(peca, recuoEsquerda);
             }
+            this.ValidarDama(peca);
         }
 
         public void PercorrerTabuleiro(Cor cor)
         {
+            this.Pecas.ForEach(a => a.PosicoesPossiveis.ForEach(b => b = new Point()));
+
             List<Peca> pecasAmigas = this.Pecas.FindAll(p => p.Cor == cor);
             pecasAmigas.ForEach(p => this.CalcularMovimentos(p));
         }

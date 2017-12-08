@@ -1,5 +1,6 @@
 ﻿using Dominio;
 using Dominio.Entidades;
+using MultiCheckers.Testes.Repositorios;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,32 +10,37 @@ using System.Web.Http;
 
 namespace WebApi.Controllers
 {
-    [RoutePrefix("tabuleiro")]
     public class TabuleiroController : BaseController
     {
+        private static Cor COR_ATUAL = Cor.BRANCA;
+        private static TabuleiroRepository tabuleiroRepository = new TabuleiroRepository();
+
         [HttpGet]
-        public HttpResponseMessage IniciarPartida()
+        public HttpResponseMessage Consultar()
         {
-            Tabuleiro tabuleiro = new Tabuleiro();
-            tabuleiro.PosicionarInicioPartida();
+            Tabuleiro tabuleiro = tabuleiroRepository.ObterTabuleiro();
+            Cor cor = COR_ATUAL;
 
-            return ResponderOK(tabuleiro);
+            Object resposta = new { tabuleiro, cor };
+            return ResponderOK(resposta);
         }
 
-        [HttpPost]
-        public HttpResponseMessage CarregarMovimentos([FromBody] Tabuleiro tabuleiro, int cor)
+        [HttpPut]
+        public HttpResponseMessage Atualizar([FromBody] Tabuleiro novoTabuleiro, int cor)
         {
-            tabuleiro.PercorrerTabuleiro((Cor)cor);
+            if ((Cor) cor != COR_ATUAL)
+                return ResponderErro("Turno do adversário");
 
-            return ResponderOK(tabuleiro);
-        }
+            Tabuleiro tabuleiro = tabuleiroRepository.ObterTabuleiro();
+            if (tabuleiro.Validar(novoTabuleiro))
+                return ResponderErro("Apenas uma peça pode ser movimentada por jogada");
 
-        [HttpPost]
-        [Route("teste")]
-        public HttpResponseMessage Teste([FromBody] Point teste)
-        {
+            tabuleiro.PercorrerTabuleiro((Cor) cor);
+            tabuleiroRepository.EditarTabuleiro(novoTabuleiro);
 
-            return ResponderOK(teste);
+            COR_ATUAL = (COR_ATUAL == Cor.BRANCA ? Cor.PRETA : Cor.BRANCA);
+
+            return ResponderOK(novoTabuleiro);
         }
     }
 }

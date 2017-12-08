@@ -57,6 +57,7 @@
     <Reference Include="Swashbuckle.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cd1bb07a5ac7c7bc, processorArchitecture=MSIL">
       <HintPath>..\packages\Swashbuckle.Core.5.6.0\lib\net40\Swashbuckle.Core.dll</HintPath>
     </Reference>
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
@@ -133,6 +134,10 @@
     <ProjectReference Include="..\Dominio\MuiltCheckers.Dominio.csproj">
       <Project>{f5302aaa-0fc0-41bb-ab64-31ca7759cae6}</Project>
       <Name>MuiltCheckers.Dominio</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Infra\MuiltCheckers.Infra.csproj">
+      <Project>{60864180-23bf-40b2-bc87-1a4a3fa5eac0}</Project>
+      <Name>MuiltCheckers.Infra</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

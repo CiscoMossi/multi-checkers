@@ -18,13 +18,13 @@ namespace Dominio
             this.IsDama = false;
         }
 
-        public Point PosicaoAtual { get; private set; }
+        public Point PosicaoAtual { get; set; }
 
-        public Cor Cor { get; private set; }
+        public Cor Cor { get; set; }
 
-        public List<Point> PosicoesPossiveis { get; private set; }
+        public List<Point> PosicoesPossiveis { get; set; }
 
-        public bool IsDama { get; private set; }
+        public bool IsDama { get; set; }
 
         public void AdicionarPosicao(Point novaPosicao)
         {
