@@ -17,5 +17,11 @@ namespace Dominio.Entidades
         public int X { get; private set; }
 
         public int Y { get; private set; }
+
+        public override bool Equals(object obj)
+        {
+            Posicao comparacao = obj as Posicao;
+            return this.X == comparacao.X && this.X == comparacao.Y;
+        }
     }
 }

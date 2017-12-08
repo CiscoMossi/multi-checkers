@@ -9,7 +9,6 @@ using System.Web.Http;
 
 namespace WebApi.Controllers
 {
-    [RoutePrefix("tabuleiro")]
     public class TabuleiroController : BaseController
     {
         [HttpGet]

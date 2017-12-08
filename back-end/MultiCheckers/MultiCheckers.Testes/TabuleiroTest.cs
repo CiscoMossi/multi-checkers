@@ -23,35 +23,35 @@ namespace MultiCheckers.Testes
 
             tabuleiro.PosicionarInicioPartida();
 
-            Assert.AreEqual(tabuleiro.Pecas[0].PosicaoAtual, new Posicao(1, 1));
-            Assert.AreEqual(tabuleiro.Pecas[1].PosicaoAtual, new Posicao(1, 3));
-            Assert.AreEqual(tabuleiro.Pecas[2].PosicaoAtual, new Posicao(1, 5));
-            Assert.AreEqual(tabuleiro.Pecas[3].PosicaoAtual, new Posicao(1, 7));
+            Assert.AreEqual(tabuleiro.Pecas[0].PosicaoAtual, new Posicao(1,1));
+            Assert.AreEqual(tabuleiro.Pecas[1].PosicaoAtual, new Posicao(3,1));
+            Assert.AreEqual(tabuleiro.Pecas[2].PosicaoAtual, new Posicao(5,1));
+            Assert.AreEqual(tabuleiro.Pecas[3].PosicaoAtual, new Posicao(7,1));
 
-            Assert.AreEqual(tabuleiro.Pecas[4].PosicaoAtual, new Posicao(2, 2));
-            Assert.AreEqual(tabuleiro.Pecas[5].PosicaoAtual, new Posicao(2, 4));
-            Assert.AreEqual(tabuleiro.Pecas[6].PosicaoAtual, new Posicao(2, 6));
-            Assert.AreEqual(tabuleiro.Pecas[7].PosicaoAtual, new Posicao(2, 8));
+            Assert.AreEqual(tabuleiro.Pecas[4].PosicaoAtual, new Posicao(2,2));
+            Assert.AreEqual(tabuleiro.Pecas[5].PosicaoAtual, new Posicao(4,2));
+            Assert.AreEqual(tabuleiro.Pecas[6].PosicaoAtual, new Posicao(6,2));
+            Assert.AreEqual(tabuleiro.Pecas[7].PosicaoAtual, new Posicao(8,2));
 
-            Assert.AreEqual(tabuleiro.Pecas[8].PosicaoAtual, new Posicao(3, 1));
-            Assert.AreEqual(tabuleiro.Pecas[9].PosicaoAtual, new Posicao(3, 3));
-            Assert.AreEqual(tabuleiro.Pecas[10].PosicaoAtual, new Posicao(3, 5));
-            Assert.AreEqual(tabuleiro.Pecas[11].PosicaoAtual, new Posicao(3, 7));
+            Assert.AreEqual(tabuleiro.Pecas[8].PosicaoAtual, new Posicao(1,3));
+            Assert.AreEqual(tabuleiro.Pecas[9].PosicaoAtual, new Posicao(3,3));
+            Assert.AreEqual(tabuleiro.Pecas[10].PosicaoAtual, new Posicao(5,3));
+            Assert.AreEqual(tabuleiro.Pecas[11].PosicaoAtual, new Posicao(7,3));
 
-            Assert.AreEqual(tabuleiro.Pecas[12].PosicaoAtual, new Posicao(6, 2));
-            Assert.AreEqual(tabuleiro.Pecas[13].PosicaoAtual, new Posicao(6, 4));
-            Assert.AreEqual(tabuleiro.Pecas[14].PosicaoAtual, new Posicao(6, 6));
-            Assert.AreEqual(tabuleiro.Pecas[15].PosicaoAtual, new Posicao(6, 8));
+            Assert.AreEqual(tabuleiro.Pecas[12].PosicaoAtual, new Posicao(2,6));
+            Assert.AreEqual(tabuleiro.Pecas[13].PosicaoAtual, new Posicao(4,6));
+            Assert.AreEqual(tabuleiro.Pecas[14].PosicaoAtual, new Posicao(6,6));
+            Assert.AreEqual(tabuleiro.Pecas[15].PosicaoAtual, new Posicao(8,6));
 
-            Assert.AreEqual(tabuleiro.Pecas[16].PosicaoAtual, new Posicao(7, 1));
-            Assert.AreEqual(tabuleiro.Pecas[17].PosicaoAtual, new Posicao(7, 3));
-            Assert.AreEqual(tabuleiro.Pecas[18].PosicaoAtual, new Posicao(7, 5));
-            Assert.AreEqual(tabuleiro.Pecas[19].PosicaoAtual, new Posicao(7, 7));
+            Assert.AreEqual(tabuleiro.Pecas[16].PosicaoAtual, new Posicao(1,7));
+            Assert.AreEqual(tabuleiro.Pecas[17].PosicaoAtual, new Posicao(3,7));
+            Assert.AreEqual(tabuleiro.Pecas[18].PosicaoAtual, new Posicao(5,7));
+            Assert.AreEqual(tabuleiro.Pecas[19].PosicaoAtual, new Posicao(7,7));
 
-            Assert.AreEqual(tabuleiro.Pecas[20].PosicaoAtual, new Posicao(8, 2));
-            Assert.AreEqual(tabuleiro.Pecas[21].PosicaoAtual, new Posicao(8, 4));
-            Assert.AreEqual(tabuleiro.Pecas[22].PosicaoAtual, new Posicao(8, 6));
-            Assert.AreEqual(tabuleiro.Pecas[23].PosicaoAtual, new Posicao(8, 8));
+            Assert.AreEqual(tabuleiro.Pecas[20].PosicaoAtual, new Posicao(2,8));
+            Assert.AreEqual(tabuleiro.Pecas[21].PosicaoAtual, new Posicao(4,8));
+            Assert.AreEqual(tabuleiro.Pecas[22].PosicaoAtual, new Posicao(6,8));
+            Assert.AreEqual(tabuleiro.Pecas[23].PosicaoAtual, new Posicao(8,8));
         }
 
         [TestMethod]
@@ -192,43 +192,31 @@ namespace MultiCheckers.Testes
         [TestMethod]
         public void Mover_Dama_Todas_Direcoes()
         {
-            Peca peca = new Peca(new Posicao(4, 4), Cor.PRETA);
+            Peca peca = new Peca(new Posicao(4, 4), Cor.BRANCA);
             Tabuleiro tabuleiro = new Tabuleiro();
-
-            Posicao posicaoEsperadaEsquerdaAvanco = new Posicao(5, 5);
-            Posicao posicaoEsperadaDireitaAvanco = new Posicao(3, 5);
-
-            Posicao posicaoEsperadaEsquerdaRecuo = new Posicao(5, 3);
-            Posicao posicaoEsperadaDireitaRecuo = new Posicao(3, 3);
 
             tabuleiro.AdicionarPeca(peca);
             peca.TransformarEmDama();
-            tabuleiro.PercorrerTabuleiro(Cor.PRETA);
+            tabuleiro.PercorrerTabuleiro(Cor.BRANCA);
 
             Assert.AreEqual(peca.PosicoesPossiveis.Count, 4);
 
-            Assert.AreEqual(peca.PosicoesPossiveis[0], posicaoEsperadaEsquerdaAvanco);
-            Assert.AreEqual(peca.PosicoesPossiveis[1], posicaoEsperadaDireitaAvanco);
-            Assert.AreEqual(peca.PosicoesPossiveis[2], posicaoEsperadaEsquerdaRecuo);
-            Assert.AreEqual(peca.PosicoesPossiveis[3], posicaoEsperadaDireitaRecuo);
+            Assert.IsTrue(peca.PosicoesPossiveis[0].Equals(new Posicao(5, 5)));
+            Assert.IsTrue(peca.PosicoesPossiveis[1].Equals(new Posicao(3, 5)));
+            Assert.IsTrue(peca.PosicoesPossiveis[2].Equals(new Posicao(5, 3)));
+            Assert.IsTrue(peca.PosicoesPossiveis[3].Equals(new Posicao(3, 3)));
         }
 
         [TestMethod]
         public void Mover_Dama_Todas_Direcoes_Saltando_Pecas_Inimigas()
         {
-            Peca peca1 = new Peca(new Posicao(4, 4), Cor.PRETA);
-            Peca peca2 = new Peca(new Posicao(5, 5), Cor.BRANCA);
-            Peca peca3 = new Peca(new Posicao(3, 5), Cor.BRANCA);
-            Peca peca4 = new Peca(new Posicao(5, 3), Cor.BRANCA);
-            Peca peca5 = new Peca(new Posicao(3, 3), Cor.BRANCA);
+            Peca peca1 = new Peca(new Posicao(4, 4), Cor.BRANCA);
+            Peca peca2 = new Peca(new Posicao(5, 5), Cor.PRETA);
+            Peca peca3 = new Peca(new Posicao(3, 5), Cor.PRETA);
+            Peca peca4 = new Peca(new Posicao(5, 3), Cor.PRETA);
+            Peca peca5 = new Peca(new Posicao(3, 3), Cor.PRETA);
 
             Tabuleiro tabuleiro = new Tabuleiro();
-
-            Posicao posicaoEsperadaEsquerdaAvanco = new Posicao(6, 6);
-            Posicao posicaoEsperadaDireitaAvanco = new Posicao(2, 6);
-
-            Posicao posicaoEsperadaEsquerdaRecuo = new Posicao(6, 2);
-            Posicao posicaoEsperadaDireitaRecuo = new Posicao(2, 2);
 
             tabuleiro.AdicionarPeca(peca1);
             tabuleiro.AdicionarPeca(peca2);
@@ -237,14 +225,14 @@ namespace MultiCheckers.Testes
             tabuleiro.AdicionarPeca(peca5);
 
             peca1.TransformarEmDama();
-            tabuleiro.PercorrerTabuleiro(Cor.PRETA);
+            tabuleiro.PercorrerTabuleiro(Cor.BRANCA);
 
             Assert.AreEqual(peca1.PosicoesPossiveis.Count, 4);
 
-            Assert.AreEqual(peca1.PosicoesPossiveis[0], posicaoEsperadaEsquerdaAvanco);
-            Assert.AreEqual(peca1.PosicoesPossiveis[1], posicaoEsperadaDireitaAvanco);
-            Assert.AreEqual(peca1.PosicoesPossiveis[2], posicaoEsperadaEsquerdaRecuo);
-            Assert.AreEqual(peca1.PosicoesPossiveis[3], posicaoEsperadaDireitaRecuo);
+            Assert.IsTrue(peca1.PosicoesPossiveis[0].Equals(new Posicao(6, 6)));
+            Assert.IsTrue(peca1.PosicoesPossiveis[1].Equals(new Posicao(2, 6)));
+            Assert.IsTrue(peca1.PosicoesPossiveis[2].Equals(new Posicao(6, 2)));
+            Assert.IsTrue(peca1.PosicoesPossiveis[3].Equals(new Posicao(2, 2)));
         }
     }
 }
