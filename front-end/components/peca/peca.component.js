@@ -1,7 +1,7 @@
 angular.module('app').component('peca', {
-    templateUrl: 'components/peça/peça.html',
+    templateUrl: 'components/peca/peca.html',
     controller: 'PecaController',
     bindings: {
-      
+      peca: '='
     }
   });

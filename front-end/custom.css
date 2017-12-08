@@ -65,6 +65,10 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+    -webkit-box-shadow: 0px 0px 300px 200px rgba(0,0,0,1);
+    -moz-box-shadow: 0px 0px 300px 200px rgba(0,0,0,1);
+    box-shadow: 0px 0px 300px 200px rgba(0,0,0,1);
+
 }
 
 .tabuleiro {
@@ -112,26 +116,38 @@ body {
 }
 
 .peca {
-    width: 12.5%;
-    height: 12.5%;
+    width: 10%;
+    height: 10%;
     border-radius: 50%;
     background-color: red;
+    -webkit-transition-property: top, left;
+    -webkit-transition-duration: 0.5s;
+    transition-property: top, left;
+    transition-duration: 0.5s;
 }
 
-.a {
-    background-color: blue
+.movimento {
+    border: 2px solid #fffa00;
+    width: 12.5%;
+    height: 12.5%;
 }
 
-/* @media screen and (max-width: 800px){
+.movimento-invisivel{
+    display: none; 
+}
+
+.movimento-invisivel.movimento{
+    display: block;
+}
+
+@media screen and (max-width: 650px) {
     .tabuleiro {
-        width: 400px;
-        height: 400px;
+        width: 90vw;
+        height:90vw;
+        background-image: url("images/tabuleiro.jpg");
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
     }
 }
-
-@media screen and (max-width: 630px){
-    .tabuleiro {
-        width: 300px;
-        height: 300px;
-    }
-} */

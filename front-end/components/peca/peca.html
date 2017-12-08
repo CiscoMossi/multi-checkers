@@ -1,0 +1,13 @@
+<div ng-init=setPeca($ctrl.peca)
+    class="peca" 
+    style="position: absolute; 
+           left: {{peca.x}}%; 
+           top: {{peca.y}}%;"
+    ng-click="mostrarMovimentos()"
+           ></div>
+
+<div class="movimento-invisivel" ng-class="{'movimento': selecionada}"
+    style="position: absolute; left: {{movimento.x * 12.5}}%; top: {{movimento.y * 12.5}}%;" 
+    ng-repeat="movimento in movimentos" 
+    ng-click="moverPeca(movimento)">
+</div>
