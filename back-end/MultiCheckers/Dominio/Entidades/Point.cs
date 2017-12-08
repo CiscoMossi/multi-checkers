@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Dominio.Entidades
 {
-    public class Point
+    public class Posicao
     {
-        public Point(int x, int y)
+        public Posicao(int x, int y)
         {
             this.X = x;
             this.Y = y;

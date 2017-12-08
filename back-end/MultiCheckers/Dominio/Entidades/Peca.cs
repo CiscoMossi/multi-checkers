@@ -10,23 +10,23 @@ namespace Dominio
 {
     public class Peca
     {
-        public Peca(Point posicaoInicial, Cor cor)
+        public Peca(Posicao posicaoInicial, Cor cor)
         {
             this.PosicaoAtual = posicaoInicial;
             this.Cor = cor;
-            this.PosicoesPossiveis = new List<Point>();
+            this.PosicoesPossiveis = new List<Posicao>();
             this.IsDama = false;
         }
 
-        public Point PosicaoAtual { get; set; }
+        public Posicao PosicaoAtual { get; set; }
 
         public Cor Cor { get; set; }
 
-        public List<Point> PosicoesPossiveis { get; set; }
+        public List<Posicao> PosicoesPossiveis { get; set; }
 
         public bool IsDama { get; set; }
 
-        public void AdicionarPosicao(Point novaPosicao)
+        public void AdicionarPosicao(Posicao novaPosicao)
         {
             this.PosicoesPossiveis.Add(novaPosicao);
         }

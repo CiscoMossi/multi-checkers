@@ -23,43 +23,43 @@ namespace MultiCheckers.Testes
 
             tabuleiro.PosicionarInicioPartida();
 
-            Assert.AreEqual(tabuleiro.Pecas[0].PosicaoAtual, new Point(1, 1));
-            Assert.AreEqual(tabuleiro.Pecas[1].PosicaoAtual, new Point(1, 3));
-            Assert.AreEqual(tabuleiro.Pecas[2].PosicaoAtual, new Point(1, 5));
-            Assert.AreEqual(tabuleiro.Pecas[3].PosicaoAtual, new Point(1, 7));
+            Assert.AreEqual(tabuleiro.Pecas[0].PosicaoAtual, new Posicao(1, 1));
+            Assert.AreEqual(tabuleiro.Pecas[1].PosicaoAtual, new Posicao(1, 3));
+            Assert.AreEqual(tabuleiro.Pecas[2].PosicaoAtual, new Posicao(1, 5));
+            Assert.AreEqual(tabuleiro.Pecas[3].PosicaoAtual, new Posicao(1, 7));
 
-            Assert.AreEqual(tabuleiro.Pecas[4].PosicaoAtual, new Point(2, 2));
-            Assert.AreEqual(tabuleiro.Pecas[5].PosicaoAtual, new Point(2, 4));
-            Assert.AreEqual(tabuleiro.Pecas[6].PosicaoAtual, new Point(2, 6));
-            Assert.AreEqual(tabuleiro.Pecas[7].PosicaoAtual, new Point(2, 8));
+            Assert.AreEqual(tabuleiro.Pecas[4].PosicaoAtual, new Posicao(2, 2));
+            Assert.AreEqual(tabuleiro.Pecas[5].PosicaoAtual, new Posicao(2, 4));
+            Assert.AreEqual(tabuleiro.Pecas[6].PosicaoAtual, new Posicao(2, 6));
+            Assert.AreEqual(tabuleiro.Pecas[7].PosicaoAtual, new Posicao(2, 8));
 
-            Assert.AreEqual(tabuleiro.Pecas[8].PosicaoAtual, new Point(3, 1));
-            Assert.AreEqual(tabuleiro.Pecas[9].PosicaoAtual, new Point(3, 3));
-            Assert.AreEqual(tabuleiro.Pecas[10].PosicaoAtual, new Point(3, 5));
-            Assert.AreEqual(tabuleiro.Pecas[11].PosicaoAtual, new Point(3, 7));
+            Assert.AreEqual(tabuleiro.Pecas[8].PosicaoAtual, new Posicao(3, 1));
+            Assert.AreEqual(tabuleiro.Pecas[9].PosicaoAtual, new Posicao(3, 3));
+            Assert.AreEqual(tabuleiro.Pecas[10].PosicaoAtual, new Posicao(3, 5));
+            Assert.AreEqual(tabuleiro.Pecas[11].PosicaoAtual, new Posicao(3, 7));
 
-            Assert.AreEqual(tabuleiro.Pecas[12].PosicaoAtual, new Point(6, 2));
-            Assert.AreEqual(tabuleiro.Pecas[13].PosicaoAtual, new Point(6, 4));
-            Assert.AreEqual(tabuleiro.Pecas[14].PosicaoAtual, new Point(6, 6));
-            Assert.AreEqual(tabuleiro.Pecas[15].PosicaoAtual, new Point(6, 8));
+            Assert.AreEqual(tabuleiro.Pecas[12].PosicaoAtual, new Posicao(6, 2));
+            Assert.AreEqual(tabuleiro.Pecas[13].PosicaoAtual, new Posicao(6, 4));
+            Assert.AreEqual(tabuleiro.Pecas[14].PosicaoAtual, new Posicao(6, 6));
+            Assert.AreEqual(tabuleiro.Pecas[15].PosicaoAtual, new Posicao(6, 8));
 
-            Assert.AreEqual(tabuleiro.Pecas[16].PosicaoAtual, new Point(7, 1));
-            Assert.AreEqual(tabuleiro.Pecas[17].PosicaoAtual, new Point(7, 3));
-            Assert.AreEqual(tabuleiro.Pecas[18].PosicaoAtual, new Point(7, 5));
-            Assert.AreEqual(tabuleiro.Pecas[19].PosicaoAtual, new Point(7, 7));
+            Assert.AreEqual(tabuleiro.Pecas[16].PosicaoAtual, new Posicao(7, 1));
+            Assert.AreEqual(tabuleiro.Pecas[17].PosicaoAtual, new Posicao(7, 3));
+            Assert.AreEqual(tabuleiro.Pecas[18].PosicaoAtual, new Posicao(7, 5));
+            Assert.AreEqual(tabuleiro.Pecas[19].PosicaoAtual, new Posicao(7, 7));
 
-            Assert.AreEqual(tabuleiro.Pecas[20].PosicaoAtual, new Point(8, 2));
-            Assert.AreEqual(tabuleiro.Pecas[21].PosicaoAtual, new Point(8, 4));
-            Assert.AreEqual(tabuleiro.Pecas[22].PosicaoAtual, new Point(8, 6));
-            Assert.AreEqual(tabuleiro.Pecas[23].PosicaoAtual, new Point(8, 8));
+            Assert.AreEqual(tabuleiro.Pecas[20].PosicaoAtual, new Posicao(8, 2));
+            Assert.AreEqual(tabuleiro.Pecas[21].PosicaoAtual, new Posicao(8, 4));
+            Assert.AreEqual(tabuleiro.Pecas[22].PosicaoAtual, new Posicao(8, 6));
+            Assert.AreEqual(tabuleiro.Pecas[23].PosicaoAtual, new Posicao(8, 8));
         }
 
         [TestMethod]
         public void Mover_Peca_Uma_Posicao_Dentro_Do_Tabuleiro()
         {
-            Peca peca = new Peca(new Point(1,1), Cor.BRANCA);
+            Peca peca = new Peca(new Posicao(1,1), Cor.BRANCA);
             Tabuleiro tabuleiro = new Tabuleiro();
-            Point posicaoEsperada = new Point(2,2);
+            Posicao posicaoEsperada = new Posicao(2,2);
 
             tabuleiro.AdicionarPeca(peca);
             tabuleiro.PercorrerTabuleiro(peca.Cor);
@@ -71,10 +71,10 @@ namespace MultiCheckers.Testes
         [TestMethod]
         public void Mover_Peca_Duas_Posicoes_Dentro_Do_Tabuleiro()
         {
-            Peca peca = new Peca(new Point(2,2), Cor.BRANCA);
+            Peca peca = new Peca(new Posicao(2,2), Cor.BRANCA);
             Tabuleiro tabuleiro = new Tabuleiro();
-            Point posicaoEsperadaEsquerda = new Point(1,3);
-            Point posicaoEsperadaDireita = new Point(3,3);
+            Posicao posicaoEsperadaEsquerda = new Posicao(1,3);
+            Posicao posicaoEsperadaDireita = new Posicao(3,3);
 
             tabuleiro.AdicionarPeca(peca);
             tabuleiro.PercorrerTabuleiro(peca.Cor);
@@ -87,15 +87,15 @@ namespace MultiCheckers.Testes
         [TestMethod]
         public void Mover_Varias_Pecas_Dentro_Do_Tabuleiro()
         {
-            Peca peca1 = new Peca(new Point(2, 2), Cor.BRANCA);
-            Peca peca2 = new Peca(new Point(4, 4), Cor.BRANCA);
+            Peca peca1 = new Peca(new Posicao(2, 2), Cor.BRANCA);
+            Peca peca2 = new Peca(new Posicao(4, 4), Cor.BRANCA);
             Tabuleiro tabuleiro = new Tabuleiro();
 
-            Point posicaoEsperadaEsquerda1 = new Point(1, 3);
-            Point posicaoEsperadaDireita1 = new Point(3, 3);
+            Posicao posicaoEsperadaEsquerda1 = new Posicao(1, 3);
+            Posicao posicaoEsperadaDireita1 = new Posicao(3, 3);
 
-            Point posicaoEsperadaEsquerda2 = new Point(3, 5);
-            Point posicaoEsperadaDireita2 = new Point(5, 5);
+            Posicao posicaoEsperadaEsquerda2 = new Posicao(3, 5);
+            Posicao posicaoEsperadaDireita2 = new Posicao(5, 5);
 
             tabuleiro.AdicionarPeca(peca1);
             tabuleiro.AdicionarPeca(peca2);
@@ -114,7 +114,7 @@ namespace MultiCheckers.Testes
         [TestMethod]
         public void Nao_Mover_Peca_Fora_Do_Tabuleiro()
         {
-            Peca peca = new Peca(new Point(8, 8), Cor.BRANCA);
+            Peca peca = new Peca(new Posicao(8, 8), Cor.BRANCA);
             Tabuleiro tabuleiro = new Tabuleiro();
 
             tabuleiro.AdicionarPeca(peca);
@@ -126,12 +126,12 @@ namespace MultiCheckers.Testes
         [TestMethod]
         public void Nao_Mover_Peca_De_Outra_Cor()
         {
-            Peca peca1 = new Peca(new Point(2, 2), Cor.PRETA);
-            Peca peca2 = new Peca(new Point(4, 4), Cor.BRANCA);
+            Peca peca1 = new Peca(new Posicao(2, 2), Cor.PRETA);
+            Peca peca2 = new Peca(new Posicao(4, 4), Cor.BRANCA);
             Tabuleiro tabuleiro = new Tabuleiro();
 
-            Point posicaoEsperadaEsquerda2 = new Point(3, 5);
-            Point posicaoEsperadaDireita2 = new Point(5, 5);
+            Posicao posicaoEsperadaEsquerda2 = new Posicao(3, 5);
+            Posicao posicaoEsperadaDireita2 = new Posicao(5, 5);
 
             tabuleiro.AdicionarPeca(peca1);
             tabuleiro.AdicionarPeca(peca2);
@@ -147,12 +147,12 @@ namespace MultiCheckers.Testes
         [TestMethod]
         public void Mover_Peca_Saltando_Peca_Inimiga()
         {
-            Peca peca1 = new Peca(new Point(5, 5), Cor.PRETA);
-            Peca peca2 = new Peca(new Point(4, 4), Cor.BRANCA);
+            Peca peca1 = new Peca(new Posicao(5, 5), Cor.PRETA);
+            Peca peca2 = new Peca(new Posicao(4, 4), Cor.BRANCA);
             Tabuleiro tabuleiro = new Tabuleiro();
 
-            Point posicaoEsperadaEsquerda2 = new Point(3, 5);
-            Point posicaoEsperadaDireita2 = new Point(6, 6);
+            Posicao posicaoEsperadaEsquerda2 = new Posicao(3, 5);
+            Posicao posicaoEsperadaDireita2 = new Posicao(6, 6);
 
             tabuleiro.AdicionarPeca(peca1);
             tabuleiro.AdicionarPeca(peca2);
@@ -168,13 +168,13 @@ namespace MultiCheckers.Testes
         [TestMethod]
         public void Mover_Peca_Podendo_Saltar_Duas_Peca_Inimigas()
         {
-            Peca peca1 = new Peca(new Point(4, 4), Cor.PRETA);
-            Peca peca2 = new Peca(new Point(5, 5), Cor.BRANCA);
-            Peca peca3 = new Peca(new Point(3, 5), Cor.BRANCA);
+            Peca peca1 = new Peca(new Posicao(4, 4), Cor.PRETA);
+            Peca peca2 = new Peca(new Posicao(5, 5), Cor.BRANCA);
+            Peca peca3 = new Peca(new Posicao(3, 5), Cor.BRANCA);
             Tabuleiro tabuleiro = new Tabuleiro();
 
-            Point posicaoEsperadaEsquerda = new Point(2, 6);
-            Point posicaoEsperadaDireita = new Point(6, 6);
+            Posicao posicaoEsperadaEsquerda = new Posicao(2, 6);
+            Posicao posicaoEsperadaDireita = new Posicao(6, 6);
 
             tabuleiro.AdicionarPeca(peca1);
             tabuleiro.AdicionarPeca(peca2);
@@ -192,14 +192,14 @@ namespace MultiCheckers.Testes
         [TestMethod]
         public void Mover_Dama_Todas_Direcoes()
         {
-            Peca peca = new Peca(new Point(4, 4), Cor.PRETA);
+            Peca peca = new Peca(new Posicao(4, 4), Cor.PRETA);
             Tabuleiro tabuleiro = new Tabuleiro();
 
-            Point posicaoEsperadaEsquerdaAvanco = new Point(5, 5);
-            Point posicaoEsperadaDireitaAvanco = new Point(3, 5);
+            Posicao posicaoEsperadaEsquerdaAvanco = new Posicao(5, 5);
+            Posicao posicaoEsperadaDireitaAvanco = new Posicao(3, 5);
 
-            Point posicaoEsperadaEsquerdaRecuo = new Point(5, 3);
-            Point posicaoEsperadaDireitaRecuo = new Point(3, 3);
+            Posicao posicaoEsperadaEsquerdaRecuo = new Posicao(5, 3);
+            Posicao posicaoEsperadaDireitaRecuo = new Posicao(3, 3);
 
             tabuleiro.AdicionarPeca(peca);
             peca.TransformarEmDama();
@@ -216,19 +216,19 @@ namespace MultiCheckers.Testes
         [TestMethod]
         public void Mover_Dama_Todas_Direcoes_Saltando_Pecas_Inimigas()
         {
-            Peca peca1 = new Peca(new Point(4, 4), Cor.PRETA);
-            Peca peca2 = new Peca(new Point(5, 5), Cor.BRANCA);
-            Peca peca3 = new Peca(new Point(3, 5), Cor.BRANCA);
-            Peca peca4 = new Peca(new Point(5, 3), Cor.BRANCA);
-            Peca peca5 = new Peca(new Point(3, 3), Cor.BRANCA);
+            Peca peca1 = new Peca(new Posicao(4, 4), Cor.PRETA);
+            Peca peca2 = new Peca(new Posicao(5, 5), Cor.BRANCA);
+            Peca peca3 = new Peca(new Posicao(3, 5), Cor.BRANCA);
+            Peca peca4 = new Peca(new Posicao(5, 3), Cor.BRANCA);
+            Peca peca5 = new Peca(new Posicao(3, 3), Cor.BRANCA);
 
             Tabuleiro tabuleiro = new Tabuleiro();
 
-            Point posicaoEsperadaEsquerdaAvanco = new Point(6, 6);
-            Point posicaoEsperadaDireitaAvanco = new Point(2, 6);
+            Posicao posicaoEsperadaEsquerdaAvanco = new Posicao(6, 6);
+            Posicao posicaoEsperadaDireitaAvanco = new Posicao(2, 6);
 
-            Point posicaoEsperadaEsquerdaRecuo = new Point(6, 2);
-            Point posicaoEsperadaDireitaRecuo = new Point(2, 2);
+            Posicao posicaoEsperadaEsquerdaRecuo = new Posicao(6, 2);
+            Posicao posicaoEsperadaDireitaRecuo = new Posicao(2, 2);
 
             tabuleiro.AdicionarPeca(peca1);
             tabuleiro.AdicionarPeca(peca2);
