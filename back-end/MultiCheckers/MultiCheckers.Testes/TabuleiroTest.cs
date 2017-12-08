@@ -125,6 +125,53 @@ namespace MultiCheckers.Testes
         }
 
         [TestMethod]
+        public void Nao_Mover_Peca_Branca_Para_Casa_Ocupada_Por_Branca()
+        {
+            Peca peca1 = new Peca(new Point(5, 5), Cor.BRANCA);
+            Peca peca2 = new Peca(new Point(4, 4), Cor.BRANCA);
+            Tabuleiro tabuleiro = new Tabuleiro();
+
+            tabuleiro.AdicionarPeca(peca1);
+            tabuleiro.AdicionarPeca(peca2);
+            tabuleiro.PercorrerTabuleiro(Cor.BRANCA);
+
+            Assert.AreEqual(peca2.PosicoesPossiveis.Count, 1);
+            Assert.AreEqual(peca2.PosicoesPossiveis[0], new Point(3, 5));
+        }
+
+        [TestMethod]
+        public void Nao_Mover_Peca_Preta_Para_Casa_Ocupada_Por_Preta()
+        {
+            Peca peca1 = new Peca(new Point(5, 5), Cor.PRETA);
+            Peca peca2 = new Peca(new Point(4, 4), Cor.PRETA);
+            Tabuleiro tabuleiro = new Tabuleiro();
+
+            tabuleiro.AdicionarPeca(peca1);
+            tabuleiro.AdicionarPeca(peca2);
+            tabuleiro.PercorrerTabuleiro(Cor.PRETA);
+
+            Assert.AreEqual(peca1.PosicoesPossiveis.Count, 1);
+            Assert.AreEqual(peca1.PosicoesPossiveis[0], new Point(6, 4));
+        }
+
+        [TestMethod]
+        public void Nao_Mover_Peca_Branca_Para_Casa_Ocupada_Por_Preta()
+        {
+            Peca peca1 = new Peca(new Point(5, 5), Cor.PRETA);
+            Peca peca2 = new Peca(new Point(6, 6), Cor.PRETA);
+            Peca peca3 = new Peca(new Point(4, 4), Cor.BRANCA);
+            Tabuleiro tabuleiro = new Tabuleiro();
+
+            tabuleiro.AdicionarPeca(peca1);
+            tabuleiro.AdicionarPeca(peca2);
+            tabuleiro.AdicionarPeca(peca3);
+            tabuleiro.PercorrerTabuleiro(Cor.BRANCA);
+
+            Assert.AreEqual(peca3.PosicoesPossiveis.Count, 1);
+            Assert.AreEqual(peca3.PosicoesPossiveis[0], new Point(3, 5));
+        }
+
+        [TestMethod]
         public void Nao_Mover_Peca_De_Outra_Cor()
         {
             Peca peca1 = new Peca(new Point(2, 2), Cor.PRETA);
@@ -325,6 +372,97 @@ namespace MultiCheckers.Testes
             Assert.IsTrue(peca1.PosicoesPossiveis[1].Equals(new Point(2, 2)));
             Assert.IsTrue(peca1.PosicoesPossiveis[2].Equals(new Point(6, 6)));
             Assert.IsTrue(peca1.PosicoesPossiveis[3].Equals(new Point(2, 6)));
+        }
+
+        [TestMethod]
+        public void Eliminar_Peca_Preta_Quando_Branca_Saltar_Sobre()
+        {
+            Peca peca1 = new Peca(new Point(6, 6), Cor.PRETA);
+            Peca peca2 = new Peca(new Point(5, 5), Cor.BRANCA);
+            Tabuleiro tabuleiro = new Tabuleiro();
+
+            Point posicaoEsperada = new Point(4, 4);
+            Jogada jogada = new Jogada(posicaoEsperada, new Point(6, 6));
+
+            tabuleiro.AdicionarPeca(peca1);
+            tabuleiro.AdicionarPeca(peca2);
+
+            int numPecasAntes = tabuleiro.Pecas.Count;
+            tabuleiro.PercorrerTabuleiro(Cor.PRETA);
+
+            tabuleiro.AtualizarJogada(jogada);
+            int numPecasDepois = tabuleiro.Pecas.Count;
+
+            Assert.AreEqual(numPecasAntes, 2);
+            Assert.AreEqual(numPecasDepois, 1);
+            Assert.AreEqual(peca1.PosicoesPossiveis.Count, 2);
+            Assert.AreEqual(peca2.PosicoesPossiveis.Count, 0);
+        }
+
+        [TestMethod]
+        public void Eliminar_Peca_Branca_Quando_Preta_Saltar_Sobre()
+        {
+            Peca peca1 = new Peca(new Point(1, 1), Cor.BRANCA);
+            Peca peca2 = new Peca(new Point(2, 2), Cor.PRETA);
+            Tabuleiro tabuleiro = new Tabuleiro();
+
+            Point posicaoEsperada = new Point(3, 3);
+            Jogada jogada = new Jogada(posicaoEsperada, new Point(1, 1));
+
+            tabuleiro.AdicionarPeca(peca1);
+            tabuleiro.AdicionarPeca(peca2);
+
+            int numPecasAntes = tabuleiro.Pecas.Count;
+            tabuleiro.PercorrerTabuleiro(Cor.BRANCA);
+
+            tabuleiro.AtualizarJogada(jogada);
+            int numPecasDepois = tabuleiro.Pecas.Count;
+
+            Assert.AreEqual(numPecasAntes, 2);
+            Assert.AreEqual(numPecasDepois, 1);
+            Assert.AreEqual(peca1.PosicoesPossiveis.Count, 1);
+            Assert.AreEqual(peca2.PosicoesPossiveis.Count, 0);
+        }
+
+        [TestMethod]
+        public void Nao_Mover_Peca_Com_Coordenadas_Incorretas()
+        {
+            Peca peca1 = new Peca(new Point(1, 1), Cor.BRANCA);
+            Peca peca2 = new Peca(new Point(2, 2), Cor.PRETA);
+            Tabuleiro tabuleiro = new Tabuleiro();
+
+            Point posicaoEsperada = new Point(3, 3);
+            Jogada jogada = new Jogada(posicaoEsperada, new Point(7, 7));
+
+            tabuleiro.AdicionarPeca(peca1);
+            tabuleiro.AdicionarPeca(peca2);
+
+            tabuleiro.PercorrerTabuleiro(Cor.BRANCA);
+            bool estado = tabuleiro.AtualizarJogada(jogada);
+
+            Assert.IsFalse(estado);
+            Assert.AreEqual(peca1.PosicoesPossiveis.Count, 1);
+            Assert.AreEqual(peca2.PosicoesPossiveis.Count, 0);
+        }
+
+        [TestMethod]
+        public void Nao_Mover_Peca_Para_Posicao_Nao_Calculada()
+        {
+            Peca peca1 = new Peca(new Point(1, 1), Cor.BRANCA);
+            Peca peca2 = new Peca(new Point(2, 2), Cor.PRETA);
+            Tabuleiro tabuleiro = new Tabuleiro();
+
+            Jogada jogada = new Jogada(new Point(4, 1), new Point(1, 1));
+
+            tabuleiro.AdicionarPeca(peca1);
+            tabuleiro.AdicionarPeca(peca2);
+
+            tabuleiro.PercorrerTabuleiro(Cor.BRANCA);
+            bool estado = tabuleiro.AtualizarJogada(jogada);
+
+            Assert.IsFalse(estado);
+            Assert.AreEqual(peca1.PosicoesPossiveis.Count, 1);
+            Assert.AreEqual(peca2.PosicoesPossiveis.Count, 0);
         }
     }
 }

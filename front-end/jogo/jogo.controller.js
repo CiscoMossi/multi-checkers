@@ -10,7 +10,7 @@ angular.module('app')
             $scope.corJogando = response.data.dados.cor;
         });
     }
-    $interval(carregarJogo, 1000);
+    $interval(polling, 1000);
     $scope.jogar = function(){
         if($scope.corDoJogador != $scope.corJogando){
             alert("não é sua vez");
@@ -18,7 +18,11 @@ angular.module('app')
         }
         /*TO-DO: implementar jogo*/
     }
-
+    function polling(){
+        if($scope.corDoUsuario != $scope.corJogando){
+            carregarJogo();   
+        }
+    }
     /*
     $scope.gerarPartida = function(){
         $scope.url = "aaaaaaaa";
