@@ -1,6 +1,6 @@
 ﻿using Dominio;
 using Dominio.Entidades;
-using MultiCheckers.Testes.Repositorios;
+using MultiCheckers.Repositorios;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,7 +25,7 @@ namespace WebApi.Controllers
             return ResponderOK(resposta);
         }
 
-        [HttpPut]
+        [HttpPost]
         public HttpResponseMessage Atualizar([FromBody] Tabuleiro novoTabuleiro, int cor)
         {
             if ((Cor) cor != COR_ATUAL)

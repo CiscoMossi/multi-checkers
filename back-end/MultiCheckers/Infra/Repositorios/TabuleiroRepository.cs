@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MultiCheckers.Testes.Repositorios
+namespace MultiCheckers.Repositorios
 {
     public class TabuleiroRepository
     {
