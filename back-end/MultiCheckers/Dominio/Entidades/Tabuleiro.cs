@@ -20,15 +20,6 @@ namespace Dominio
 
         public List<Peca> Pecas { get; private set; }
 
-        public bool Validar(Tabuleiro tabuleiro)
-        {
-            var diferentes = this.Pecas
-                               .Select(a => a.PosicaoAtual)
-                               .Except(tabuleiro.Pecas.Select(b => b.PosicaoAtual));
-
-            return diferentes.Count() != 1;
-        }
-
         public void PosicionarInicioPartida()
         {            
             Pecas.Add(new Peca(new Point(1,1), Cor.BRANCA));
@@ -77,7 +68,7 @@ namespace Dominio
                    posicaoDesejada.Y <= LIMITE_MAX;
         }
 
-        private bool ValidarOutraPecaNoLocal(Peca peca, Point posicaoDesejada)
+        private bool ValidarOutraPecaNoLocal(Point posicaoDesejada)
         {
             return this.Pecas.FirstOrDefault(p => p.PosicaoAtual.X == posicaoDesejada.X &&
                                                   p.PosicaoAtual.Y == posicaoDesejada.Y) != null;
@@ -93,7 +84,7 @@ namespace Dominio
         {
             if(this.ValidarPecaDentroTabuleiro(posicaoDesejada))
             {
-                if (this.ValidarOutraPecaNoLocal(peca, posicaoDesejada))
+                if (this.ValidarOutraPecaNoLocal(posicaoDesejada))
                 {
                     if (this.ValidarPecaInimiga(peca, posicaoDesejada))
                         return true;
@@ -106,11 +97,19 @@ namespace Dominio
 
         private void AplicarMovimentos(Peca peca, Point movimentacao)
         {
-            if (this.ValidarERefazerMovimento(peca, new Point(peca.PosicaoAtual.X + movimentacao.X,
-                                                              peca.PosicaoAtual.Y + movimentacao.Y)))
+            Point posicaoDesejada = new Point(peca.PosicaoAtual.X + movimentacao.X,
+                                              peca.PosicaoAtual.Y + movimentacao.Y);
+
+            Point posicaoSalto = new Point(peca.PosicaoAtual.X + 2 * movimentacao.X,
+                                           peca.PosicaoAtual.Y + 2 * movimentacao.Y);
+
+            if (this.ValidarERefazerMovimento(peca, posicaoDesejada))
             {
-                peca.AdicionarPosicao(new Point(peca.PosicaoAtual.X + 2* movimentacao.X,
-                                                peca.PosicaoAtual.Y + 2* movimentacao.Y));
+                if (this.ValidarPecaDentroTabuleiro(posicaoSalto) &&
+                    !this.ValidarOutraPecaNoLocal(posicaoSalto))
+                {
+                    peca.AdicionarPosicao(posicaoSalto);
+                }
             }
         }
 
@@ -133,13 +132,26 @@ namespace Dominio
             this.ValidarDama(peca);
         }
 
+        private void RemoverPecaInimiga(Peca pecaMovida, Jogada jogada)
+        {
+            pecaMovida = this.Pecas.FirstOrDefault(p => p.PosicaoAtual == jogada.PosicaoAntiga);
+
+            Peca pecaEliminada = this.Pecas.First(p => p.PosicaoAtual.X == jogada.PosicaoEscolhida.X +
+                                                                          (jogada.PosicaoEscolhida.X > jogada.PosicaoAntiga.X ? -1 : 1) &&
+
+                                                       p.PosicaoAtual.Y == jogada.PosicaoEscolhida.Y +
+                                                                          (jogada.PosicaoEscolhida.Y > jogada.PosicaoAntiga.Y ? -1 : 1));
+            this.Pecas.Remove(pecaEliminada);
+        }
+
         public void PercorrerTabuleiro(Cor cor)
         {
-            //this.Pecas.ForEach(p => p.PosicoesPossiveis.RemoveRange(0, p.PosicoesPossiveis.Count - 1));
+            this.Pecas.ForEach(p => p.PosicoesPossiveis.RemoveRange(0, p.PosicoesPossiveis.Count));
 
             List<Peca> pecasAmigas = this.Pecas.FindAll(p => p.Cor == cor);
             pecasAmigas.ForEach(p => this.CalcularMovimentos(p));
         }
+
 
         public bool AtualizarJogada(Jogada jogada)
         {
@@ -149,6 +161,10 @@ namespace Dominio
 
             if(!pecaMovida.PosicoesPossiveis.Exists(p => p == jogada.PosicaoEscolhida))
                 return false;
+
+            if (Math.Abs(jogada.PosicaoEscolhida.X - jogada.PosicaoAntiga.X) == 2 &&
+                Math.Abs(jogada.PosicaoEscolhida.Y - jogada.PosicaoAntiga.Y) == 2)
+                this.RemoverPecaInimiga(pecaMovida, jogada);
 
             this.Pecas.Find(p => p.PosicaoAtual == jogada.PosicaoAntiga).Mover(jogada.PosicaoEscolhida);
             return true;

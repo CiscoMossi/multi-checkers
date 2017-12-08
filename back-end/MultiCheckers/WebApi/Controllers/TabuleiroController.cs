@@ -41,7 +41,7 @@ namespace WebApi.Controllers
             tabuleiro.PercorrerTabuleiro(COR_ATUAL);
             tabuleiroRepository.EditarTabuleiro(tabuleiro);
 
-            return ResponderOK(tabuleiro);
+            return ResponderOK(COR_ATUAL);
         }
     }
 }
