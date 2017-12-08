@@ -5,7 +5,7 @@ angular.module('app')
             templateUrl: 'home/home.html',
             controller: 'HomeCtrl'
         })
-        .when('/sala', {
+        .when('/sala/:urlSala?', {
             templateUrl: 'jogo/jogo.html',
             controller: 'JogoCtrl'
         })
