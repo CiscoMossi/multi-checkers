@@ -116,12 +116,38 @@ body {
 }
 
 .peca {
-    width: 12.5%;
-    height: 12.5%;
+    width: 10%;
+    height: 10%;
     border-radius: 50%;
     background-color: red;
+    -webkit-transition-property: top, left;
+    -webkit-transition-duration: 0.5s;
+    transition-property: top, left;
+    transition-duration: 0.5s;
 }
 
 .movimento {
-    border: 2px solid #fffa00
+    border: 2px solid #fffa00;
+    width: 12.5%;
+    height: 12.5%;
+}
+
+.movimento-invisivel{
+    display: none; 
+}
+
+.movimento-invisivel.movimento{
+    display: block;
+}
+
+@media screen and (max-width: 650px) {
+    .tabuleiro {
+        width: 90vw;
+        height:90vw;
+        background-image: url("images/tabuleiro.jpg");
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
 }
