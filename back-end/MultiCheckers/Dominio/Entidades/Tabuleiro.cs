@@ -135,10 +135,23 @@ namespace Dominio
 
         public void PercorrerTabuleiro(Cor cor)
         {
-            this.Pecas.ForEach(a => a.PosicoesPossiveis.ForEach(b => b = new Point()));
+            //this.Pecas.ForEach(p => p.PosicoesPossiveis.RemoveRange(0, p.PosicoesPossiveis.Count - 1));
 
             List<Peca> pecasAmigas = this.Pecas.FindAll(p => p.Cor == cor);
             pecasAmigas.ForEach(p => this.CalcularMovimentos(p));
+        }
+
+        public bool AtualizarJogada(Jogada jogada)
+        {
+            Peca pecaMovida = this.Pecas.FirstOrDefault(p => p.PosicaoAtual == jogada.PosicaoAntiga);
+            if(pecaMovida == null)
+                return false;
+
+            if(!pecaMovida.PosicoesPossiveis.Exists(p => p == jogada.PosicaoEscolhida))
+                return false;
+
+            this.Pecas.Find(p => p.PosicaoAtual == jogada.PosicaoAntiga).Mover(jogada.PosicaoEscolhida);
+            return true;
         }
 
         public void AdicionarPeca(Peca peca)

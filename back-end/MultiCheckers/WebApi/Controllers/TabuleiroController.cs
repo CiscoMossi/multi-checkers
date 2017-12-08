@@ -26,21 +26,22 @@ namespace WebApi.Controllers
         }
 
         [HttpPost]
-        public HttpResponseMessage Atualizar([FromBody] Tabuleiro novoTabuleiro, int cor)
+        public HttpResponseMessage Atualizar([FromBody] Jogada jogada, int cor)
         {
             if ((Cor) cor != COR_ATUAL)
                 return ResponderErro("Turno do adversário");
 
             Tabuleiro tabuleiro = tabuleiroRepository.ObterTabuleiro();
-            if (tabuleiro.Validar(novoTabuleiro))
-                return ResponderErro("Apenas uma peça pode ser movimentada por jogada");
 
-            tabuleiro.PercorrerTabuleiro((Cor) cor);
-            tabuleiroRepository.EditarTabuleiro(novoTabuleiro);
+            if(!tabuleiro.AtualizarJogada(jogada))
+                return ResponderErro("Jogada inválida");
 
             COR_ATUAL = (COR_ATUAL == Cor.BRANCA ? Cor.PRETA : Cor.BRANCA);
 
-            return ResponderOK(novoTabuleiro);
+            tabuleiro.PercorrerTabuleiro(COR_ATUAL);
+            tabuleiroRepository.EditarTabuleiro(tabuleiro);
+
+            return ResponderOK(tabuleiro);
         }
     }
 }
