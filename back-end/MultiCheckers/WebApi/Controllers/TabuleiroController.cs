@@ -11,7 +11,11 @@ namespace WebApi.Controllers
 {
     public class TabuleiroController : BaseController
     {
+        private static Cor COR_ATUAL = Cor.BRANCA;
+        private static Tabuleiro TABULEIRO_ATUAL = new Tabuleiro();
+
         [HttpGet]
+        [Route("iniciar")]
         public HttpResponseMessage IniciarPartida()
         {
             Tabuleiro tabuleiro = new Tabuleiro();
@@ -20,12 +24,33 @@ namespace WebApi.Controllers
             return ResponderOK(tabuleiro);
         }
 
-        [HttpPost]
-        public HttpResponseMessage CarregarMovimentos([FromBody] Tabuleiro tabuleiro, int cor)
+        [HttpGet]
+        [Route("cor")]
+        public HttpResponseMessage ConsultarCorAtual()
         {
-            tabuleiro.PercorrerTabuleiro((Cor)cor);
+            return ResponderOK(COR_ATUAL);
+        }
 
-            return ResponderOK(tabuleiro);
+        [HttpGet]
+        [Route("tabuleiro")]
+        public HttpResponseMessage ConsultarTabuleiro()
+        {
+            return ResponderOK(TABULEIRO_ATUAL);
+        }
+
+        [HttpPut]
+        public HttpResponseMessage AtualizarTabuleiro([FromBody] Tabuleiro tabuleiro, [FromBody] int cor)
+        {
+            if ((Cor) cor != COR_ATUAL)
+                return ResponderErro("Turno do adversário");
+
+            if (TABULEIRO_ATUAL.Validar(tabuleiro))
+                return ResponderErro("Apenas uma peça pode ser movimentada por jogada");
+
+            TABULEIRO_ATUAL.PercorrerTabuleiro((Cor)cor);
+            COR_ATUAL = (COR_ATUAL == Cor.BRANCA ? Cor.PRETA : Cor.BRANCA);
+
+            return ResponderOK(TABULEIRO_ATUAL);
         }
     }
 }

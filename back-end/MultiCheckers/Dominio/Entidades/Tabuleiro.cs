@@ -10,8 +10,8 @@ namespace Dominio
 {
     public class Tabuleiro
     {
-        private static int LIMITE_MIN = 1;
-        private static int LIMITE_MAX = 8;
+        private int LIMITE_MIN = 1;
+        private int LIMITE_MAX = 8;
 
         public Tabuleiro()
         {
@@ -19,6 +19,14 @@ namespace Dominio
         }
 
         public List<Peca> Pecas { get; private set; }
+
+        public bool Validar(Tabuleiro tabuleiro)
+        {
+            List<String> listaErros = new List<String>();
+            var listaTabuleiros = tabuleiro.Pecas.Distinct();
+
+            return listaTabuleiros.Count() != 1;
+        }
 
         public void PosicionarInicioPartida()
         {            
