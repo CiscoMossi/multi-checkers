@@ -16,16 +16,17 @@ namespace Dominio
         public Tabuleiro()
         {
             this.Pecas = new List<Peca>();
+            this.PosicionarInicioPartida();
+            this.PercorrerTabuleiro(Cor.BRANCA);
         }
 
         public List<Peca> Pecas { get; private set; }
 
         public bool Validar(Tabuleiro tabuleiro)
         {
-            List<String> listaErros = new List<String>();
-            var listaTabuleiros = tabuleiro.Pecas.Distinct();
+            var listaPecas = tabuleiro.Pecas.Except(this.Pecas);
 
-            return listaTabuleiros.Count() != 1;
+            return listaPecas.Count() != 1;
         }
 
         public void PosicionarInicioPartida()

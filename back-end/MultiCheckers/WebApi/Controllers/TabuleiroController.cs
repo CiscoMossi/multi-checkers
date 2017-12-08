@@ -15,16 +15,6 @@ namespace WebApi.Controllers
         private static Tabuleiro TABULEIRO_ATUAL = new Tabuleiro();
 
         [HttpGet]
-        [Route("iniciar")]
-        public HttpResponseMessage IniciarPartida()
-        {
-            Tabuleiro tabuleiro = new Tabuleiro();
-            tabuleiro.PosicionarInicioPartida();
-
-            return ResponderOK(tabuleiro);
-        }
-
-        [HttpGet]
         [Route("cor")]
         public HttpResponseMessage ConsultarCorAtual()
         {
@@ -39,7 +29,7 @@ namespace WebApi.Controllers
         }
 
         [HttpPut]
-        public HttpResponseMessage AtualizarTabuleiro([FromBody] Tabuleiro tabuleiro, [FromBody] int cor)
+        public HttpResponseMessage AtualizarTabuleiro([FromBody] Tabuleiro tabuleiro, int cor)
         {
             if ((Cor) cor != COR_ATUAL)
                 return ResponderErro("Turno do adversário");
