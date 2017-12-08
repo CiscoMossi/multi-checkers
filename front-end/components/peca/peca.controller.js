@@ -1,14 +1,11 @@
 angular.module('app')
     .controller('PecaController', function ($scope) {
-        var x = 2;
-        var y = 2;
-        
         $scope.setPeca = function(peca){
             $scope.peca = peca;
             $scope.selecionada = false;
             var posicao = $scope.peca.PosicaoAtual.split(", ");
-            $scope.peca.x = 12.5 * parseInt(posicao[0]) + 1.2;
-            $scope.peca.y = 12.5 * parseInt(posicao[1]) + 1.2;
+            $scope.peca.x = 12.5 * (parseInt(posicao[0]) - 1) + 1.2;
+            $scope.peca.y = 12.5 * (parseInt(posicao[1]) - 1) + 1.2;
             
             let movimentosString = [];
             $scope.peca.PosicoesPossiveis
