@@ -1,5 +1,6 @@
 ﻿using Dominio;
 using Dominio.Entidades;
+using MultiCheckers.Testes.Repositorios;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,35 +13,34 @@ namespace WebApi.Controllers
     public class TabuleiroController : BaseController
     {
         private static Cor COR_ATUAL = Cor.BRANCA;
-        private static Tabuleiro TABULEIRO_ATUAL = new Tabuleiro();
+        private static TabuleiroRepository tabuleiroRepository = new TabuleiroRepository();
 
         [HttpGet]
-        [Route("cor")]
-        public HttpResponseMessage ConsultarCorAtual()
+        public HttpResponseMessage Consultar()
         {
-            return ResponderOK(COR_ATUAL);
-        }
+            Tabuleiro tabuleiro = tabuleiroRepository.ObterTabuleiro();
+            Cor cor = COR_ATUAL;
 
-        [HttpGet]
-        [Route("tabuleiro")]
-        public HttpResponseMessage ConsultarTabuleiro()
-        {
-            return ResponderOK(TABULEIRO_ATUAL);
+            Object resposta = new { tabuleiro, cor };
+            return ResponderOK(resposta);
         }
 
         [HttpPut]
-        public HttpResponseMessage AtualizarTabuleiro([FromBody] Tabuleiro tabuleiro, int cor)
+        public HttpResponseMessage Atualizar([FromBody] Tabuleiro novoTabuleiro, int cor)
         {
             if ((Cor) cor != COR_ATUAL)
                 return ResponderErro("Turno do adversário");
 
-            if (TABULEIRO_ATUAL.Validar(tabuleiro))
+            Tabuleiro tabuleiro = tabuleiroRepository.ObterTabuleiro();
+            if (tabuleiro.Validar(novoTabuleiro))
                 return ResponderErro("Apenas uma peça pode ser movimentada por jogada");
 
-            TABULEIRO_ATUAL.PercorrerTabuleiro((Cor)cor);
+            tabuleiro.PercorrerTabuleiro((Cor) cor);
+            tabuleiroRepository.EditarTabuleiro(novoTabuleiro);
+
             COR_ATUAL = (COR_ATUAL == Cor.BRANCA ? Cor.PRETA : Cor.BRANCA);
 
-            return ResponderOK(TABULEIRO_ATUAL);
+            return ResponderOK(novoTabuleiro);
         }
     }
 }
