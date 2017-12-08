@@ -1,9 +1,12 @@
 angular.module('app')
 .controller('JogoCtrl', function($scope, jogoService, $routeParams) {
     $scope.urlSala = $routeParams.urlSala;
-    jogoService.criarTabuleiro().then(response => {
-        $scope.pecas = response.data.dados.Pecas;
-    });
+
+    function carregarJogo(){
+        jogoService.buscarTabuleiro().then(response => {
+            $scope.pecas = response.data.dados.Pecas;
+        });
+    }
     /*
     $scope.gerarPartida = function(){
         $scope.url = "aaaaaaaa";

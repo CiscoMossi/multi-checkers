@@ -1,14 +1,18 @@
 angular.module('app')
 .factory('jogoService', function($http){
-    urlBase = 'http://localhost:49938/api/tabuleiro?cor=0';
-    function criarTabuleiro(){
-        return  $http.get(urlBase);
+    urlBase = 'http://localhost:49938/';
+    function buscarTabuleiro(){
+        return $http.get(urlBase+"tabuleiro");
     }
-    function carregarMovimentos(tabuleiro, cor){
-        return $http.post(urlBase, tabuleiro, cor);
+    function alterarTabuleiro(tabuleiro, cor){
+        return $http.put(urlBase+`api/Tabuleiro?cor=${cor}`, tabuleiro);
+    }
+    function buscarCorAtual(){
+        return $http.get(urlBase+"cor");
     }
     return {
-        criarTabuleiro : criarTabuleiro,
-        carregarMovimentos : carregarMovimentos
+        buscarTabuleiro : buscarTabuleiro,
+        alterarTabuleiro : alterarTabuleiro,
+        buscarCorAtual : buscarCorAtual
     }
 });
