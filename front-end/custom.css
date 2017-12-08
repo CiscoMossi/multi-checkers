@@ -65,6 +65,10 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+    -webkit-box-shadow: 0px 0px 300px 200px rgba(0,0,0,1);
+    -moz-box-shadow: 0px 0px 300px 200px rgba(0,0,0,1);
+    box-shadow: 0px 0px 300px 200px rgba(0,0,0,1);
+
 }
 
 .tabuleiro {
@@ -118,20 +122,6 @@ body {
     background-color: red;
 }
 
-.a {
-    background-color: blue
+.movimento {
+    border: 2px solid #fffa00
 }
-
-/* @media screen and (max-width: 800px){
-    .tabuleiro {
-        width: 400px;
-        height: 400px;
-    }
-}
-
-@media screen and (max-width: 630px){
-    .tabuleiro {
-        width: 300px;
-        height: 300px;
-    }
-} */
