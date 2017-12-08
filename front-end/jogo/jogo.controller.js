@@ -1,5 +1,5 @@
 angular.module('app')
-.controller('JogoCtrl', function($scope) {
+.controller('JogoCtrl', function($scope, jogoService) {
     $scope.gerarPartida = function(){
         $scope.url = "aaaaaaaa";
 
