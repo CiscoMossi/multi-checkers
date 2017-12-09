@@ -112,6 +112,11 @@ namespace Dominio
             posicoesPossiveis.ForEach(p => pecaMovida.AdicionarPosicao(p));
         }
 
+        public bool ValidarFimJogo()
+        {
+            return this.Pecas.FirstOrDefault(p => p.Cor != this.CorTurnoAtual) == null;
+        }
+
         private void ValidarDama(Peca peca)
         {
             if ((peca.Cor == Cor.BRANCA && peca.PosicaoAtual.Y == 8) ||

@@ -36,6 +36,9 @@ namespace WebApi.Controllers
 
             tabuleiroRepository.EditarTabuleiro(tabuleiro);
 
+            if (tabuleiro.ValidarFimJogo())
+                return ResponderOK("Você venceu!");
+
             return ResponderOK(tabuleiro.CorTurnoAtual);
         }
     }

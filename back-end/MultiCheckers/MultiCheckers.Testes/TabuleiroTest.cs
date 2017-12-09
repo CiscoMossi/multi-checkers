@@ -631,5 +631,47 @@ namespace MultiCheckers.Testes
             Assert.AreEqual(cor6, Cor.PRETA);
             Assert.IsTrue(peca1.IsDama);
         }
+
+        [TestMethod]
+        public void Eliminar_Peca_Preta_E_Terminar_Jogo()
+        {
+            Peca peca1 = new Peca(new Point(4, 4), Cor.BRANCA);
+            Peca peca2 = new Peca(new Point(5, 5), Cor.PRETA);
+            Peca peca3 = new Peca(new Point(1, 1), Cor.BRANCA);
+            Tabuleiro tabuleiro = new Tabuleiro();
+            Jogada jogada1 = new Jogada(new Point(6, 6), new Point(4, 4));
+
+            tabuleiro.AdicionarPeca(peca1);
+            tabuleiro.AdicionarPeca(peca2);
+            tabuleiro.AdicionarPeca(peca3);
+
+            tabuleiro.PercorrerTabuleiro(Cor.BRANCA);
+            tabuleiro.AtualizarJogada(jogada1);
+
+            Assert.AreEqual(tabuleiro.Pecas.Count, 2);
+            Assert.IsTrue(tabuleiro.ValidarFimJogo());
+        }
+
+        [TestMethod]
+        public void Eliminar_Peca_Preta_E_Nao_Terminar_Jogo()
+        {
+            Peca peca1 = new Peca(new Point(1, 1), Cor.BRANCA);
+            Peca peca2 = new Peca(new Point(4, 4), Cor.BRANCA);
+            Peca peca3 = new Peca(new Point(5, 5), Cor.PRETA);
+            Peca peca4 = new Peca(new Point(3, 3), Cor.PRETA);
+            Tabuleiro tabuleiro = new Tabuleiro();
+            Jogada jogada1 = new Jogada(new Point(6, 6), new Point(4, 4));
+
+            tabuleiro.AdicionarPeca(peca1);
+            tabuleiro.AdicionarPeca(peca2);
+            tabuleiro.AdicionarPeca(peca3);
+            tabuleiro.AdicionarPeca(peca4);
+
+            tabuleiro.PercorrerTabuleiro(Cor.BRANCA);
+            tabuleiro.AtualizarJogada(jogada1);
+
+            Assert.AreEqual(tabuleiro.Pecas.Count, 3);
+            Assert.IsFalse(tabuleiro.ValidarFimJogo());
+        }
     }
 }
