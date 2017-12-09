@@ -5,7 +5,8 @@ angular.module('app')
             $scope.selecionada = false;
             var posicao = $scope.peca.PosicaoAtual.split(", ");
             $scope.peca.x = 12.5 * (parseInt(posicao[0]) - 1) + 1.2;
-            $scope.peca.y = 12.5 * (parseInt(posicao[1]) - 1) + 1.2;
+            $scope.peca.y = 12.5 * (8 - parseInt(posicao[1])) + 1.2;
+            console.log("x"+posicao[0] +"y"+posicao[1])
             
             let movimentosString = [];
             $scope.peca.PosicoesPossiveis
@@ -25,8 +26,8 @@ angular.module('app')
         }
 
         $scope.moverPeca = function(posicao){
-            $scope.peca.x = 12.5 * posicao.x + 1.2;
-            $scope.peca.y = 12.5 * posicao.y + 1.2;
+            $scope.peca.x = 12.5 * (posicao.x-1) + 1.2;
+            $scope.peca.y = 12.5 * (posicao.y) + 1.2;
             $scope.selecionada = false;
         }
     }

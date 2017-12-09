@@ -10,7 +10,7 @@ angular.module('app')
             $scope.corJogando = response.data.dados.cor;
         });
     }
-    $interval(polling, 1000);
+    //$interval(polling, 1000);
     $scope.jogar = function(){
         if($scope.corDoJogador != $scope.corJogando){
             alert("não é sua vez");
