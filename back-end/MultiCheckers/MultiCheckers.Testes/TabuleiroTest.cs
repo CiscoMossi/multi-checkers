@@ -500,7 +500,7 @@ namespace MultiCheckers.Testes
         }
 
         [TestMethod]
-        public void Aplicar_Rodada_Bonus_Sem_Proxima_Peca()
+        public void Aplicar_Rodada_Bonus_Com_Proxima_Peca()
         {
             Peca peca1 = new Peca(new Point(1, 1), Cor.BRANCA);
             Peca peca2 = new Peca(new Point(2, 2), Cor.PRETA);
@@ -518,7 +518,9 @@ namespace MultiCheckers.Testes
 
             int numPecasSalto1 = tabuleiro.Pecas.Count;
             tabuleiro.PercorrerTabuleiro(Cor.BRANCA);
+            int numPosicoes1 = tabuleiro.Pecas[0].PosicoesPossiveis.Count;
             tabuleiro.AtualizarJogada(jogada1);
+            int numPosicoes2 = tabuleiro.Pecas[0].PosicoesPossiveis.Count;
 
             int numPecasSalto2 = tabuleiro.Pecas.Count;
             tabuleiro.AplicarRodadaBonus(jogada1);
@@ -529,6 +531,105 @@ namespace MultiCheckers.Testes
             Assert.AreEqual(numPecasSalto1, 3);
             Assert.AreEqual(numPecasSalto2, 2);
             Assert.AreEqual(numPecasAtual, 1);
+            Assert.AreEqual(numPosicoes1, 1);
+            Assert.AreEqual(numPosicoes2, 1);
+            Assert.AreEqual(tabuleiro.Pecas[0].PosicoesPossiveis.Count, 1);
+        }
+
+        [TestMethod]
+        public void Nao_Aplicar_Rodada_Bonus_Sem_Proxima_Peca()
+        {
+            Peca peca1 = new Peca(new Point(1, 1), Cor.BRANCA);
+            Peca peca2 = new Peca(new Point(2, 2), Cor.PRETA);
+            Tabuleiro tabuleiro = new Tabuleiro();
+
+            Point posicaoEsperada1 = new Point(3, 3);
+            Jogada jogada1 = new Jogada(posicaoEsperada1, new Point(1, 1));
+
+            tabuleiro.AdicionarPeca(peca1);
+            tabuleiro.AdicionarPeca(peca2);
+
+            int numPecasSalto1 = tabuleiro.Pecas.Count;
+            tabuleiro.PercorrerTabuleiro(Cor.BRANCA);
+            int numPosicoes1 = tabuleiro.Pecas[0].PosicoesPossiveis.Count;
+            tabuleiro.AtualizarJogada(jogada1);
+            tabuleiro.PercorrerTabuleiro(Cor.BRANCA);
+            int numPosicoes2 = tabuleiro.Pecas[0].PosicoesPossiveis.Count;
+            int numPecasAtual = tabuleiro.Pecas.Count;
+
+            Assert.AreEqual(numPecasSalto1, 2);
+            Assert.AreEqual(numPecasAtual, 1);
+            Assert.AreEqual(numPosicoes1, 1);
+            Assert.AreEqual(numPosicoes2, 2);
+        }
+
+        [TestMethod]
+        public void Trocar_De_Turno_Apos_Movimento()
+        {
+            Peca peca1 = new Peca(new Point(4, 4), Cor.BRANCA);
+            Peca peca2 = new Peca(new Point(5, 5), Cor.PRETA);
+            Tabuleiro tabuleiro = new Tabuleiro();
+
+            Point posicaoEsperada1 = new Point(6, 6);
+            Jogada jogada1 = new Jogada(posicaoEsperada1, new Point(4, 4));
+
+            tabuleiro.AdicionarPeca(peca1);
+            tabuleiro.AdicionarPeca(peca2);
+
+            tabuleiro.PercorrerTabuleiro(Cor.BRANCA);
+            Cor cor1 = tabuleiro.CorTurnoAtual;
+
+            tabuleiro.AtualizarJogada(jogada1);
+            Cor cor2 = tabuleiro.CorTurnoAtual;
+
+            tabuleiro.AplicarRodadaBonus(jogada1);
+            Cor cor3 = tabuleiro.CorTurnoAtual;
+
+            Assert.AreEqual(cor1, Cor.BRANCA);
+            Assert.AreEqual(cor2, Cor.BRANCA);
+            Assert.AreEqual(cor3, Cor.PRETA);
+        }
+
+        [TestMethod]
+        public void Nao_Trocar_De_Turno_Em_Rodada_Bonus()
+        {
+            Peca peca1 = new Peca(new Point(4, 4), Cor.BRANCA);
+            Peca peca2 = new Peca(new Point(5, 5), Cor.PRETA);
+            Peca peca3 = new Peca(new Point(7, 7), Cor.PRETA);
+            Tabuleiro tabuleiro = new Tabuleiro();
+
+            Point posicaoEsperada1 = new Point(6, 6);
+            Point posicaoEsperada2 = new Point(8, 8);
+            Jogada jogada1 = new Jogada(posicaoEsperada1, new Point(4, 4));
+            Jogada jogada2 = new Jogada(posicaoEsperada2, new Point(6, 6));
+
+            tabuleiro.AdicionarPeca(peca1);
+            tabuleiro.AdicionarPeca(peca2);
+            tabuleiro.AdicionarPeca(peca3);
+
+            Cor cor1 = tabuleiro.CorTurnoAtual;
+            tabuleiro.PercorrerTabuleiro(Cor.BRANCA);
+
+            Cor cor2 = tabuleiro.CorTurnoAtual;
+            tabuleiro.AtualizarJogada(jogada1);
+
+            Cor cor3 = tabuleiro.CorTurnoAtual;
+            tabuleiro.AplicarRodadaBonus(jogada1);
+
+            Cor cor4 = tabuleiro.CorTurnoAtual;
+            tabuleiro.AtualizarJogada(jogada2);
+
+            Cor cor5 = tabuleiro.CorTurnoAtual;
+            tabuleiro.AplicarRodadaBonus(jogada2);
+            Cor cor6 = tabuleiro.CorTurnoAtual;
+
+            Assert.AreEqual(cor1, Cor.BRANCA);
+            Assert.AreEqual(cor2, Cor.BRANCA);
+            Assert.AreEqual(cor2, Cor.BRANCA);
+            Assert.AreEqual(cor4, Cor.BRANCA);
+            Assert.AreEqual(cor5, Cor.BRANCA);
+            Assert.AreEqual(cor6, Cor.PRETA);
+            Assert.IsTrue(peca1.IsDama);
         }
     }
 }

@@ -90,9 +90,26 @@ namespace Dominio
                 Math.Abs(jogada.PosicaoEscolhida.Y - jogada.PosicaoAntiga.Y) == 2)
                 this.RemoverPecaInimiga(jogada);
             else
-                CorTurnoAtual = (CorTurnoAtual == Cor.BRANCA ? Cor.PRETA : Cor.BRANCA);
+                this.AtualizarCorAtual();
 
             return true;
+        }
+
+        public void AplicarRodadaBonus(Jogada jogada)
+        {
+            Peca pecaMovida = this.Pecas.First(p => p.PosicaoAtual == jogada.PosicaoEscolhida);
+
+            this.CalcularMovimentos(pecaMovida);
+            List<Point> posicoesPossiveis = pecaMovida.PosicoesPossiveis.FindAll(p => Math.Abs(p.X - jogada.PosicaoEscolhida.X) == 2 &&
+                                                                                      Math.Abs(p.Y - jogada.PosicaoEscolhida.Y) == 2);
+            if (posicoesPossiveis.Count == 0)
+            {
+                this.AtualizarCorAtual();
+                this.PercorrerTabuleiro(CorTurnoAtual);
+                return;
+            }
+            this.Pecas.ForEach(p => p.PosicoesPossiveis.RemoveRange(0, p.PosicoesPossiveis.Count));
+            posicoesPossiveis.ForEach(p => pecaMovida.AdicionarPosicao(p));
         }
 
         private void ValidarDama(Peca peca)
@@ -183,19 +200,9 @@ namespace Dominio
             this.Pecas.Remove(pecaEliminada);
         }
 
-        public void AplicarRodadaBonus(Jogada jogada)
+        private void AtualizarCorAtual()
         {
-            Peca pecaMovida = this.Pecas.First(p => p.PosicaoAtual == jogada.PosicaoAntiga);
-
-            this.CalcularMovimentos(pecaMovida);
-            List<Point> posicoesPossiveis = pecaMovida.PosicoesPossiveis.FindAll(p => Math.Abs(p.X - jogada.PosicaoEscolhida.X) == 2 &&
-                                                                                      Math.Abs(p.Y - jogada.PosicaoEscolhida.Y) == 2);
-            if (posicoesPossiveis.Count == 0)
-            {
-                this.PercorrerTabuleiro((CorTurnoAtual == Cor.BRANCA ? Cor.PRETA : Cor.BRANCA));
-                return;
-            }
-            posicoesPossiveis.ForEach(p => pecaMovida.AdicionarPosicao(p));
+            CorTurnoAtual = (CorTurnoAtual == Cor.BRANCA ? Cor.PRETA : Cor.BRANCA);
         }
     }
 }
