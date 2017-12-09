@@ -1,5 +1,5 @@
 angular.module('app')
-.controller('JogoCtrl', function($scope, jogoService, $routeParams, $interval) {
+.controller('JogoCtrl', function($scope, jogoService, $routeParams, $interval, pecaService, $rootScope) {
     carregarJogo();
     $scope.corDoJogador = 0;
     $scope.urlSala = $routeParams.urlSala;
@@ -12,14 +12,20 @@ angular.module('app')
     }
     $interval(polling, 5000);
     function polling(){
-        carregarJogo();   
+        if($scope.corDoJogador != $scope.corJogando){
+            carregarJogo();   
+        }
     }
-    /*
-    $scope.gerarPartida = function(){
-        $scope.url = "aaaaaaaa";
-
-        $scope.gerado = !!$scope.url;
-    }*/
+    $rootScope.$on('jogada', function(){
+        var peca = pecaService.getPosicaoPecas();
+        console.log(peca);
+        jogoService.alterarTabuleiro(peca.pecaMovimento, peca.pecaCor).then(
+            response => {
+                debugger;
+                $scope.corJogando = response.data;
+            }
+        );
+    });
 
     $scope.peca = {
         "PosicaoAtual": "5, 3",
