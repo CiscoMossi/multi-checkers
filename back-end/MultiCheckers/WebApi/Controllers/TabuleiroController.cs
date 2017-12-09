@@ -20,7 +20,9 @@ namespace WebApi.Controllers
             Tabuleiro tabuleiro = tabuleiroRepository.ObterTabuleiro();
 
             if (tabuleiro.JogoFinalizado)
-                return ResponderOK(String.Concat("Jogo Finalizado. ", tabuleiro.CorTurnoAtual.ToString(), "s venceram."));
+                return ResponderOK(String.Concat("Jogo Finalizado. ", 
+                                                (tabuleiro.CorTurnoAtual == Cor.BRANCA ? Cor.PRETA : Cor.BRANCA).ToString(), 
+                                                 "S venceram."));
 
             return ResponderOK(tabuleiro);
         }

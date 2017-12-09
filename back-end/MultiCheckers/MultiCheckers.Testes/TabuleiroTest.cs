@@ -647,9 +647,10 @@ namespace MultiCheckers.Testes
 
             tabuleiro.PercorrerTabuleiro(Cor.BRANCA);
             tabuleiro.AtualizarJogada(jogada1);
+            tabuleiro.AplicarRodadaBonus(jogada1);
 
             Assert.AreEqual(tabuleiro.Pecas.Count, 2);
-            Assert.AreEqual(tabuleiro.CorTurnoAtual, Cor.BRANCA);
+            Assert.AreEqual(tabuleiro.CorTurnoAtual, Cor.PRETA);
             Assert.IsTrue(tabuleiro.ValidarFimJogo());
             Assert.IsTrue(tabuleiro.JogoFinalizado);
         }
@@ -660,7 +661,7 @@ namespace MultiCheckers.Testes
             Peca peca1 = new Peca(new Point(1, 1), Cor.BRANCA);
             Peca peca2 = new Peca(new Point(4, 4), Cor.BRANCA);
             Peca peca3 = new Peca(new Point(5, 5), Cor.PRETA);
-            Peca peca4 = new Peca(new Point(3, 3), Cor.PRETA);
+            Peca peca4 = new Peca(new Point(8, 8), Cor.PRETA);
             Tabuleiro tabuleiro = new Tabuleiro();
             Jogada jogada1 = new Jogada(new Point(6, 6), new Point(4, 4));
 
@@ -671,9 +672,10 @@ namespace MultiCheckers.Testes
 
             tabuleiro.PercorrerTabuleiro(Cor.BRANCA);
             tabuleiro.AtualizarJogada(jogada1);
+            tabuleiro.AplicarRodadaBonus(jogada1);
 
             Assert.AreEqual(tabuleiro.Pecas.Count, 3);
-            Assert.AreEqual(tabuleiro.CorTurnoAtual, Cor.BRANCA);
+            Assert.AreEqual(tabuleiro.CorTurnoAtual, Cor.PRETA);
             Assert.IsFalse(tabuleiro.ValidarFimJogo());
             Assert.IsFalse(tabuleiro.JogoFinalizado);
         }

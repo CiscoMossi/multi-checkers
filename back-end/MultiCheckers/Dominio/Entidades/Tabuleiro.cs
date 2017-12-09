@@ -117,7 +117,7 @@ namespace Dominio
 
         public bool ValidarFimJogo()
         {
-            if(this.Pecas.FirstOrDefault(p => p.Cor != this.CorTurnoAtual) == null)
+            if(this.Pecas.FirstOrDefault(p => p.Cor == this.CorTurnoAtual) == null)
                 this.JogoFinalizado = true;
 
             return this.JogoFinalizado;
