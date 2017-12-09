@@ -19,7 +19,9 @@ angular.module('app')
         /*TO-DO: implementar jogo*/
     }
     function polling(){
-        if($scope.corDoUsuario != $scope.corJogando){
+        debugger;
+        if($scope.corDoJogador != $scope.corJogando){
+            debugger;
             carregarJogo();   
         }
     }
