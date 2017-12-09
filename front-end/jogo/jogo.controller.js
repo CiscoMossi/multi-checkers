@@ -6,8 +6,8 @@ angular.module('app')
 
     function carregarJogo(){
         jogoService.buscarJogo().then(response => {
-            $scope.pecas = response.data.dados.tabuleiro.Pecas;
-            $scope.corJogando = response.data.dados.cor;
+            $scope.pecas = response.data.dados.Pecas;
+            $scope.corJogando = response.data.dados.CorTurnoAtual;
         });
     }
     //$interval(polling, 1000);
