@@ -10,20 +10,9 @@ angular.module('app')
             $scope.corJogando = response.data.dados.CorTurnoAtual;
         });
     }
-    //$interval(polling, 1000);
-    $scope.jogar = function(){
-        if($scope.corDoJogador != $scope.corJogando){
-            alert("não é sua vez");
-            return
-        }
-        /*TO-DO: implementar jogo*/
-    }
+    $interval(polling, 5000);
     function polling(){
-        debugger;
-        if($scope.corDoJogador != $scope.corJogando){
-            debugger;
-            carregarJogo();   
-        }
+        carregarJogo();   
     }
     /*
     $scope.gerarPartida = function(){
@@ -31,7 +20,6 @@ angular.module('app')
 
         $scope.gerado = !!$scope.url;
     }*/
-
 
     $scope.peca = {
         "PosicaoAtual": "5, 3",
