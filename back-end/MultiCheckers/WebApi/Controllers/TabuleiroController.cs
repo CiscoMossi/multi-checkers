@@ -12,36 +12,31 @@ namespace WebApi.Controllers
 {
     public class TabuleiroController : BaseController
     {
-        private static Cor COR_ATUAL = Cor.BRANCA;
         private static TabuleiroRepository tabuleiroRepository = new TabuleiroRepository();
 
         [HttpGet]
-        public HttpResponseMessage Consultar()
-        {
-            Tabuleiro tabuleiro = tabuleiroRepository.ObterTabuleiro();
-            Cor cor = COR_ATUAL;
-
-            Object resposta = new { tabuleiro, cor };
-            return ResponderOK(resposta);
-        }
+        public HttpResponseMessage Consultar() => ResponderOK(tabuleiroRepository.ObterTabuleiro());
 
         [HttpPost]
         public HttpResponseMessage Atualizar([FromBody] Jogada jogada, int cor)
         {
-            if ((Cor) cor != COR_ATUAL)
-                return ResponderErro("Turno do adversário");
-
             Tabuleiro tabuleiro = tabuleiroRepository.ObterTabuleiro();
+            int numPecas = tabuleiro.Pecas.Count;
+
+            if ((Cor) cor != tabuleiro.CorTurnoAtual)
+                return ResponderErro("Turno do adversário");
 
             if(!tabuleiro.AtualizarJogada(jogada))
                 return ResponderErro("Jogada inválida");
 
-            COR_ATUAL = (COR_ATUAL == Cor.BRANCA ? Cor.PRETA : Cor.BRANCA);
+            if (tabuleiro.Pecas.Count < numPecas)
+                tabuleiro.AplicarRodadaBonus(jogada);
+            else
+                tabuleiro.PercorrerTabuleiro(tabuleiro.CorTurnoAtual);
 
-            tabuleiro.PercorrerTabuleiro(COR_ATUAL);
             tabuleiroRepository.EditarTabuleiro(tabuleiro);
 
-            return ResponderOK(COR_ATUAL);
+            return ResponderOK(tabuleiro.CorTurnoAtual);
         }
     }
 }

@@ -375,7 +375,7 @@ namespace MultiCheckers.Testes
         }
 
         [TestMethod]
-        public void Eliminar_Peca_Preta_Quando_Branca_Saltar_Sobre()
+        public void Eliminar_Peca_Branca_Quando_Preta_Saltar_Sobre()
         {
             Peca peca1 = new Peca(new Point(6, 6), Cor.PRETA);
             Peca peca2 = new Peca(new Point(5, 5), Cor.BRANCA);
@@ -400,7 +400,7 @@ namespace MultiCheckers.Testes
         }
 
         [TestMethod]
-        public void Eliminar_Peca_Branca_Quando_Preta_Saltar_Sobre()
+        public void Eliminar_Peca_Preta_Quando_Branca_Saltar_Sobre()
         {
             Peca peca1 = new Peca(new Point(1, 1), Cor.BRANCA);
             Peca peca2 = new Peca(new Point(2, 2), Cor.PRETA);
@@ -463,6 +463,72 @@ namespace MultiCheckers.Testes
             Assert.IsFalse(estado);
             Assert.AreEqual(peca1.PosicoesPossiveis.Count, 1);
             Assert.AreEqual(peca2.PosicoesPossiveis.Count, 0);
+        }
+
+        [TestMethod]
+        public void Peca_Branca_Se_Torna_Dama()
+        {
+            Peca peca1 = new Peca(new Point(7, 7), Cor.BRANCA);
+            Tabuleiro tabuleiro = new Tabuleiro();
+
+            Jogada jogada1 = new Jogada(new Point(8, 8), new Point(7, 7));
+
+            tabuleiro.AdicionarPeca(peca1);
+            tabuleiro.PercorrerTabuleiro(Cor.BRANCA);
+
+            bool estado1 = tabuleiro.AtualizarJogada(jogada1);
+
+            Assert.IsTrue(estado1);
+            Assert.IsTrue(peca1.IsDama);
+        }
+
+        [TestMethod]
+        public void Peca_Preta_Se_Torna_Dama()
+        {
+            Peca peca2 = new Peca(new Point(2, 2), Cor.PRETA);
+            Tabuleiro tabuleiro = new Tabuleiro();
+
+            Jogada jogada2 = new Jogada(new Point(1, 1), new Point(2, 2));
+
+            tabuleiro.AdicionarPeca(peca2);
+            tabuleiro.PercorrerTabuleiro(Cor.PRETA);
+
+            bool estado2 = tabuleiro.AtualizarJogada(jogada2);
+
+            Assert.IsTrue(estado2);
+            Assert.IsTrue(peca2.IsDama);
+        }
+
+        [TestMethod]
+        public void Aplicar_Rodada_Bonus_Sem_Proxima_Peca()
+        {
+            Peca peca1 = new Peca(new Point(1, 1), Cor.BRANCA);
+            Peca peca2 = new Peca(new Point(2, 2), Cor.PRETA);
+            Peca peca3 = new Peca(new Point(4, 4), Cor.PRETA);
+            Tabuleiro tabuleiro = new Tabuleiro();
+
+            Point posicaoEsperada1 = new Point(3, 3);
+            Point posicaoEsperada2 = new Point(5, 5);
+            Jogada jogada1 = new Jogada(posicaoEsperada1, new Point(1, 1));
+            Jogada jogada2 = new Jogada(posicaoEsperada2, new Point(3, 3));
+
+            tabuleiro.AdicionarPeca(peca1);
+            tabuleiro.AdicionarPeca(peca2);
+            tabuleiro.AdicionarPeca(peca3);
+
+            int numPecasSalto1 = tabuleiro.Pecas.Count;
+            tabuleiro.PercorrerTabuleiro(Cor.BRANCA);
+            tabuleiro.AtualizarJogada(jogada1);
+
+            int numPecasSalto2 = tabuleiro.Pecas.Count;
+            tabuleiro.AplicarRodadaBonus(jogada1);
+
+            tabuleiro.AtualizarJogada(jogada2);
+            int numPecasAtual = tabuleiro.Pecas.Count;
+
+            Assert.AreEqual(numPecasSalto1, 3);
+            Assert.AreEqual(numPecasSalto2, 2);
+            Assert.AreEqual(numPecasAtual, 1);
         }
     }
 }

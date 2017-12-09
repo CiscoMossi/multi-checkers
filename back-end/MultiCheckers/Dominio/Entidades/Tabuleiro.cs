@@ -10,15 +10,28 @@ namespace Dominio
 {
     public class Tabuleiro
     {
-        private int LIMITE_MIN = 1;
-        private int LIMITE_MAX = 8;
+        private readonly int LIMITE_MIN = 1;
+        private readonly int LIMITE_MAX = 8;
 
         public Tabuleiro()
         {
             this.Pecas = new List<Peca>();
+            this.CorTurnoAtual = Cor.BRANCA;
         }
 
         public List<Peca> Pecas { get; private set; }
+
+        public Cor CorTurnoAtual { get; private set; }
+
+        public void AdicionarPeca(Peca peca)
+        {
+            this.Pecas.Add(peca);
+        }
+
+        public void AtualizarTurno(Cor cor)
+        {
+            this.CorTurnoAtual = cor;
+        }
 
         public void PosicionarInicioPartida()
         {            
@@ -51,6 +64,35 @@ namespace Dominio
             Pecas.Add(new Peca(new Point(4,8), Cor.PRETA));
             Pecas.Add(new Peca(new Point(6,8), Cor.PRETA));
             Pecas.Add(new Peca(new Point(8,8), Cor.PRETA));
+        }
+
+        public void PercorrerTabuleiro(Cor cor)
+        {
+            this.Pecas.ForEach(p => p.PosicoesPossiveis.RemoveRange(0, p.PosicoesPossiveis.Count));
+
+            List<Peca> pecasDestaCor = this.Pecas.FindAll(p => p.Cor == cor);
+            pecasDestaCor.ForEach(p => this.CalcularMovimentos(p));
+        }
+
+        public bool AtualizarJogada(Jogada jogada)
+        {
+            Peca pecaMovida = this.Pecas.FirstOrDefault(p => p.PosicaoAtual == jogada.PosicaoAntiga);
+            if (pecaMovida == null)
+                return false;
+
+            if (!pecaMovida.PosicoesPossiveis.Exists(p => p == jogada.PosicaoEscolhida))
+                return false;
+
+            pecaMovida.Mover(jogada.PosicaoEscolhida);
+            this.ValidarDama(pecaMovida);
+
+            if (Math.Abs(jogada.PosicaoEscolhida.X - jogada.PosicaoAntiga.X) == 2 &&
+                Math.Abs(jogada.PosicaoEscolhida.Y - jogada.PosicaoAntiga.Y) == 2)
+                this.RemoverPecaInimiga(jogada);
+            else
+                CorTurnoAtual = (CorTurnoAtual == Cor.BRANCA ? Cor.PRETA : Cor.BRANCA);
+
+            return true;
         }
 
         private void ValidarDama(Peca peca)
@@ -129,13 +171,10 @@ namespace Dominio
                 this.AplicarMovimentos(peca, recuoDireita);
                 this.AplicarMovimentos(peca, recuoEsquerda);
             }
-            this.ValidarDama(peca);
         }
 
-        private void RemoverPecaInimiga(Peca pecaMovida, Jogada jogada)
+        private void RemoverPecaInimiga(Jogada jogada)
         {
-            pecaMovida = this.Pecas.FirstOrDefault(p => p.PosicaoAtual == jogada.PosicaoAntiga);
-
             Peca pecaEliminada = this.Pecas.First(p => p.PosicaoAtual.X == jogada.PosicaoEscolhida.X +
                                                                           (jogada.PosicaoEscolhida.X > jogada.PosicaoAntiga.X ? -1 : 1) &&
 
@@ -144,36 +183,19 @@ namespace Dominio
             this.Pecas.Remove(pecaEliminada);
         }
 
-        public void PercorrerTabuleiro(Cor cor)
+        public void AplicarRodadaBonus(Jogada jogada)
         {
-            this.Pecas.ForEach(p => p.PosicoesPossiveis.RemoveRange(0, p.PosicoesPossiveis.Count));
+            Peca pecaMovida = this.Pecas.First(p => p.PosicaoAtual == jogada.PosicaoAntiga);
 
-            List<Peca> pecasAmigas = this.Pecas.FindAll(p => p.Cor == cor);
-            pecasAmigas.ForEach(p => this.CalcularMovimentos(p));
+            this.CalcularMovimentos(pecaMovida);
+            List<Point> posicoesPossiveis = pecaMovida.PosicoesPossiveis.FindAll(p => Math.Abs(p.X - jogada.PosicaoEscolhida.X) == 2 &&
+                                                                                      Math.Abs(p.Y - jogada.PosicaoEscolhida.Y) == 2);
+            if (posicoesPossiveis.Count == 0)
+            {
+                this.PercorrerTabuleiro((CorTurnoAtual == Cor.BRANCA ? Cor.PRETA : Cor.BRANCA));
+                return;
+            }
+            posicoesPossiveis.ForEach(p => pecaMovida.AdicionarPosicao(p));
         }
-
-
-        public bool AtualizarJogada(Jogada jogada)
-        {
-            Peca pecaMovida = this.Pecas.FirstOrDefault(p => p.PosicaoAtual == jogada.PosicaoAntiga);
-            if(pecaMovida == null)
-                return false;
-
-            if(!pecaMovida.PosicoesPossiveis.Exists(p => p == jogada.PosicaoEscolhida))
-                return false;
-
-            if (Math.Abs(jogada.PosicaoEscolhida.X - jogada.PosicaoAntiga.X) == 2 &&
-                Math.Abs(jogada.PosicaoEscolhida.Y - jogada.PosicaoAntiga.Y) == 2)
-                this.RemoverPecaInimiga(pecaMovida, jogada);
-
-            this.Pecas.Find(p => p.PosicaoAtual == jogada.PosicaoAntiga).Mover(jogada.PosicaoEscolhida);
-            return true;
-        }
-
-        public void AdicionarPeca(Peca peca)
-        {
-            this.Pecas.Add(peca);
-        }
-
     }
 }
