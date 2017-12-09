@@ -1,8 +1,8 @@
 angular.module('app')
 .factory('pecaService', function(){
-    var pecas = [];
-    function setPosicaoPecas(pecasLista){
-        pecas = pecasLista;
+    var peca = {};
+    function setPosicaoPecas(pecaMovimento){
+        peca = pecaMovimento;
     }
     function getPosicaoPecas(){
         return pecas;

@@ -1,5 +1,6 @@
 angular.module('app')
-    .controller('PecaController', function ($scope) {
+    .controller('PecaController', function ($scope, jogoService) {
+        let posicaoAnterior;
         $scope.setPeca = function(peca){
             $scope.peca = peca;
             $scope.selecionada = false;
@@ -7,7 +8,7 @@ angular.module('app')
             $scope.peca.x = 12.5 * (parseInt(posicao[0]) - 1) + 1.2;
             $scope.peca.y = 12.5 * (8 - parseInt(posicao[1])) + 1.2;
             console.log("x"+posicao[0] +"y"+posicao[1])
-            
+            posicaoAnterior = posicao;
             let movimentosString = [];
             $scope.peca.PosicoesPossiveis
                                 .forEach(
@@ -29,6 +30,11 @@ angular.module('app')
             $scope.peca.x = 12.5 * (posicao.x-1) + 1.2;
             $scope.peca.y = 12.5 * (posicao.y) + 1.2;
             $scope.selecionada = false;
+            let posicaoJogada = {
+                "PosicaoEscolhida" : `${posicao.x},${posicao.y}`,
+                "PosicaoAntiga" : `${posicaoAnterior[0]},${posicaoAnterior[1]}`
+            }
+            jogoService.alterarTabuleiro(posicaoJogada, $scope.peca.Cor).then();
         }
     }
 );    

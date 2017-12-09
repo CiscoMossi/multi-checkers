@@ -4,8 +4,8 @@ angular.module('app')
     function buscarJogo(){
         return $http.get(urlBase);
     }
-    function alterarTabuleiro(tabuleiro, cor){
-        return $http.put(urlBase+`?cor=${cor}`, tabuleiro);
+    function alterarTabuleiro(movimento, cor){
+        return $http.post(urlBase+`?cor=${cor}`, movimento);
     }
     return {
         buscarJogo : buscarJogo,
