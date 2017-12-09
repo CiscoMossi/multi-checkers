@@ -2,6 +2,7 @@ angular.module('app')
     .controller('PecaController', function ($scope, pecaService) {
         let posicaoAnterior;
         $scope.setPeca = function(peca){
+            console.log(peca)
             $scope.peca = peca;
             $scope.selecionada = false;
             var posicao = $scope.peca.PosicaoAtual.split(", ");

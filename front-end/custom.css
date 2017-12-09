@@ -111,15 +111,26 @@ body {
     background-image: url("images/blacksquare.jpg")
 }
 
-.white {
+.branca {
     background-color: #fff;
+}
+
+.preta {
+    background-color: #f00;
+}
+
+.branca.dama {
+    background: #fff url("http://4.bp.blogspot.com/-BDcUTSIGkY4/Ui5yiqbainI/AAAAAAAABMQ/Tb8-BOjl4U4/s1600/capture_20130216_174321_by_pinklifeeditions-d5v61cs.png");
+}
+
+.preta.dama {
+    background: #f00 url("http://4.bp.blogspot.com/-BDcUTSIGkY4/Ui5yiqbainI/AAAAAAAABMQ/Tb8-BOjl4U4/s1600/capture_20130216_174321_by_pinklifeeditions-d5v61cs.png");
 }
 
 .peca {
     width: 10%;
     height: 10%;
     border-radius: 50%;
-    background-color: red;
     -webkit-transition-property: top, left;
     -webkit-transition-duration: 0.5s;
     transition-property: top, left;
