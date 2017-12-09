@@ -1,5 +1,5 @@
 angular.module('app')
-    .controller('PecaController', function ($scope, jogoService) {
+    .controller('PecaController', function ($scope, pecaService) {
         let posicaoAnterior;
         $scope.setPeca = function(peca){
             $scope.peca = peca;
@@ -33,7 +33,7 @@ angular.module('app')
                 "PosicaoEscolhida" : `${posicao.x},${posicao.y}`,
                 "PosicaoAntiga" : `${posicaoAnterior[0]},${posicaoAnterior[1]}`
             }
-            jogoService.alterarTabuleiro(posicaoJogada, $scope.peca.Cor).then();
+            pecaService.setPosicaoPecas(posicaoJogada, $scope.peca.Cor);
         }
     }
 );    
