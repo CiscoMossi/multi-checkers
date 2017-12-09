@@ -10,7 +10,7 @@ angular.module('app')
             $scope.corJogando = response.data.dados.CorTurnoAtual;
         });
     }
-    $interval(polling, 5000);
+    $interval(polling, 1000);
     function polling(){
         if($scope.corDoJogador != $scope.corJogando){
             carregarJogo();   
@@ -18,10 +18,8 @@ angular.module('app')
     }
     $rootScope.$on('jogada', function(){
         var peca = pecaService.getPosicaoPecas();
-        console.log(peca);
         jogoService.alterarTabuleiro(peca.pecaMovimento, peca.pecaCor).then(
             response => {
-                debugger;
                 $scope.corJogando = response.data;
             }
         );
