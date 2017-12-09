@@ -10,7 +10,7 @@ angular.module('app')
             $scope.corJogando = response.data.dados.CorTurnoAtual;
         });
     }
-    $interval(polling, 1000);
+    $interval(polling, 3000);
     function polling(){
         if($scope.corDoJogador != $scope.corJogando){
             carregarJogo();   

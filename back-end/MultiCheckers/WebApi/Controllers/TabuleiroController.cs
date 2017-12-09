@@ -15,7 +15,15 @@ namespace WebApi.Controllers
         private static TabuleiroRepository tabuleiroRepository = new TabuleiroRepository();
 
         [HttpGet]
-        public HttpResponseMessage Consultar() => ResponderOK(tabuleiroRepository.ObterTabuleiro());
+        public HttpResponseMessage Consultar()
+        {
+            Tabuleiro tabuleiro = tabuleiroRepository.ObterTabuleiro();
+
+            if (tabuleiro.JogoFinalizado)
+                return ResponderOK(String.Concat("Jogo Finalizado. ", tabuleiro.CorTurnoAtual.ToString(), "s venceram."));
+
+            return ResponderOK(tabuleiro);
+        }
 
         [HttpPost]
         public HttpResponseMessage Atualizar([FromBody] Jogada jogada, int cor)

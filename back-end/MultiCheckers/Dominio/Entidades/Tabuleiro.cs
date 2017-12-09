@@ -17,11 +17,14 @@ namespace Dominio
         {
             this.Pecas = new List<Peca>();
             this.CorTurnoAtual = Cor.BRANCA;
+            this.JogoFinalizado = false;
         }
 
         public List<Peca> Pecas { get; private set; }
 
         public Cor CorTurnoAtual { get; private set; }
+
+        public bool JogoFinalizado { get; private set; }
 
         public void AdicionarPeca(Peca peca)
         {
@@ -114,7 +117,10 @@ namespace Dominio
 
         public bool ValidarFimJogo()
         {
-            return this.Pecas.FirstOrDefault(p => p.Cor != this.CorTurnoAtual) == null;
+            if(this.Pecas.FirstOrDefault(p => p.Cor != this.CorTurnoAtual) == null)
+                this.JogoFinalizado = true;
+
+            return this.JogoFinalizado;
         }
 
         private void ValidarDama(Peca peca)

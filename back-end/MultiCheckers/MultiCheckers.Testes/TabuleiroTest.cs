@@ -649,7 +649,9 @@ namespace MultiCheckers.Testes
             tabuleiro.AtualizarJogada(jogada1);
 
             Assert.AreEqual(tabuleiro.Pecas.Count, 2);
+            Assert.AreEqual(tabuleiro.CorTurnoAtual, Cor.BRANCA);
             Assert.IsTrue(tabuleiro.ValidarFimJogo());
+            Assert.IsTrue(tabuleiro.JogoFinalizado);
         }
 
         [TestMethod]
@@ -671,7 +673,9 @@ namespace MultiCheckers.Testes
             tabuleiro.AtualizarJogada(jogada1);
 
             Assert.AreEqual(tabuleiro.Pecas.Count, 3);
+            Assert.AreEqual(tabuleiro.CorTurnoAtual, Cor.BRANCA);
             Assert.IsFalse(tabuleiro.ValidarFimJogo());
+            Assert.IsFalse(tabuleiro.JogoFinalizado);
         }
     }
 }
