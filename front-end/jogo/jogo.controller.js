@@ -1,5 +1,5 @@
 angular.module('app')
-.controller('JogoCtrl', function($scope, jogoService, $routeParams, $interval, pecaService, $rootScope) {
+.controller('JogoCtrl', function($scope, $timeout, jogoService, $routeParams, $interval, pecaService, $rootScope) {
     carregarJogo();
     $scope.corDoJogador = 0;
     $scope.urlSala = $routeParams.urlSala;
@@ -8,6 +8,9 @@ angular.module('app')
         jogoService.buscarJogo().then(response => {
             $scope.pecas = response.data.dados.Pecas;
             $scope.corJogando = response.data.dados.CorTurnoAtual;
+            if($scope.pecas == undefined){
+                alert(response.data.dados);
+            }
         });
     }
     $interval(polling, 3000);
