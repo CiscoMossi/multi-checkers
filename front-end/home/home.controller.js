@@ -5,8 +5,10 @@ angular.module('app')
         $scope.gerado = !!$scope.url;
     }
 
-    $scope.copiar = function(url){
-        
+    $scope.copiar = function(){
+        let texto = document.getElementById("url");
+        texto.select();
+        document.execCommand("Copy");
     }
 
     $scope.alterar = function(){

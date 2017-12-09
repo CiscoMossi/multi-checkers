@@ -7,7 +7,6 @@ angular.module('app')
             var posicao = $scope.peca.PosicaoAtual.split(", ");
             $scope.peca.x = 12.5 * (parseInt(posicao[0]) - 1) + 1.2;
             $scope.peca.y = 12.5 * (8 - parseInt(posicao[1])) + 1.2;
-            console.log("x"+posicao[0] +"y"+posicao[1])
             posicaoAnterior = posicao;
             let movimentosString = [];
             $scope.peca.PosicoesPossiveis
