@@ -21,9 +21,6 @@ angular.module('app')
                             ));
         }
 
-        $scope.mostrarMovimentos = function(){
-        }
-
         $scope.moverPeca = function(posicao){
             $scope.peca.x = 12.5 * (posicao.x-1) + 1.2;
             $scope.peca.y = 12.5 * (8-posicao.y) + 1.2;

@@ -7,9 +7,9 @@
     style="position: absolute; 
            left: {{peca.x}}%; 
            top: {{peca.y}}%;"
-    ng-click="mostrarMovimentos()"><img src="images/peça.png"></div>
+    ng-click="mostrarMovimentos($ctrl.selecionada)"><img src="images/peça.png"></div>
 
-<div class="movimento" ng-show="$ctrl.peca.PosicaoAtual == selecionada.PosicaoAtual"
+<div class="movimento" ng-show="$ctrl.peca == $ctrl.selecionada"
     style="position: absolute; left: {{(movimento.x - 1) * 12.5 + 1.2}}%; top: {{(8 - movimento.y) * 12.5 + 1.2}}%;" 
     ng-repeat="movimento in movimentos" 
     ng-click="moverPeca(movimento)"><img src="images/peça.png"></div>
