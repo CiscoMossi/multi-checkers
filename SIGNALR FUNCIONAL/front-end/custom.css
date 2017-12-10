@@ -143,12 +143,20 @@ body {
     transition-duration: 0.5s;
 }
 
-.podeMexer {
-    border: 1px solid #02f;
+.podeMexerBranca {
+    filter: drop-shadow(0 0 10px #fff) sepia(.5);
 }
 
-.selecionada {
+.podeMexerPreta {
+    filter: drop-shadow(0 0 10px #fff)
+}
 
+.selecionadaBranca {
+    filter: drop-shadow(0 0 10px #0f0) sepia(.5)
+}
+
+.selecionadaPreta {
+    filter: drop-shadow(0 0 10px #0f0)
 }
 
 .movimento {

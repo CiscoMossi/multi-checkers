@@ -2,7 +2,6 @@ angular.module('app')
     .controller('PecaCtrl', function ($scope, pecaService) {
         let posicaoAnterior;
         $scope.setPeca = function(peca){
-            console.log(peca)
             $scope.peca = peca;
             var posicao = $scope.peca.PosicaoAtual.split(", ");
             $scope.peca.x = 12.5 * (parseInt(posicao[0]) - 1) + 1.2;
@@ -22,7 +21,6 @@ angular.module('app')
         }
 
         $scope.moverPeca = function(posicao){
-            //console.log(posicao)
             $scope.peca.x = 12.5 * (posicao.x-1) + 1.2;
             $scope.peca.y = 12.5 * (8-posicao.y) + 1.2;
             let posicaoJogada = {

@@ -21,7 +21,8 @@ angular.module('app')
     });
 
     $scope.mostrarMovimentos = function(peca){
-        $scope.selecionada = peca;
+        if($scope.corJogando == peca.Cor && peca.PosicoesPossiveis.length != 0)
+            $scope.selecionada = peca;
     }
 
     $scope.copiar = function(){
