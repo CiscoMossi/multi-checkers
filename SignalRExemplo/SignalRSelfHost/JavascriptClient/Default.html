@@ -12,9 +12,28 @@
     </style>
 </head>
 <body>
+    <!--Mensagens para Geral-->
     <div class="container">
         <input type="text" id="message" />
         <input type="button" id="sendmessage" value="Send" />
+        <input type="hidden" id="displayname" />
+        <ul id="discussion"></ul>
+    </div>
+    <!--Adicionador de Grupo-->
+    <div class="container">
+        <p>ENTRAR / ADICIONAR GRUPO</p>
+        <input type="text" id="messagegroup" />
+        <input type="button" id="group" value="Adicionar/Entrar" />
+        <input type="hidden" id="displayname" />
+        <ul id="discussion"></ul>
+    </div>
+    <div class="container">
+        <p>MANDAR MENSAGEM PARA GRUPO</p>
+        <label for="mensGrupo">Mensagem :</label>
+        <input type="text" id="mensGrupo" />
+        <label for="grupoR">Grupo :</label>
+        <input type="text" id="grupoR" />
+        <input type="button" id="mandarGrupo" value="Mandar" />
         <input type="hidden" id="displayname" />
         <ul id="discussion"></ul>
     </div>
@@ -54,6 +73,12 @@
                     chat.server.send($('#displayname').val(), $('#message').val());
                     // Clear text box and reset focus for next comment.
                     $('#message').val('').focus();
+                });
+                $('#group').click(function () {
+                    chat.server.adicionandoGrupo($('#messagegroup').val());
+                });
+                $('#mandarGrupo').click(function () {
+                    chat.server.sendMessageGroup($('#displayname').val(), $('#mensGrupo').val(), $('#grupoR').val());
                 });
             });
         });

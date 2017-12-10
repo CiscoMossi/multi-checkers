@@ -1,5 +1,5 @@
 angular.module('app')
-.controller('JogoCtrl', function($scope, $timeout, jogoService, $routeParams, $interval, pecaService, $rootScope) {
+.controller('JogoCtrl', function($scope, connectionService, jogoService, $routeParams, $interval, pecaService, $rootScope) {
     carregarJogo();
     $scope.corDoJogador = 0;
     $scope.urlSala = $routeParams.urlSala;
