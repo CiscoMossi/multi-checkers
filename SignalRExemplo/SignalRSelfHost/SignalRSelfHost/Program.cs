@@ -3,6 +3,7 @@ using Microsoft.AspNet.SignalR;
 using Microsoft.Owin.Hosting;
 using Owin;
 using Microsoft.Owin.Cors;
+using System.Threading.Tasks;
 
 namespace SignalRSelfHost
 {
@@ -35,6 +36,14 @@ namespace SignalRSelfHost
         public void Send(string name, string message)
         {
             Clients.All.addMessage(name, message);
+        }
+        public void AdicionandoGrupo(string grupo)
+        {
+            Groups.Add(Context.ConnectionId, grupo);
+        }
+        public void SendMessageGroup(string name, string mensagem, string grupo)
+        {
+            Clients.Group(grupo).addMessage(name, mensagem);
         }
     }
 }
