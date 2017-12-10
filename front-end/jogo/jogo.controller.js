@@ -28,17 +28,13 @@ angular.module('app')
         );
     });
 
-    $scope.peca = {
-        "PosicaoAtual": "5, 3",
-        "Cor": 0,
-        "PosicoesPossiveis": [
-          "6, 4",
-          "4, 4"
-        ],
-        "IsDama": false
-      };
+    $scope.copiar = function(){
+        let texto = document.getElementById("url");
+        texto.select();
+        document.execCommand("Copy");
+    }
 
-    $scope.copiar = function(url){
-
+    $scope.mostrarMovimentos = function(peca){
+        $scope.selecionada = peca;
     }
 });

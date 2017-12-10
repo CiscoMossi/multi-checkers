@@ -122,14 +122,6 @@ body {
     filter: brightness(.2);
 }
 
-.branca.dama {
-    background: #fff url("http://4.bp.blogspot.com/-BDcUTSIGkY4/Ui5yiqbainI/AAAAAAAABMQ/Tb8-BOjl4U4/s1600/capture_20130216_174321_by_pinklifeeditions-d5v61cs.png");
-}
-
-.preta.dama {
-    background: #f00 url("http://4.bp.blogspot.com/-BDcUTSIGkY4/Ui5yiqbainI/AAAAAAAABMQ/Tb8-BOjl4U4/s1600/capture_20130216_174321_by_pinklifeeditions-d5v61cs.png");
-}
-
 .peca {  
     height: 10%;
     width: 10%;
@@ -137,6 +129,11 @@ body {
     -webkit-transition-duration: 0.5s;
     transition-property: top, left;
     transition-duration: 0.5s;
+}
+
+.selecionada {
+    background-color: #ff0;
+    border-radius: 50%;
 }
 
 .movimento {
