@@ -6,11 +6,11 @@ function ($, $rootScope) {
         connect: function () {
             var self = this;
 
-            connection = $.hubConnection('http://192.168.0.101:8082/signalr');
+            connection = $.hubConnection('http://localhost:9090/signalr');
             proxy = connection.createHubProxy('HubMessage');
-            connection.start().done(function() {
+            connection.start()/*.done(function() {
                 console.log("Conectado")
-            });
+            })*/;
             proxy.on('buscarJogo', function (tabuleiro) {
                 $rootScope.$broadcast('buscarJogo', tabuleiro);
             });

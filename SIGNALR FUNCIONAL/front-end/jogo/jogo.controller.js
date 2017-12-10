@@ -25,11 +25,11 @@ angular.module('app')
         var peca = pecaService.getPosicaoPecas();
         jogoService.atualizar(peca.pecaMovimento, peca.pecaCor)
     });
-
+    /*
     $interval(polling, 3000);
     function polling(){
         jogoService.consultar();
-    }
+    }*/
 
     $scope.corDoJogador = 0;
     $scope.urlSala = $routeParams.urlSala;
@@ -37,6 +37,7 @@ angular.module('app')
     $scope.$on('buscarJogo', function (event, tabuleiro) {
         $scope.pecas = tabuleiro.Pecas;
         $scope.corJogando = parseInt(tabuleiro.CorTurnoAtual);
+        $scope.$apply();
     });
 
     $scope.peca = {
@@ -49,7 +50,13 @@ angular.module('app')
         "IsDama": false
       };
 
-    $scope.copiar = function(url){
+    $scope.mostrarMovimentos = function(peca){
+        $scope.selecionada = peca;
+    }
 
+    $scope.copiar = function(){
+        let texto = document.getElementById("url");
+        texto.select();
+        document.execCommand("Copy");
     }
 });

@@ -22,7 +22,7 @@ namespace MultiCheckers.SignalR
             // use http://*:8080 to bind to all addresses. 
             // See http://msdn.microsoft.com/en-us/library/system.net.httplistener.aspx 
             // for more information.
-            string url = "http://192.168.0.101:8082";
+            string url = "http://localhost:9090";
             using (WebApp.Start(url))
             {
                 Console.WriteLine("Server running on {0}", url);
@@ -55,6 +55,12 @@ namespace MultiCheckers.SignalR
 
             Clients.All.buscarJogo(tabuleiro);
         }
+        public override Task OnConnected()
+        {
+            this.Consultar();
+            return base.OnConnected();
+        }
+
 
         public void Atualizar(Jogada jogada, int cor)
         {
