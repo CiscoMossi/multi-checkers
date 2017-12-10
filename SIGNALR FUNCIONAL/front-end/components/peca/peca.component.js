@@ -1,6 +1,6 @@
 angular.module('app').component('peca', {
     templateUrl: 'components/peca/peca.html',
-    controller: 'PecaController',
+    controller: 'PecaCtrl',
     bindings: {
       peca: '=',
       selecionada: '='

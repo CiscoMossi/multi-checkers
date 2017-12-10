@@ -1,5 +1,5 @@
 angular.module('app')
-    .controller('PecaController', function ($scope, pecaService) {
+    .controller('PecaCtrl', function ($scope, pecaService) {
         let posicaoAnterior;
         $scope.setPeca = function(peca){
             console.log(peca)
