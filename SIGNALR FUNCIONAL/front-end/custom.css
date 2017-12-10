@@ -142,15 +142,14 @@ body {
 .movimento {
     height: 10%;
     width: 10%;
-    filter: opacity(.4);
+    opacity: .4;
+    background-image: url("images/peça.png");
+    background-size: cover
 }
 
-.movimento-invisivel{
-    display: none; 
-}
-
-.movimento-invisivel.movimento{
-    display: block;
+.movimentoPreta {
+    filter: brightness(.2);
+    opacity: .7;
 }
 
 @media screen and (max-width: 650px) {
