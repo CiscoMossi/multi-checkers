@@ -24,13 +24,8 @@ angular.module('app')
     $rootScope.$on('jogada', function(){
         var peca = pecaService.getPosicaoPecas();
         jogoService.atualizar(peca.pecaMovimento, peca.pecaCor)
-    });
-    /*
-    $interval(polling, 3000);
-    function polling(){
         jogoService.consultar();
-    }*/
-
+    });
     $scope.corDoJogador = 0;
     $scope.urlSala = $routeParams.urlSala;
 
