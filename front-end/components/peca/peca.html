@@ -6,11 +6,9 @@
     style="position: absolute; 
            left: {{peca.x}}%; 
            top: {{peca.y}}%;"
-    ng-click="mostrarMovimentos()"
-           ></div>
+    ng-click="mostrarMovimentos()"><img src="images/peça.png"></div>
 
 <div class="movimento-invisivel" ng-class="{'movimento': selecionada}"
     style="position: absolute; left: {{(movimento.x - 1) * 12.5}}%; top: {{(8 - movimento.y) * 12.5}}%;" 
     ng-repeat="movimento in movimentos" 
-    ng-click="moverPeca(movimento)">
-</div>
+    ng-click="moverPeca(movimento)"><img src="images/peça.png"></div>
