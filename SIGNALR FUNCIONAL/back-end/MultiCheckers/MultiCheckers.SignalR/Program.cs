@@ -30,6 +30,7 @@ namespace MultiCheckers.SignalR
             }
         }
     }
+
     class Startup
     {
         public void Configuration(IAppBuilder app)
@@ -42,21 +43,7 @@ namespace MultiCheckers.SignalR
     [HubName("HubMessage")]
     public class MyHub : Hub
     {
-        private static TabuleiroRepository tabuleiroRepository = new TabuleiroRepository();
-
-        public void Consultar()
-        {
-            Tabuleiro tabuleiro = tabuleiroRepository.ObterTabuleiro();
-
-            Clients.All.buscarJogo(tabuleiro);
-            if (tabuleiro.JogoFinalizado)
-            {
-                Clients.All.fimJogo(String.Concat("Jogo Finalizado. ",
-                                      (tabuleiro.CorTurnoAtual == Cor.BRANCA ? Cor.PRETA : Cor.BRANCA).ToString(),
-                                       "S venceram."), tabuleiro);
-                return;
-            }           
-        }
+        private static PartidaRepository partidaRepository = new PartidaRepository();
 
         public override Task OnConnected()
         {
@@ -64,9 +51,24 @@ namespace MultiCheckers.SignalR
             return base.OnConnected();
         }
 
+        public void Consultar()
+        {
+            Partida partida = partidaRepository.ObterPartida();
+
+            Clients.All.buscarJogo(partida);
+            if (partida.PartidaFinalizada)
+            {
+                Clients.All.fimJogo(String.Concat("Jogo Finalizado. ",
+                                      (partida.Tabuleiro.CorTurnoAtual == Cor.BRANCA ? Cor.PRETA : Cor.BRANCA).ToString(),
+                                       "S venceram."));
+                return;
+            }           
+        }
+        
         public void Atualizar(Jogada jogada, int cor)
         {
-            Tabuleiro tabuleiro = tabuleiroRepository.ObterTabuleiro();
+            Partida partida = partidaRepository.ObterPartida();
+            Tabuleiro tabuleiro = partida.Tabuleiro;
             int numPecas = tabuleiro.Pecas.Count;
 
             if ((Cor)cor != tabuleiro.CorTurnoAtual)
@@ -80,9 +82,9 @@ namespace MultiCheckers.SignalR
             else
                 tabuleiro.PercorrerTabuleiro(tabuleiro.CorTurnoAtual);
 
-            tabuleiroRepository.EditarTabuleiro(tabuleiro);
+            partidaRepository.EditarTabuleiro(tabuleiro);
 
-            if (tabuleiro.ValidarFimJogo())
+            if (partida.ValidarFimJogo(tabuleiro.CorTurnoAtual))
                 Clients.All.alterarTabuleiro("Você venceu!");
 
             Clients.All.alterarTabuleiro(tabuleiro.CorTurnoAtual.ToString());

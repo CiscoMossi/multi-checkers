@@ -9,9 +9,10 @@ angular.module('app')
     $scope.corDoJogador = 0;
     $scope.urlSala = $routeParams.urlSala;
 
-    $scope.$on('buscarJogo', function (event, tabuleiro) {
-        $scope.pecas = tabuleiro.Pecas;
-        $scope.corJogando = parseInt(tabuleiro.CorTurnoAtual);
+    $scope.$on('buscarJogo', function (event, partida) {
+        $scope.pecas = partida.Tabuleiro.Pecas;
+        $scope.corJogando = parseInt(partida.Tabuleiro.CorTurnoAtual);
+        $scope.jogadorBrancas = partida.JogadorBrancas
         $scope.$apply();
     });
 

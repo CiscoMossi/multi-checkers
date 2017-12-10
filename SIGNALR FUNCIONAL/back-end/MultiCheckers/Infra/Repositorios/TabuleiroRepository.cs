@@ -11,7 +11,7 @@ namespace MultiCheckers.Repositorios
 {
     public class TabuleiroRepository
     {
-        private static Tabuleiro TABULEIRO_ATUAL = new Tabuleiro();
+        private static Tabuleiro TABULEIRO_ATUAL;
 
         public TabuleiroRepository()
         {
