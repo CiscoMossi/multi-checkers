@@ -40,16 +40,6 @@ angular.module('app')
         $scope.$apply();
     });
 
-    $scope.peca = {
-        "PosicaoAtual": "5, 3",
-        "Cor": 0,
-        "PosicoesPossiveis": [
-          "6, 4",
-          "4, 4"
-        ],
-        "IsDama": false
-      };
-
     $scope.mostrarMovimentos = function(peca){
         $scope.selecionada = peca;
     }
