@@ -115,19 +115,23 @@ body {
 
 .branca {
     filter: sepia(.5);
+    background-image: url("images/peca.png");
+    background-size: cover;
 }
 
 .preta {
-    filter: grayscale(.9);
-    filter: brightness(.2);
+    background-image: url("images/peca-preta.png");
+    background-size: cover;
 }
 
 .branca.dama {
-    background: #fff url("http://4.bp.blogspot.com/-BDcUTSIGkY4/Ui5yiqbainI/AAAAAAAABMQ/Tb8-BOjl4U4/s1600/capture_20130216_174321_by_pinklifeeditions-d5v61cs.png");
+    background: url("images/peca-dama.png");
+    background-size: cover;
 }
 
 .preta.dama {
-    background: #f00 url("http://4.bp.blogspot.com/-BDcUTSIGkY4/Ui5yiqbainI/AAAAAAAABMQ/Tb8-BOjl4U4/s1600/capture_20130216_174321_by_pinklifeeditions-d5v61cs.png");
+    background: url("images/peca-preta-dama.png");
+    background-size: cover;
 }
 
 .peca {  
@@ -139,17 +143,25 @@ body {
     transition-duration: 0.5s;
 }
 
+.podeMexer {
+    border: 1px solid #02f;
+}
+
+.selecionada {
+
+}
+
 .movimento {
     height: 10%;
     width: 10%;
     opacity: .4;
-    background-image: url("images/peça.png");
+    background-image: url("images/peca.png");
     background-size: cover
 }
 
 .movimentoPreta {
-    filter: brightness(.2);
-    opacity: .7;
+    background-image: url("images/peca-preta.png");
+    opacity: .4;
 }
 
 @media screen and (max-width: 650px) {
