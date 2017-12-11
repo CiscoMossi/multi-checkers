@@ -48,6 +48,7 @@ namespace MultiCheckers.SignalR
         public override Task OnConnected()
         {
             this.Consultar();
+            InserirUsuario();
             return base.OnConnected();
         }
 
@@ -82,12 +83,20 @@ namespace MultiCheckers.SignalR
             else
                 tabuleiro.PercorrerTabuleiro(tabuleiro.CorTurnoAtual);
 
-            partidaRepository.EditarTabuleiro(tabuleiro);
+            partida.EditarTabuleiro(tabuleiro);
 
             if (partida.ValidarFimJogo(tabuleiro.CorTurnoAtual))
                 Clients.All.alterarTabuleiro("Você venceu!");
 
             Clients.All.alterarTabuleiro(tabuleiro.CorTurnoAtual.ToString());
+        }
+
+        public void InserirUsuario()
+        {
+            Usuario usuario = new Usuario("Hoffmann", "bruno.siqueira.hoffmann@gmail.com", "senha");
+            Partida partida = partidaRepository.ObterPartida();
+
+            partida.InserirJogadorPretas(usuario);
         }
     }
 }

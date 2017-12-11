@@ -39,7 +39,8 @@ namespace Dominio
 
         public bool ValidarFimJogo(Cor CorTurnoAtual)
         {
-            if (this.Tabuleiro.Pecas.FirstOrDefault(p => p.Cor == CorTurnoAtual) == null)
+            if (this.Tabuleiro.Pecas.FirstOrDefault(p => p.Cor == CorTurnoAtual) == null ||
+                this.Tabuleiro.Pecas.Sum(p => p.PosicoesPossiveis.Count) < 1)
                 this.PartidaFinalizada = true;
 
             return this.PartidaFinalizada;

@@ -13,6 +13,8 @@ angular.module('app')
         $scope.pecas = partida.Tabuleiro.Pecas;
         $scope.corJogando = parseInt(partida.Tabuleiro.CorTurnoAtual);
         $scope.jogadorBrancas = partida.JogadorBrancas
+        if(!!partida.JogadorPretas)
+            $scope.jogadorPretas = partida.JogadorPretas
         $scope.$apply();
     });
 

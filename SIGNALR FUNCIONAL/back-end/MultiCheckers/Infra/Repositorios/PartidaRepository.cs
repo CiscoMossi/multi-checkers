@@ -15,18 +15,13 @@ namespace MultiCheckers.Repositorios
 
         public PartidaRepository()
         {
-            Usuario JogadorBrancas = new Usuario("Damke", "victor.damke@cwi.com.br", "senha");
+            Usuario JogadorBrancas = new Usuario("Damke", "email@email", "senha");
             PARTIDA_ATUAL = new Partida(JogadorBrancas, "sala1");
         }
 
         public Partida ObterPartida()
         {
             return PARTIDA_ATUAL;
-        }
-
-        public void EditarTabuleiro(Tabuleiro tabuleiro)
-        {
-            PARTIDA_ATUAL.EditarTabuleiro(tabuleiro);
         }
     }
 }
