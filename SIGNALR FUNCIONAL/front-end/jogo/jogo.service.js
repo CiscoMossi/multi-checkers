@@ -20,6 +20,9 @@ function ($, $rootScope) {
             proxy.on('fimJogo', function(mensagem){
                 $rootScope.$broadcast('fimJogo', mensagem);
             });
+            proxy.on('gerarSala', function(urlSala){
+                $rootScope.$broadcast('gerarSala', urlSala);
+            });
         },
         isConnecting: function () {
             return connection.state === 0;
@@ -38,6 +41,11 @@ function ($, $rootScope) {
         atualizar: function (jogada, cor){
             if(this.isConnected()){
                 proxy.invoke('Atualizar', jogada, cor);
+            }
+        },
+        gerarUrl: function (){
+            if(this.isConnected()){
+                proxy.invoke('GerarSala');
             }
         },
     }
