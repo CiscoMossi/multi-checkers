@@ -36,4 +36,13 @@ angular.module('app')
 
     var modal = document.getElementById('myModal');
 
+    $scope.mostrar = false;    
+
+    $scope.mostrarUrl = function(){
+        $scope.mostrar = true;
+    }
+
+    $scope.fechar = function(){
+        $scope.mostrar = false;
+    }
 });

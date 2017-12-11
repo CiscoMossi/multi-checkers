@@ -23,6 +23,25 @@ body {
     flex-direction: column;
 }
 
+.url {
+    position: fixed;
+    left: 5vw;
+    top: 85vh;
+}
+
+.url-button{
+    font-size: 125%;
+    color: #fff;
+    font-weight: bold;
+    background-color: #209cee;
+    width: 70px;
+    height: 70px;
+    padding: 10px;
+    -webkit-box-shadow: 7px 10px 19px 0px rgba(0,0,0,0.59);
+    -moz-box-shadow: 7px 10px 19px 0px rgba(0,0,0,0.59);
+    box-shadow: 7px 10px 19px 0px rgba(0,0,0,0.59);
+}
+
 .is-not-first{
     margin-top: 10px;
 }
@@ -50,6 +69,7 @@ body {
     -webkit-box-shadow: 0px 0px 38px 10px rgba(0,0,0,0.59);
     -moz-box-shadow: 0px 0px 38px 10px rgba(0,0,0,0.59);
     box-shadow: 0px 0px 38px 10px rgba(0,0,0,0.59);
+    position: fixed
 }
 
 .delete{
@@ -171,22 +191,11 @@ body {
 }
 
 #usuario1 {
-    left: 20px;
+    left: 5vw;
 }
 
 #usuario2 {
-    left: 74%;
-}
-
-.usuario {
-    width: 215px;
-    height: 215px;
-    background-image: url("images/quadro.jpg");
-    background-size: cover;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
+    right: 5vw;
 }
 
 .usuario img {
@@ -204,9 +213,50 @@ body {
     max-width: 25%;
 }
 
+.box.shadow {
+    -webkit-box-shadow: 7px 10px 19px 0px rgba(0,0,0,1);
+    -moz-box-shadow: 7px 10px 19px 0px rgba(0,0,0,1);
+    box-shadow: 7px 10px 19px 0px rgba(0,0,0,1);
+}
+
+@media screen and (max-width: 2560px){
+    .usuario img {
+        width: 280px;
+        height: 280px;
+    }
+    
+    .media-content {
+        max-width: 300px;
+    }
+
+    figure.image.tamanho{
+        width: 10vw;
+        height: 10vw;
+    }
+    
+    .content {
+        font-size: 1.5vw;
+    }
+}
+
 @media screen and (max-width: 1100px){
+    #usuario1 {
+        left: 3vw;
+    }
+
+    #usuario2{
+        right: 3vw;
+    }
+}
+
+@media screen and (max-width: 750px){
     .box {
         max-width: 50%;
+        position: fixed;
+        -webkit-box-shadow: 7px 10px 19px 0px rgba(0,0,0,0.59);
+        -moz-box-shadow: 7px 10px 19px 0px rgba(0,0,0,0.59);
+        box-shadow: 7px 10px 19px 0px rgba(0,0,0,0.59);
+    
     }
 
     #usuario1 {
@@ -215,7 +265,8 @@ body {
     }
 
     #usuario2 {
-        top: 60%
+        top: 60%;
+        left: 26%;
     }
 }
 
@@ -231,11 +282,128 @@ body {
     }
 
     .box {
-        width: 40%;
-        height: 20%;
-        display: inline-block;
+        width: 50vw;
+        height: 30vw;
+        -webkit-box-shadow: 7px 10px 19px 0px rgba(0,0,0,0.59);
+        -moz-box-shadow: 7px 10px 19px 0px rgba(0,0,0,0.59);
+        box-shadow: 7px 10px 19px 0px rgba(0,0,0,0.59);
+    
+    }
+
+    .media {
+        width: 20vw;
+        height: 20vw;
+    }
+
+    figure.image.tamanho{
+        width: 20vw;
+        height: 20vw;
+    }
+
+    #usuario1 {
+        top: 5vh;
+        left: 25%;
+    }
+
+    #usuario2 {
+        top: 78vh;
+        left: 25%;
     }
 }
+
+@media screen and (min-height: 1024px) and (max-width: 1400px){
+    .tabuleiro {
+        width: 70vw;
+        height: 70vw;
+        background-image: url("images/tabuleiro.jpg");
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .content {
+        font-size: 2.5vw;
+    }
+
+    .box {
+        width: 40vw;
+        height: 23vw;
+        max-width: 400px;
+        -webkit-box-shadow: 7px 10px 19px 0px rgba(0,0,0,0.59);
+        -moz-box-shadow: 7px 10px 19px 0px rgba(0,0,0,0.59);
+        box-shadow: 7px 10px 19px 0px rgba(0,0,0,0.59);
+    
+    }
+
+    .media {
+        width: 10vw;
+        height: 10vw;
+    }
+
+    figure.image.tamanho{
+        width: 20vw;
+        height: 20vw;
+    }
+}
+
+@media screen and (max-width: 425px) {
+    #usuario1 {
+        top: .5vh;
+        left: 25%;
+    }
+
+    #usuario2 {
+        top: 77vh;
+        left: 25%;
+    }
+
+    .tabuleiro {
+        width: 70vw;
+        height: 70vw;
+        background-image: url("images/tabuleiro.jpg");
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .content {
+        font-size: 3.5vw;
+    }
+}
+
+@media screen and (max-width: 375px) {
+    #usuario1 {
+        top: 2vh;
+        left: 25%;
+    }
+
+    #usuario2 {
+        top: 80vh;
+        left: 25%;
+    }
+}
+
+@media screen and (max-width: 320px) {
+    #usuario1 {
+        top: 3vh;
+        left: 25%;
+    }
+
+    #usuario2 {
+        top: 80vh;
+        left: 25%;
+    }
+}
+
+
+
+
+
+
+
+
 
 /*ModalBox*/
 .modal {
