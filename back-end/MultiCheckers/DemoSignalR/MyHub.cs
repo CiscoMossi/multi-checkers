@@ -87,6 +87,11 @@ namespace MultiCheckers.Api
             Usuario usuario = USUARIOS.FirstOrDefault(u => u.Login == login);
             Partida partida = SALAS.FirstOrDefault(s => s.Key == salaHash).Value;
 
+            if (partida == null)
+            {
+                Clients.Caller.infoJogador("Esta partida já acabou");
+                return;
+            }
             string jogador = partida.InserirUsuario(usuario);
             usuario.InserirUserHash(Context.ConnectionId);
 

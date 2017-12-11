@@ -17,23 +17,15 @@ namespace Dominio
         {
             this.Pecas = new List<Peca>();
             this.CorTurnoAtual = Cor.BRANCA;
-            this.JogoFinalizado = false;
         }
 
         public List<Peca> Pecas { get; private set; }
 
         public Cor CorTurnoAtual { get; private set; }
 
-        public bool JogoFinalizado { get; private set; }
-
         public void AdicionarPeca(Peca peca)
         {
             this.Pecas.Add(peca);
-        }
-
-        public void AtualizarTurno(Cor cor)
-        {
-            this.CorTurnoAtual = cor;
         }
 
         public void PosicionarInicioPartida()
@@ -108,19 +100,11 @@ namespace Dominio
             if (posicoesPossiveis.Count == 0)
             {
                 this.AtualizarCorAtual();
-                this.PercorrerTabuleiro(CorTurnoAtual);
+                this.PercorrerTabuleiro(this.CorTurnoAtual);
                 return;
             }
             this.Pecas.ForEach(p => p.PosicoesPossiveis.RemoveRange(0, p.PosicoesPossiveis.Count));
             posicoesPossiveis.ForEach(p => pecaMovida.AdicionarPosicao(p));
-        }
-
-        public bool ValidarFimJogo()
-        {
-            if(this.Pecas.FirstOrDefault(p => p.Cor == this.CorTurnoAtual) == null)
-                this.JogoFinalizado = true;
-
-            return this.JogoFinalizado;
         }
 
         private void ValidarDama(Peca peca)

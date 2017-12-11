@@ -49,9 +49,11 @@
     <Reference Include="System.Drawing" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="PartidaTest.cs" />
     <Compile Include="TabuleiroTest.cs" />
     <Compile Include="PecaTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UsuarioTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

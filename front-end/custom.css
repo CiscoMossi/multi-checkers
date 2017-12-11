@@ -1,5 +1,3 @@
-@import url('https://fonts.googleapis.com/css?family=Fredericka+the+Great');
-
 * {
     box-sizing: border-box
 }
@@ -23,6 +21,25 @@ body {
     align-items: center;
     justify-content: center;
     flex-direction: column;
+}
+
+.url {
+    position: fixed;
+    left: 5vw;
+    top: 85vh;
+}
+
+.url-button{
+    font-size: 125%;
+    color: #fff;
+    font-weight: bold;
+    background-color: #209cee;
+    width: 70px;
+    height: 70px;
+    padding: 10px;
+    -webkit-box-shadow: 7px 10px 19px 0px rgba(0,0,0,0.59);
+    -moz-box-shadow: 7px 10px 19px 0px rgba(0,0,0,0.59);
+    box-shadow: 7px 10px 19px 0px rgba(0,0,0,0.59);
 }
 
 .is-not-first{
@@ -52,6 +69,7 @@ body {
     -webkit-box-shadow: 0px 0px 38px 10px rgba(0,0,0,0.59);
     -moz-box-shadow: 0px 0px 38px 10px rgba(0,0,0,0.59);
     box-shadow: 0px 0px 38px 10px rgba(0,0,0,0.59);
+    position: fixed
 }
 
 .delete{
@@ -115,11 +133,23 @@ body {
 
 .branca {
     filter: sepia(.5);
+    background-image: url("images/peca.png");
+    background-size: cover;
 }
 
 .preta {
-    filter: grayscale(.9);
-    filter: brightness(.2);
+    background-image: url("images/peca-preta.png");
+    background-size: cover;
+}
+
+.branca.dama {
+    background: url("images/peca-dama.png");
+    background-size: cover;
+}
+
+.preta.dama {
+    background: url("images/peca-preta-dama.png");
+    background-size: cover;
 }
 
 .peca {  
@@ -131,23 +161,113 @@ body {
     transition-duration: 0.5s;
 }
 
-.selecionada {
-    background-color: #ff0;
-    border-radius: 50%;
+.podeMexerBranca {
+    filter: drop-shadow(0 0 10px #fff) sepia(.5);
+}
+
+.podeMexerPreta {
+    filter: drop-shadow(0 0 10px #fff)
+}
+
+.selecionadaBranca {
+    filter: drop-shadow(0 0 10px #0f0) sepia(.5)
+}
+
+.selecionadaPreta {
+    filter: drop-shadow(0 0 10px #0f0)
 }
 
 .movimento {
     height: 10%;
     width: 10%;
-    filter: opacity(.4);
+    opacity: .4;
+    background-image: url("images/peca.png");
+    background-size: cover
 }
 
-.movimento-invisivel{
-    display: none; 
+.movimentoPreta {
+    background-image: url("images/peca-preta.png");
+    opacity: .4;
 }
 
-.movimento-invisivel.movimento{
-    display: block;
+#usuario1 {
+    left: 5vw;
+}
+
+#usuario2 {
+    right: 5vw;
+}
+
+.usuario img {
+    width: 140px;
+    height: 140px;
+}
+
+.media-content {
+    max-width: 300px;
+}
+
+.box {
+    position: fixed;
+    top: 50px;
+    max-width: 25%;
+}
+
+.box.shadow {
+    -webkit-box-shadow: 7px 10px 19px 0px rgba(0,0,0,1);
+    -moz-box-shadow: 7px 10px 19px 0px rgba(0,0,0,1);
+    box-shadow: 7px 10px 19px 0px rgba(0,0,0,1);
+}
+
+@media screen and (max-width: 2560px){
+    .usuario img {
+        width: 280px;
+        height: 280px;
+    }
+    
+    .media-content {
+        max-width: 300px;
+    }
+
+    figure.image.tamanho{
+        width: 10vw;
+        height: 10vw;
+    }
+    
+    .content {
+        font-size: 1.5vw;
+    }
+}
+
+@media screen and (max-width: 1100px){
+    #usuario1 {
+        left: 3vw;
+    }
+
+    #usuario2{
+        right: 3vw;
+    }
+}
+
+@media screen and (max-width: 750px){
+    .box {
+        max-width: 50%;
+        position: fixed;
+        -webkit-box-shadow: 7px 10px 19px 0px rgba(0,0,0,0.59);
+        -moz-box-shadow: 7px 10px 19px 0px rgba(0,0,0,0.59);
+        box-shadow: 7px 10px 19px 0px rgba(0,0,0,0.59);
+    
+    }
+
+    #usuario1 {
+        top: 10px;
+        left: 26%;
+    }
+
+    #usuario2 {
+        top: 60%;
+        left: 26%;
+    }
 }
 
 @media screen and (max-width: 650px) {
@@ -160,4 +280,143 @@ body {
         justify-content: center;
         align-items: center;
     }
+
+    .box {
+        width: 50vw;
+        height: 30vw;
+        -webkit-box-shadow: 7px 10px 19px 0px rgba(0,0,0,0.59);
+        -moz-box-shadow: 7px 10px 19px 0px rgba(0,0,0,0.59);
+        box-shadow: 7px 10px 19px 0px rgba(0,0,0,0.59);
+    
+    }
+
+    .media {
+        width: 20vw;
+        height: 20vw;
+    }
+
+    figure.image.tamanho{
+        width: 20vw;
+        height: 20vw;
+    }
+
+    #usuario1 {
+        top: 5vh;
+        left: 25%;
+    }
+
+    #usuario2 {
+        top: 78vh;
+        left: 25%;
+    }
 }
+
+@media screen and (min-height: 1024px) and (max-width: 1400px){
+    .tabuleiro {
+        width: 70vw;
+        height: 70vw;
+        background-image: url("images/tabuleiro.jpg");
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .content {
+        font-size: 2.5vw;
+    }
+
+    .box {
+        width: 40vw;
+        height: 23vw;
+        max-width: 400px;
+        -webkit-box-shadow: 7px 10px 19px 0px rgba(0,0,0,0.59);
+        -moz-box-shadow: 7px 10px 19px 0px rgba(0,0,0,0.59);
+        box-shadow: 7px 10px 19px 0px rgba(0,0,0,0.59);
+    
+    }
+
+    .media {
+        width: 10vw;
+        height: 10vw;
+    }
+
+    figure.image.tamanho{
+        width: 20vw;
+        height: 20vw;
+    }
+}
+
+@media screen and (max-width: 425px) {
+    #usuario1 {
+        top: .5vh;
+        left: 25%;
+    }
+
+    #usuario2 {
+        top: 77vh;
+        left: 25%;
+    }
+
+    .tabuleiro {
+        width: 70vw;
+        height: 70vw;
+        background-image: url("images/tabuleiro.jpg");
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .content {
+        font-size: 3.5vw;
+    }
+}
+
+@media screen and (max-width: 375px) {
+    #usuario1 {
+        top: 2vh;
+        left: 25%;
+    }
+
+    #usuario2 {
+        top: 80vh;
+        left: 25%;
+    }
+}
+
+@media screen and (max-width: 320px) {
+    #usuario1 {
+        top: 3vh;
+        left: 25%;
+    }
+
+    #usuario2 {
+        top: 80vh;
+        left: 25%;
+    }
+}
+
+
+
+
+
+
+
+
+
+/*ModalBox*/
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+/*End ModalBox*/

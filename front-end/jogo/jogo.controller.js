@@ -1,40 +1,60 @@
 angular.module('app')
-.controller('JogoCtrl', function($scope, connectionService, jogoService, $routeParams, $interval, pecaService, $rootScope) {
-    carregarJogo();
-    $scope.corDoJogador = 0;
-    $scope.urlSala = $routeParams.urlSala;
-
-    function carregarJogo(){
-        jogoService.buscarJogo().then(response => {
-            $scope.pecas = response.data.dados.Pecas;
-            $scope.corJogando = response.data.dados.CorTurnoAtual;
-            if($scope.pecas == undefined){
-                alert(response.data.dados);
-            }
-        });
+.controller('JogoCtrl', function($scope, $timeout, jogoService, $routeParams, $interval, pecaService, $rootScope, $sessionStorage) {
+    if($sessionStorage.connect == true){
+        rodarJogo();
     }
-    $interval(polling, 3000);
-    function polling(){
-        if($scope.corDoJogador != $scope.corJogando){
-            carregarJogo();   
-        }
-    }
-    $rootScope.$on('jogada', function(){
-        var peca = pecaService.getPosicaoPecas();
-        jogoService.alterarTabuleiro(peca.pecaMovimento, peca.pecaCor).then(
-            response => {
-                $scope.corJogando = response.data;
-            }
-        );
+    $scope.$on('isConnect', function(event, connect){
+        $sessionStorage.connect = connect;
+        rodarJogo();
     });
-
-    $scope.copiar = function(){
-        let texto = document.getElementById("url");
-        texto.select();
-        document.execCommand("Copy");
+    function rodarJogo(){   
+        jogoService.insereUsuario('CheckersKing', $routeParams.urlSala);
+        $rootScope.$on('jogada', function(){
+            var peca = pecaService.getPosicaoPecas();
+            jogoService.atualizar(peca.pecaMovimento, peca.pecaCor, $routeParams.urlSala)
+            jogoService.consultar($routeParams.urlSala);
+        });
+    
+        $scope.corDoJogador = 0;
+        jogoService.consultar($routeParams.urlSala);
+        $scope.$on('buscarJogo', function (event, partida) {
+            $scope.pecas = partida.Tabuleiro.Pecas;
+            $scope.corJogando = parseInt(partida.Tabuleiro.CorTurnoAtual);
+            $scope.jogadorBrancas = partida.JogadorBrancas
+            console.log($scope.corJogando);            
+            if(!!partida.JogadorPretas)
+                $scope.jogadorPretas = partida.JogadorPretas
+            $scope.$apply();
+        });
+        $scope.$on('fimJogo', function (event, mensagem) {
+            modal.style.display = "flex";
+            modal.style.justifyContent = "center";
+            $scope.$apply();
+        });
+    
+        $scope.mostrarMovimentos = function(peca){
+            if($scope.corJogando == peca.Cor && peca.PosicoesPossiveis.length != 0)
+                $scope.selecionada = peca;
+        }
+    
+        $scope.copiar = function(){
+            let texto = document.getElementById("url");
+            texto.select();
+            document.execCommand("Copy");
+        }
+    
+        var modal = document.getElementById('myModal'); 
     }
 
-    $scope.mostrarMovimentos = function(peca){
-        $scope.selecionada = peca;
+    var modal = document.getElementById('myModal');
+
+    $scope.mostrar = false;    
+
+    $scope.mostrarUrl = function(){
+        $scope.mostrar = true;
+    }
+
+    $scope.fechar = function(){
+        $scope.mostrar = false;
     }
 });

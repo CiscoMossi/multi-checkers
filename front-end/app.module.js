@@ -1,2 +1,7 @@
-angular.module('app', ['ngRoute']);
-angular.module('app').value('$', $);
+angular
+.module('app', ['ngRoute', 'ngStorage'])
+.value('$', $)
+.run(function(jogoService) {
+    jogoService.connect();
+})
+;
