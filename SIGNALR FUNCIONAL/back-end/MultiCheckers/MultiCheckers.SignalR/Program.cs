@@ -54,10 +54,9 @@ namespace MultiCheckers.SignalR
             return base.OnConnected();
         }
 
-        public void CriarSala(string login)
+        public void CriarSala()
         {
-            Usuario jogadorBrancas = USUARIOS.FirstOrDefault(u => u.Login == login);
-            Partida partida = new Partida(jogadorBrancas);
+            Partida partida = new Partida();
             GeradorUrl gerador = new GeradorUrl();
 
             string salaHash = gerador.GerarUrl();
@@ -109,7 +108,9 @@ namespace MultiCheckers.SignalR
         {
             Usuario usuario = USUARIOS.FirstOrDefault(u => u.Login == login);
             Partida partida = SALAS.FirstOrDefault(s => s.Key == salaHash).Value;
-            partida.InserirJogadorPretas(usuario);
+            partida.InserirUsuario(usuario);
+
+            Groups.Add(Context.ConnectionId, salaHash);
         }
     }
 }
