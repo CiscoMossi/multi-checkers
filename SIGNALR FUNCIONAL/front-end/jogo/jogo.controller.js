@@ -8,16 +8,18 @@ angular.module('app')
     });
     $scope.corDoJogador = 0;
     $scope.urlSala = $routeParams.urlSala;
-
+    jogoService.consultar();
     $scope.$on('buscarJogo', function (event, partida) {
         $scope.pecas = partida.Tabuleiro.Pecas;
         $scope.corJogando = parseInt(partida.Tabuleiro.CorTurnoAtual);
         $scope.jogadorBrancas = partida.JogadorBrancas
+        if(!!partida.JogadorPretas)
+            $scope.jogadorPretas = partida.JogadorPretas
         $scope.$apply();
     });
-
     $scope.$on('fimJogo', function (event, mensagem) {
-        alert(mensagem);
+        modal.style.display = "flex";
+        modal.style.justifyContent = "center";
         $scope.$apply();
     });
 
@@ -31,5 +33,7 @@ angular.module('app')
         texto.select();
         document.execCommand("Copy");
     }
+
+    var modal = document.getElementById('myModal');
 
 });
