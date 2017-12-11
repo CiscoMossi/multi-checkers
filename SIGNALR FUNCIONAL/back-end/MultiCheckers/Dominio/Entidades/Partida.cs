@@ -10,10 +10,9 @@ namespace Dominio
 {
     public class Partida
     {
-        public Partida(Usuario usuarioBrancas, string salaHash)
+        public Partida(Usuario usuarioBrancas)
         {
             this.JogadorBrancas = usuarioBrancas;
-            this.SalaHash = salaHash;
             this.PartidaFinalizada = false;
             this.CriarTabuleiro();
         }
@@ -25,8 +24,6 @@ namespace Dominio
         // public List<Usuario> Expectadores { get; private set; }
 
         public Tabuleiro Tabuleiro { get; private set; }
-
-        public string SalaHash { get; private set; }
 
         public bool PartidaFinalizada { get; private set; }
 

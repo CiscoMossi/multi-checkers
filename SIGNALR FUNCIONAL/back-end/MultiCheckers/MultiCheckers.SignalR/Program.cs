@@ -43,18 +43,32 @@ namespace MultiCheckers.SignalR
     [HubName("HubMessage")]
     public class MyHub : Hub
     {
-        private static PartidaRepository partidaRepository = new PartidaRepository();
+        private static Dictionary<string, Partida> SALAS = new Dictionary<string, Partida>();
+        private static List<Usuario> USUARIOS = new List<Usuario>();
 
         public override Task OnConnected()
         {
-            this.Consultar();
-            InserirUsuario();
+            USUARIOS.Add(new Usuario("CheckersKing", "email@email.com", "senha"));
+            USUARIOS.Add(new Usuario("Mr_Winner", "winner@email.com", "senha"));
+
             return base.OnConnected();
         }
 
-        public void Consultar()
+        public void CriarSala(string login)
         {
-            Partida partida = partidaRepository.ObterPartida();
+            Usuario jogadorBrancas = USUARIOS.FirstOrDefault(u => u.Login == login);
+            Partida partida = new Partida(jogadorBrancas);
+            GeradorUrl gerador = new GeradorUrl();
+
+            string salaHash = gerador.GerarUrl();
+            SALAS.Add(salaHash, partida);
+
+            Clients.Caller(salaHash);
+        }
+
+        public void Consultar(string salaHash)
+        {
+            Partida partida = SALAS.FirstOrDefault(s => s.Key == salaHash).Value;
 
             Clients.All.buscarJogo(partida);
             if (partida.PartidaFinalizada)
@@ -66,9 +80,9 @@ namespace MultiCheckers.SignalR
             }           
         }
         
-        public void Atualizar(Jogada jogada, int cor)
+        public void Atualizar(Jogada jogada, int cor, string salaHash)
         {
-            Partida partida = partidaRepository.ObterPartida();
+            Partida partida = SALAS.FirstOrDefault(s => s.Key == salaHash).Value;
             Tabuleiro tabuleiro = partida.Tabuleiro;
             int numPecas = tabuleiro.Pecas.Count;
 
@@ -91,11 +105,10 @@ namespace MultiCheckers.SignalR
             Clients.All.alterarTabuleiro(tabuleiro.CorTurnoAtual.ToString());
         }
 
-        public void InserirUsuario()
+        public void InserirUsuario(string login, string salaHash)
         {
-            Usuario usuario = new Usuario("Hoffmann", "bruno.siqueira.hoffmann@gmail.com", "senha");
-            Partida partida = partidaRepository.ObterPartida();
-
+            Usuario usuario = USUARIOS.FirstOrDefault(u => u.Login == login);
+            Partida partida = SALAS.FirstOrDefault(s => s.Key == salaHash).Value;
             partida.InserirJogadorPretas(usuario);
         }
     }

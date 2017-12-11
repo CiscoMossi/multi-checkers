@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Dominio.Entidades
 {
-    class GeradorUrl
+    public class GeradorUrl
     {
         public GeradorUrl() { }
 
