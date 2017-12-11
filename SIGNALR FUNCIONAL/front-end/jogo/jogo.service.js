@@ -8,9 +8,9 @@ function ($, $rootScope) {
 
             connection = $.hubConnection('http://localhost:9090/signalr');
             proxy = connection.createHubProxy('HubMessage');
-            connection.start()/*.done(function() {
-                console.log("Conectado")
-            })*/;
+            connection.start().done(function() {
+                console.log('Conectado');
+            });
             proxy.on('buscarJogo', function (tabuleiro) {
                 $rootScope.$broadcast('buscarJogo', tabuleiro);
             });
@@ -22,6 +22,9 @@ function ($, $rootScope) {
             });
             proxy.on('criarSala', function(urlSala) {
                 $rootScope.$broadcast('criarSala', urlSala);
+            });
+            proxy.on('isConnect', function(connect){
+                $rootScope.$broadcast('isConnect', connect);
             });
         },
         isConnecting: function () {
@@ -38,16 +41,21 @@ function ($, $rootScope) {
                 proxy.invoke('Consultar', salaHash);
             }
         },
-        atualizar: function (jogada, cor) {
+        atualizar: function (jogada, cor, salaHash) {
             if(this.isConnected()){
-                proxy.invoke('Atualizar', jogada, cor);
+                proxy.invoke('Atualizar', jogada, cor, salaHash);
             }
         },
-        gerarUrl: function (login){
+        gerarUrl: function (){
             if(this.isConnected()) {
-                proxy.invoke('CriarSala', login);
+                proxy.invoke('CriarSala');
             }
         },
+        insereUsuario: function (login, salaHash){
+            if(this.isConnected()) {
+                proxy.invoke('InserirUsuario', login, salaHash);
+            }
+        }
     }
 }]);
 

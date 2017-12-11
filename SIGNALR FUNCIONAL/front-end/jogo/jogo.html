@@ -1,168 +1,163 @@
 <!-- <div class="luz"> -->
-    <img src="">
-
-    <div class="box" id="usuario1">
-        <article class="media">
-          <div class="media-left">
-            <figure class="image is-128x128">
-              <img ng-src="https://www.gravatar.com/avatar/{{jogadorBrancas.GravatarHash}}?d=retro&s=128" alt="jogadorBrancas">
-            </figure>
-          </div>
-          <div class="media-content">
-            <div class="content">
-              <p>
-                <strong>{{jogadorBrancas.Login}}</strong> <small>Brancas</small>
-                <br>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean efficitur sit amet massa fringilla egestas. Nullam condimentum luctus turpis.
-              </p>
-            </div>
-            <nav class="level is-mobile">
-              <div class="level-left">
-                <a class="level-item">
-                  <span class="icon is-small"><i class="fa fa-reply"></i></span>
-                </a>
-                <a class="level-item">
-                  <span class="icon is-small"><i class="fa fa-retweet"></i></span>
-                </a>
-                <a class="level-item">
-                  <span class="icon is-small"><i class="fa fa-heart"></i></span>
-                </a>
-              </div>
-            </nav>
-          </div>
-        </article>
-      </div>
-
-    <div class="tabuleiro">
-    <div class="borda">
-
-        <peca peca=peca selecionada=selecionada ng-repeat="peca in pecas" ng-click="mostrarMovimentos(peca)"></peca>
-
-        <div class="linha">
-            <div id="a1"class="quadrado"></div>
-            <div id="a2" class="black quadrado"></div>
-            <div id="a3" class="quadrado"></div>
-            <div id="a2" class="black quadrado"></div>
-            <div id="a5" class="quadrado"></div>
-            <div id="a6" class="black quadrado"></div>
-            <div id="a7" class="quadrado"></div>
-            <div id="a8" class="black quadrado"></div>
-        </div>
-
-        <div class="linha">
-            <div id="b1" class="black quadrado"></div>
-            <div id="b2" class="quadrado"></div>
-            <div id="b3" class="black quadrado"></div>
-            <div id="b4" class="quadrado"></div>
-            <div id="b5" class="black quadrado"></div>
-            <div id="b6" class="quadrado"></div>
-            <div id="b7" class="black quadrado"></div>
-            <div id="b8" class="quadrado"></div>
-        </div>
-
-        <div class="linha">
-            <div id="c1" class="quadrado"></div>
-            <div id="c2" class="black quadrado"></div>
-            <div id="c3" class="quadrado"></div>
-            <div id="c4" class="black quadrado"></div>
-            <div id="c5" class="quadrado"></div>
-            <div id="c6" class="black quadrado"></div>
-            <div id="c7" class="quadrado"></div>
-            <div id="c8" class="black quadrado"></div>
-        </div>
-
-        <div class="linha">
-            <div id="d1" class="black quadrado"></div>
-            <div id="d2" class="quadrado"></div>
-            <div id="d3" class="black quadrado"></div>
-            <div id="d4" class="quadrado"></div>
-            <div id="d5" class="black quadrado"></div>
-            <div id="d6" class="quadrado"></div>
-            <div id="d7" class="black quadrado"></div>
-            <div id="d8" class="quadrado"></div>
-        </div>
-
-        <div class="linha">
-            <div id="e1" class="quadrado"></div>
-            <div id="e2" class="black quadrado"></div>
-            <div id="e3" class="quadrado"></div>
-            <div id="e4" class="black quadrado"></div>
-            <div id="e5" class="quadrado"></div>
-            <div id="e6" class="black quadrado"></div>
-            <div id="e7" class="quadrado"></div>
-            <div id="e8" class="black quadrado"></div>
-        </div>
-
-        <div class="linha">
-            <div id="f1" class="black quadrado"></div>
-            <div id="f2" class="quadrado"></div>
-            <div id="f3" class="black quadrado"></div>
-            <div id="f4" class="quadrado"></div>
-            <div id="f5" class="black quadrado"></div>
-            <div id="f6" class="quadrado"></div>
-            <div id="f7" class="black quadrado"></div>
-            <div id="f8" class="quadrado"></div>
-        </div>
-
-        <div class="linha">
-            <div id="g1" class="quadrado"></div>
-            <div id="g2" class="black quadrado"></div>
-            <div id="g3" class="quadrado"></div>
-            <div id="g2" class="black quadrado"></div>
-            <div id="g5" class="quadrado"></div>
-            <div id="g6" class="black quadrado"></div>
-            <div id="g7" class="quadrado"></div>
-            <div id="g8" class="black quadrado"></div>
-        </div>
-
-        <div class="linha">
-            <div id="h1" class="black quadrado"></div>
-            <div id="h2" class="quadrado"></div>
-            <div id="h3" class="black quadrado"></div>
-            <div id="h4" class="quadrado"></div>
-            <div id="h5" class="black quadrado"></div>
-            <div id="h6" class="quadrado"></div>
-            <div id="h7" class="black quadrado"></div>
-            <div id="h8" class="quadrado"></div>
-        </div>
+<div class="box shadow" id="usuario1">
+  <article class="media">
+    <div class="media-left">
+      <figure class="image tamanho">
+        <!-- <img ng-src="https://www.gravatar.com/avatar/{{jogadorBrancas.GravatarHash}}?d=retro&s=128" alt="jogadorBrancas"> -->
+        <img src="https://2.gravatar.com/avatar/767fc9c115a1b989744c755db47feb60?s=132&d=wavatar" alt="Usuario Image">
+      </figure>
     </div>
+    <div class="media-content">
+      <div class="content">
+        <p>
+          <div><strong>Francisco</strong></div>
+          <div><small><img src="images/icon.png" alt="pontos">5</small></div>
+          <div><small>1/12 peças</small></div>
+
+        </p>
+      </div>
+    </div>
+  </article>
 </div>
 
-<div class="box" id="usuario2">
-    <article class="media">
-      <div class="media-content">
-        <div class="content">
-          <p>
-            <strong>{{jogadorPretas.Login}}</strong> <small>Pretas</small>
-            <br>
-            Pontos acumulados (o mesmo que vão aparecer no leaderboard), o número de peças restante no tabuleiro, ex: 8/12.
-          </p>
-        </div>
-        <nav class="level is-mobile">
-          <div class="level-left">
-            <a class="level-item">
-              <span class="icon is-small"><i class="fa fa-reply"></i></span>
-            </a>
-            <a class="level-item">
-              <span class="icon is-small"><i class="fa fa-retweet"></i></span>
-            </a>
-            <a class="level-item">
-              <span class="icon is-small"><i class="fa fa-heart"></i></span>
-            </a>
-          </div>
-        </nav>
-      </div>
+<!-- <div class="url">
+  <a class="url-button" ng-click="mostrarUrl()" ng-show="!mostrar">Compartilhar Sala</a></a>
 
-      <div class="media-right">
-        <figure class="image is-128x128">
-          <img ng-src="https://www.gravatar.com/avatar/{{jogadorPretas.GravatarHash}}?d=retro&s=128" alt="jogadorPretas">
-        </figure>
+  <div class="notification" ng-show="mostrar">
+      <button class="delete" ng-click="fechar()"></button>
+
+      <div class="field has-addons is-not-first">
+          <div class="control">
+              <input class="input" type="text" id="url" ng-model="url">
+          </div>
+          <div class="control">
+              <a class="button is-info" ng-click="copiar(url)">
+                  Copiar
+              </a>
+          </div>
       </div>
-    </article>
+  </div>  
+</div> -->
+
+<div class="tabuleiro">
+  <div class="borda">
+
+    <peca peca=peca selecionada=selecionada ng-repeat="peca in pecas" ng-click="mostrarMovimentos(peca)"></peca>
+
+    <div class="linha">
+      <div id="a1" class="quadrado"></div>
+      <div id="a2" class="black quadrado"></div>
+      <div id="a3" class="quadrado"></div>
+      <div id="a2" class="black quadrado"></div>
+      <div id="a5" class="quadrado"></div>
+      <div id="a6" class="black quadrado"></div>
+      <div id="a7" class="quadrado"></div>
+      <div id="a8" class="black quadrado"></div>
+    </div>
+
+    <div class="linha">
+      <div id="b1" class="black quadrado"></div>
+      <div id="b2" class="quadrado"></div>
+      <div id="b3" class="black quadrado"></div>
+      <div id="b4" class="quadrado"></div>
+      <div id="b5" class="black quadrado"></div>
+      <div id="b6" class="quadrado"></div>
+      <div id="b7" class="black quadrado"></div>
+      <div id="b8" class="quadrado"></div>
+    </div>
+
+    <div class="linha">
+      <div id="c1" class="quadrado"></div>
+      <div id="c2" class="black quadrado"></div>
+      <div id="c3" class="quadrado"></div>
+      <div id="c4" class="black quadrado"></div>
+      <div id="c5" class="quadrado"></div>
+      <div id="c6" class="black quadrado"></div>
+      <div id="c7" class="quadrado"></div>
+      <div id="c8" class="black quadrado"></div>
+    </div>
+
+    <div class="linha">
+      <div id="d1" class="black quadrado"></div>
+      <div id="d2" class="quadrado"></div>
+      <div id="d3" class="black quadrado"></div>
+      <div id="d4" class="quadrado"></div>
+      <div id="d5" class="black quadrado"></div>
+      <div id="d6" class="quadrado"></div>
+      <div id="d7" class="black quadrado"></div>
+      <div id="d8" class="quadrado"></div>
+    </div>
+
+    <div class="linha">
+      <div id="e1" class="quadrado"></div>
+      <div id="e2" class="black quadrado"></div>
+      <div id="e3" class="quadrado"></div>
+      <div id="e4" class="black quadrado"></div>
+      <div id="e5" class="quadrado"></div>
+      <div id="e6" class="black quadrado"></div>
+      <div id="e7" class="quadrado"></div>
+      <div id="e8" class="black quadrado"></div>
+    </div>
+
+    <div class="linha">
+      <div id="f1" class="black quadrado"></div>
+      <div id="f2" class="quadrado"></div>
+      <div id="f3" class="black quadrado"></div>
+      <div id="f4" class="quadrado"></div>
+      <div id="f5" class="black quadrado"></div>
+      <div id="f6" class="quadrado"></div>
+      <div id="f7" class="black quadrado"></div>
+      <div id="f8" class="quadrado"></div>
+    </div>
+
+    <div class="linha">
+      <div id="g1" class="quadrado"></div>
+      <div id="g2" class="black quadrado"></div>
+      <div id="g3" class="quadrado"></div>
+      <div id="g2" class="black quadrado"></div>
+      <div id="g5" class="quadrado"></div>
+      <div id="g6" class="black quadrado"></div>
+      <div id="g7" class="quadrado"></div>
+      <div id="g8" class="black quadrado"></div>
+    </div>
+
+    <div class="linha">
+      <div id="h1" class="black quadrado"></div>
+      <div id="h2" class="quadrado"></div>
+      <div id="h3" class="black quadrado"></div>
+      <div id="h4" class="quadrado"></div>
+      <div id="h5" class="black quadrado"></div>
+      <div id="h6" class="quadrado"></div>
+      <div id="h7" class="black quadrado"></div>
+      <div id="h8" class="quadrado"></div>
+    </div>
   </div>
-<div id="myModal" class="modal">
-      <div class="modal-content">
-            <img src="../images/vitoria.png" alt="" srcset="">
+</div>
+
+<div class="box shadow" id="usuario2">
+  <article class="media">
+    <div class="media-left">
+      <figure class="image tamanho">
+        <!-- <img ng-src="https://www.gravatar.com/avatar/{{jogadorBrancas.GravatarHash}}?d=retro&s=128" alt="jogadorBrancas"> -->
+        <img src="https://2.gravatar.com/avatar/767fc9c115a1b989744c755db47feb60?s=132&d=wavatar" alt="Usuario Image">
+      </figure>
+    </div>
+    <div class="media-content">
+      <div class="content">
+        <p>
+          <div><strong>Francisco</strong></div>
+          <div><small><img src="images/icon.png" alt="pontos">5</small></div>
+          <div><small>1/12 peças</small></div>
+
+        </p>
       </div>
+    </div>
+  </article>
+</div>
+
+<div id="myModal" class="modal">
+  <div class="modal-content">
+    <img src="../images/vitoria.png" alt="" srcset="">
+  </div>
 </div>
 <!-- </div> -->
