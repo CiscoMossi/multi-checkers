@@ -47,7 +47,6 @@
     <Compile Include="Entidades\Partida.cs" />
     <Compile Include="Entidades\Usuario.cs" />
     <Compile Include="Entidades\Peca.cs" />
-    <Compile Include="Entidades\UsuarioModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Entidades\Tabuleiro.cs" />
   </ItemGroup>

@@ -15,8 +15,8 @@ namespace Dominio.Entidades
             this.PosicaoAntiga = posicaoAntiga;
         }
 
-        public Point PosicaoEscolhida { get; set; }
+        public Point PosicaoEscolhida { get; private set; }
 
-        public Point PosicaoAntiga { get; set; }
+        public Point PosicaoAntiga { get; private set; }
     }
 }

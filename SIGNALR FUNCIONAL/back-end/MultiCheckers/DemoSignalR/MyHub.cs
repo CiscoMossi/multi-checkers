@@ -1,44 +1,15 @@
-﻿using Dominio;
-using Dominio.Entidades;
-using Microsoft.AspNet.SignalR;
-using Microsoft.AspNet.SignalR.Hubs;
-using Microsoft.Owin.Hosting;
-using Owin;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
+using System.Web;
+using Microsoft.AspNet.SignalR;
+using Dominio;
 using System.Threading.Tasks;
+using Dominio.Entidades;
+using MultiCheckers.Api.Models;
 
-namespace MultiCheckers.SignalR
+namespace MultiCheckers.Api
 {
-    class Program
-    {
-        static void Main(string[] args)
-        {
-            // This will *ONLY* bind to localhost, if you want to bind to all addresses
-            // use http://*:8080 to bind to all addresses. 
-            // See http://msdn.microsoft.com/en-us/library/system.net.httplistener.aspx 
-            // for more information.
-            string url = "http://localhost:9090";
-            using (WebApp.Start(url))
-            {
-                Console.WriteLine("Server running on {0}", url);
-                Console.ReadLine();
-            }
-        }
-    }
-
-    class Startup
-    {
-        public void Configuration(IAppBuilder app)
-        {
-            app.UseCors(CorsOptions.AllowAll);
-            app.MapSignalR();
-        }
-    }
-
-    [HubName("HubMessage")]
     public class MyHub : Hub
     {
         private static Dictionary<string, Partida> SALAS = new Dictionary<string, Partida>();
@@ -74,11 +45,12 @@ namespace MultiCheckers.SignalR
                                       (partida.Tabuleiro.CorTurnoAtual == Cor.BRANCA ? Cor.PRETA : Cor.BRANCA).ToString(),
                                        "S venceram."));
                 return;
-            }           
+            }
         }
-        
-        public void Atualizar(Jogada jogada, int cor, string salaHash)
+
+        public void Atualizar(JogadaModel jogadaModel, int cor, string salaHash)
         {
+            Jogada jogada = new Jogada(jogadaModel.PosicaoEscolhida, jogadaModel.PosicaoAntiga);
             Partida partida = SALAS.FirstOrDefault(s => s.Key == salaHash).Value;
             Tabuleiro tabuleiro = partida.Tabuleiro;
             int numPecas = tabuleiro.Pecas.Count;
