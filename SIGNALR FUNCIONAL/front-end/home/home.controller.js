@@ -14,4 +14,7 @@ angular.module('app')
     $scope.alterar = function(){
         $scope.gerado = !$scope.gerado;
     }
+    $scope.fechar = function(){
+        
+    }
 });

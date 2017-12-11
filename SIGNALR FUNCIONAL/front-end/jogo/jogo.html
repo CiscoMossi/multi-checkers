@@ -1,14 +1,14 @@
 <!-- <div class="luz"> -->
-    <img src="https://www.gravatar.com/avatar/{{jogadorBrancas.GravatarHash}}">
+<!--<img src="https://www.gravatar.com/avatar/{{jogadorBrancas.GravatarHash}}">-->
 
-    <div class="tabuleiro">
+<div class="tabuleiro">
     <div class="borda">
 
         <peca peca=peca selecionada=selecionada ng-repeat="peca in pecas" ng-click="mostrarMovimentos(peca)"></peca>
-        
+
 
         <div class="linha">
-            <div id="a1"class="quadrado"></div>
+            <div id="a1" class="quadrado"></div>
             <div id="a2" class="black quadrado"></div>
             <div id="a3" class="quadrado"></div>
             <div id="a2" class="black quadrado"></div>
@@ -95,5 +95,13 @@
             <div id="h8" class="quadrado"></div>
         </div>
     </div>
+    <!-- The Modal -->
+    <div id="myModal" class="modal">
+        <!-- Modal content -->
+        <div class="modal-content">
+            <img src="../images/vitoria.png" alt="">
+        </div>
+    </div>
+
 </div>
 <!-- </div> -->
