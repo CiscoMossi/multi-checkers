@@ -27,7 +27,12 @@ namespace Dominio
 
         public string GravatarHash { get; private set; }
 
-        public string Identificador { get; private set; }
+        public string UserHash { get; private set; }
+
+        public void InserirUserHash(string userHash)
+        {
+            this.UserHash = userHash;
+        }
 
         // https://gist.github.com/danesparza/973923
         private void GerarGravatarHash(string email)

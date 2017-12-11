@@ -10,18 +10,18 @@ namespace Dominio
 {
     public class Partida
     {
-        public Partida(Usuario usuarioBrancas)
+        public Partida()
         {
-            this.JogadorBrancas = usuarioBrancas;
             this.PartidaFinalizada = false;
             this.CriarTabuleiro();
+            this.Expectadores = new List<Usuario>();
         }
 
         public Usuario JogadorBrancas { get; private set; }
 
         public Usuario JogadorPretas { get; private set; }
 
-        // public List<Usuario> Expectadores { get; private set; }
+        public List<Usuario> Expectadores { get; private set; }
 
         public Tabuleiro Tabuleiro { get; private set; }
 
@@ -43,9 +43,15 @@ namespace Dominio
             return this.PartidaFinalizada;
         }
 
-        public void InserirJogadorPretas(Usuario jogadorPretas)
+        public void InserirUsuario(Usuario usuario)
         {
-            this.JogadorPretas = jogadorPretas;
+            if (this.JogadorBrancas == null)
+                this.JogadorBrancas = usuario;
+            else if (this.JogadorBrancas != null &&
+                    this.JogadorPretas == null)
+                this.JogadorPretas = usuario;
+            else
+                this.Expectadores.Add(usuario);
         }
 
         public void EditarTabuleiro(Tabuleiro tabuleiro)

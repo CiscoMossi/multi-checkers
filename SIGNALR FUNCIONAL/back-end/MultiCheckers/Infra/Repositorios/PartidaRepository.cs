@@ -15,8 +15,8 @@ namespace MultiCheckers.Repositorios
 
         public PartidaRepository()
         {
-            Usuario JogadorBrancas = new Usuario("Damke", "email@email", "senha");
-            PARTIDA_ATUAL = new Partida(JogadorBrancas);
+            //Usuario JogadorBrancas = new Usuario("Damke", "email@email", "senha");
+            PARTIDA_ATUAL = new Partida();
         }
 
         public Partida ObterPartida()

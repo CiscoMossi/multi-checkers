@@ -48,32 +48,31 @@ namespace MultiCheckers.SignalR
 
         public override Task OnConnected()
         {
-            USUARIOS.Add(new Usuario("CheckersKing", "email@email.com", "senha"));
-            USUARIOS.Add(new Usuario("Mr_Winner", "winner@email.com", "senha"));
-
+            //USUARIOS.Add(new Usuario("CheckersKing", "email@email.com", "senha"));
+            //USUARIOS.Add(new Usuario("Mr_Winner", "winner@email.com", "senha"));
+            Clients.Caller.isConnect(true);
             return base.OnConnected();
         }
 
-        public void CriarSala(string login)
+        public void CriarSala()
         {
-            Usuario jogadorBrancas = USUARIOS.FirstOrDefault(u => u.Login == login);
-            Partida partida = new Partida(jogadorBrancas);
+            Partida partida = new Partida();
             GeradorUrl gerador = new GeradorUrl();
 
             string salaHash = gerador.GerarUrl();
             SALAS.Add(salaHash, partida);
 
-            Clients.Caller(salaHash);
+            Clients.Caller.criarSala(salaHash);
         }
 
         public void Consultar(string salaHash)
         {
             Partida partida = SALAS.FirstOrDefault(s => s.Key == salaHash).Value;
 
-            Clients.All.buscarJogo(partida);
+            Clients.Group(salaHash).buscarJogo(partida);
             if (partida.PartidaFinalizada)
             {
-                Clients.All.fimJogo(String.Concat("Jogo Finalizado. ",
+                Clients.Group(salaHash).fimJogo(String.Concat("Jogo Finalizado. ",
                                       (partida.Tabuleiro.CorTurnoAtual == Cor.BRANCA ? Cor.PRETA : Cor.BRANCA).ToString(),
                                        "S venceram."));
                 return;
@@ -87,11 +86,15 @@ namespace MultiCheckers.SignalR
             int numPecas = tabuleiro.Pecas.Count;
 
             if ((Cor)cor != tabuleiro.CorTurnoAtual)
-                Clients.All.alterarTabuleiro("Turno do adversário");
-
+            {
+                Clients.Group(salaHash).alterarTabuleiro("Turno do adversário");
+                return;
+            }
             if (!tabuleiro.AtualizarJogada(jogada))
-                Clients.All.alterarTabuleiro("Jogada inválida");
-
+            {
+                Clients.Group(salaHash).alterarTabuleiro("Jogada inválida");
+                return;
+            }
             if (tabuleiro.Pecas.Count < numPecas)
                 tabuleiro.AplicarRodadaBonus(jogada);
             else
@@ -100,16 +103,23 @@ namespace MultiCheckers.SignalR
             partida.EditarTabuleiro(tabuleiro);
 
             if (partida.ValidarFimJogo(tabuleiro.CorTurnoAtual))
-                Clients.All.alterarTabuleiro("Você venceu!");
-
-            Clients.All.alterarTabuleiro(tabuleiro.CorTurnoAtual.ToString());
+            {
+                Clients.Group(salaHash).alterarTabuleiro("Você venceu!");
+                return;
+            }
+            Clients.Group(salaHash).alterarTabuleiro(tabuleiro.CorTurnoAtual.ToString());
         }
 
         public void InserirUsuario(string login, string salaHash)
         {
+            USUARIOS.Add(new Usuario("CheckersKing", "email@email.com", "senha"));
             Usuario usuario = USUARIOS.FirstOrDefault(u => u.Login == login);
             Partida partida = SALAS.FirstOrDefault(s => s.Key == salaHash).Value;
-            partida.InserirJogadorPretas(usuario);
+
+            partida.InserirUsuario(usuario);
+            usuario.InserirUserHash(Context.ConnectionId);
+
+            Groups.Add(Context.ConnectionId, salaHash);
         }
     }
 }

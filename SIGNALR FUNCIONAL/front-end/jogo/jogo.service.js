@@ -8,20 +8,23 @@ function ($, $rootScope) {
 
             connection = $.hubConnection('http://localhost:9090/signalr');
             proxy = connection.createHubProxy('HubMessage');
-            connection.start()/*.done(function() {
-                console.log("Conectado")
-            })*/;
+            connection.start().done(function() {
+                console.log('Conectado');
+            });
             proxy.on('buscarJogo', function (tabuleiro) {
                 $rootScope.$broadcast('buscarJogo', tabuleiro);
             });
             proxy.on('alterarTabuleiro', function (resposta) {
                 $rootScope.$broadcast('alterarTabuleiro', resposta);
             });
-            proxy.on('fimJogo', function(mensagem){
+            proxy.on('fimJogo', function(mensagem) {
                 $rootScope.$broadcast('fimJogo', mensagem);
             });
-            proxy.on('gerarSala', function(urlSala){
-                $rootScope.$broadcast('gerarSala', urlSala);
+            proxy.on('criarSala', function(urlSala) {
+                $rootScope.$broadcast('criarSala', urlSala);
+            });
+            proxy.on('isConnect', function(connect){
+                $rootScope.$broadcast('isConnect', connect);
             });
         },
         isConnecting: function () {
@@ -33,21 +36,26 @@ function ($, $rootScope) {
         connectionState: function () {
             return connection.state;
         },
-        consultar: function () {
+        consultar: function (salaHash) {
             if(this.isConnected()) {
-                proxy.invoke('Consultar');
+                proxy.invoke('Consultar', salaHash);
             }
         },
-        atualizar: function (jogada, cor){
+        atualizar: function (jogada, cor, salaHash) {
             if(this.isConnected()){
-                proxy.invoke('Atualizar', jogada, cor);
+                proxy.invoke('Atualizar', jogada, cor, salaHash);
             }
         },
         gerarUrl: function (){
-            if(this.isConnected()){
-                proxy.invoke('GerarSala');
+            if(this.isConnected()) {
+                proxy.invoke('CriarSala');
             }
         },
+        insereUsuario: function (login, salaHash){
+            if(this.isConnected()) {
+                proxy.invoke('InserirUsuario', login, salaHash);
+            }
+        }
     }
 }]);
 
