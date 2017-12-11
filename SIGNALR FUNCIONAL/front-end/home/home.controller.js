@@ -2,9 +2,10 @@ angular.module('app')
 .controller('HomeCtrl', function($scope, jogoService, $location) {
     $scope.gerarPartida = function(){
         $scope.url = "";
-        jogoService.gerarUrl();
+        var login = "CheckersKing";
+        jogoService.gerarUrl(login);
     }
-    $scope.$on('gerarSala', function(event, urlSala){
+    $scope.$on('criarSala', function(event, urlSala){
         $scope.url = urlSala;
         $location.path(`sala/${$scope.url}`);
         $scope.gerado = !!$scope.url;

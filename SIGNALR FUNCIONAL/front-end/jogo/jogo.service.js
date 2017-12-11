@@ -17,11 +17,11 @@ function ($, $rootScope) {
             proxy.on('alterarTabuleiro', function (resposta) {
                 $rootScope.$broadcast('alterarTabuleiro', resposta);
             });
-            proxy.on('fimJogo', function(mensagem){
+            proxy.on('fimJogo', function(mensagem) {
                 $rootScope.$broadcast('fimJogo', mensagem);
             });
-            proxy.on('gerarSala', function(urlSala){
-                $rootScope.$broadcast('gerarSala', urlSala);
+            proxy.on('criarSala', function(urlSala) {
+                $rootScope.$broadcast('criarSala', urlSala);
             });
         },
         isConnecting: function () {
@@ -33,19 +33,19 @@ function ($, $rootScope) {
         connectionState: function () {
             return connection.state;
         },
-        consultar: function () {
+        consultar: function (salaHash) {
             if(this.isConnected()) {
-                proxy.invoke('Consultar');
+                proxy.invoke('Consultar', salaHash);
             }
         },
-        atualizar: function (jogada, cor){
+        atualizar: function (jogada, cor) {
             if(this.isConnected()){
                 proxy.invoke('Atualizar', jogada, cor);
             }
         },
-        gerarUrl: function (){
-            if(this.isConnected()){
-                proxy.invoke('GerarSala');
+        gerarUrl: function (login){
+            if(this.isConnected()) {
+                proxy.invoke('CriarSala', login);
             }
         },
     }

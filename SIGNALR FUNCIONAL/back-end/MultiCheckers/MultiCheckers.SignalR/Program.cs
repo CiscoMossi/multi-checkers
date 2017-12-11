@@ -63,7 +63,7 @@ namespace MultiCheckers.SignalR
             string salaHash = gerador.GerarUrl();
             SALAS.Add(salaHash, partida);
 
-            Clients.Caller(salaHash);
+            Clients.Caller.criarSala(salaHash);
         }
 
         public void Consultar(string salaHash)
