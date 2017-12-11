@@ -1,9 +1,15 @@
 angular.module('app')
-.controller('HomeCtrl', function($scope) {
+.controller('HomeCtrl', function($scope, jogoService, $location) {
     $scope.gerarPartida = function(){
-        $scope.url = "aaaaaaaa";
-        $scope.gerado = !!$scope.url;
+        $scope.url = "";
+        jogoService.gerarUrl();
     }
+    $scope.$on('gerarSala', function(event, urlSala){
+        $scope.url = urlSala;
+        $location.path(`sala/${$scope.url}`);
+        $scope.gerado = !!$scope.url;
+        $scope.$apply();
+    });
 
     $scope.copiar = function(){
         let texto = document.getElementById("url");
