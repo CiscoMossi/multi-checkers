@@ -48,9 +48,9 @@ namespace MultiCheckers.SignalR
 
         public override Task OnConnected()
         {
-            USUARIOS.Add(new Usuario("CheckersKing", "email@email.com", "senha"));
-            USUARIOS.Add(new Usuario("Mr_Winner", "winner@email.com", "senha"));
-
+            //USUARIOS.Add(new Usuario("CheckersKing", "email@email.com", "senha"));
+            //USUARIOS.Add(new Usuario("Mr_Winner", "winner@email.com", "senha"));
+            Clients.Caller.isConnect(true);
             return base.OnConnected();
         }
 
@@ -72,7 +72,7 @@ namespace MultiCheckers.SignalR
             Clients.Group(salaHash).buscarJogo(partida);
             if (partida.PartidaFinalizada)
             {
-                Clients.All.fimJogo(String.Concat("Jogo Finalizado. ",
+                Clients.Group(salaHash).fimJogo(String.Concat("Jogo Finalizado. ",
                                       (partida.Tabuleiro.CorTurnoAtual == Cor.BRANCA ? Cor.PRETA : Cor.BRANCA).ToString(),
                                        "S venceram."));
                 return;
@@ -112,6 +112,7 @@ namespace MultiCheckers.SignalR
 
         public void InserirUsuario(string login, string salaHash)
         {
+            USUARIOS.Add(new Usuario("CheckersKing", "email@email.com", "senha"));
             Usuario usuario = USUARIOS.FirstOrDefault(u => u.Login == login);
             Partida partida = SALAS.FirstOrDefault(s => s.Key == salaHash).Value;
 
