@@ -4,7 +4,6 @@ using Microsoft.AspNet.SignalR;
 using Microsoft.AspNet.SignalR.Hubs;
 using Microsoft.Owin.Cors;
 using Microsoft.Owin.Hosting;
-using MultiCheckers.Repositorios;
 using Owin;
 using System;
 using System.Collections.Generic;
@@ -115,9 +114,10 @@ namespace MultiCheckers.SignalR
             Usuario usuario = USUARIOS.FirstOrDefault(u => u.Login == login);
             Partida partida = SALAS.FirstOrDefault(s => s.Key == salaHash).Value;
 
-            partida.InserirUsuario(usuario);
+            string jogador = partida.InserirUsuario(usuario);
             usuario.InserirUserHash(Context.ConnectionId);
 
+            Clients.Group(salaHash).infoJogador(jogador);
             Groups.Add(Context.ConnectionId, salaHash);
         }
     }

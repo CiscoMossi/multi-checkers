@@ -43,15 +43,22 @@ namespace Dominio
             return this.PartidaFinalizada;
         }
 
-        public void InserirUsuario(Usuario usuario)
+        public string InserirUsuario(Usuario usuario)
         {
             if (this.JogadorBrancas == null)
+            {
                 this.JogadorBrancas = usuario;
+                return "BRANCAS";
+            }              
             else if (this.JogadorBrancas != null &&
                     this.JogadorPretas == null)
+            {
                 this.JogadorPretas = usuario;
+                return "PRETAS";
+            }               
             else
                 this.Expectadores.Add(usuario);
+            return "EXPECTADOR";
         }
 
         public void EditarTabuleiro(Tabuleiro tabuleiro)
