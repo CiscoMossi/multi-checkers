@@ -69,7 +69,7 @@ namespace MultiCheckers.SignalR
         {
             Partida partida = SALAS.FirstOrDefault(s => s.Key == salaHash).Value;
 
-            Clients.All.buscarJogo(partida);
+            Clients.Group(salaHash).buscarJogo(partida);
             if (partida.PartidaFinalizada)
             {
                 Clients.All.fimJogo(String.Concat("Jogo Finalizado. ",
@@ -86,11 +86,15 @@ namespace MultiCheckers.SignalR
             int numPecas = tabuleiro.Pecas.Count;
 
             if ((Cor)cor != tabuleiro.CorTurnoAtual)
-                Clients.All.alterarTabuleiro("Turno do adversário");
-
+            {
+                Clients.Group(salaHash).alterarTabuleiro("Turno do adversário");
+                return;
+            }
             if (!tabuleiro.AtualizarJogada(jogada))
-                Clients.All.alterarTabuleiro("Jogada inválida");
-
+            {
+                Clients.Group(salaHash).alterarTabuleiro("Jogada inválida");
+                return;
+            }
             if (tabuleiro.Pecas.Count < numPecas)
                 tabuleiro.AplicarRodadaBonus(jogada);
             else
@@ -99,16 +103,20 @@ namespace MultiCheckers.SignalR
             partida.EditarTabuleiro(tabuleiro);
 
             if (partida.ValidarFimJogo(tabuleiro.CorTurnoAtual))
-                Clients.All.alterarTabuleiro("Você venceu!");
-
-            Clients.All.alterarTabuleiro(tabuleiro.CorTurnoAtual.ToString());
+            {
+                Clients.Group(salaHash).alterarTabuleiro("Você venceu!");
+                return;
+            }
+            Clients.Group(salaHash).alterarTabuleiro(tabuleiro.CorTurnoAtual.ToString());
         }
 
         public void InserirUsuario(string login, string salaHash)
         {
             Usuario usuario = USUARIOS.FirstOrDefault(u => u.Login == login);
             Partida partida = SALAS.FirstOrDefault(s => s.Key == salaHash).Value;
+
             partida.InserirUsuario(usuario);
+            usuario.InserirUserHash(Context.ConnectionId);
 
             Groups.Add(Context.ConnectionId, salaHash);
         }
