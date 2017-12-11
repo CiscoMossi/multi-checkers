@@ -21,7 +21,7 @@ angular.module('app')
         jogoService.consultar($routeParams.urlSala);
         $scope.$on('buscarJogo', function (event, partida) {
             $scope.pecas = partida.Tabuleiro.Pecas;
-            $scope.corJogando = parseInt(partida.Tabuleiro.CorTurnoAtual);
+            $rootScope.corJogando = parseInt(partida.Tabuleiro.CorTurnoAtual);
             $scope.jogadorBrancas = partida.JogadorBrancas
             if(!!partida.JogadorPretas)
                 $scope.jogadorPretas = partida.JogadorPretas
@@ -34,7 +34,7 @@ angular.module('app')
         });
     
         $scope.mostrarMovimentos = function(peca){
-            if($scope.corJogando == peca.Cor && peca.PosicoesPossiveis.length != 0)
+            if($rootScope.corJogando == peca.Cor && peca.PosicoesPossiveis.length != 0)
                 $scope.selecionada = peca;
         }
     

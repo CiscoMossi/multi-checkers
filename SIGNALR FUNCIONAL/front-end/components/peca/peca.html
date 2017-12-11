@@ -4,8 +4,8 @@
                'dama': $ctrl.peca.IsDama,
                'selecionadaBranca': $ctrl.peca == $ctrl.selecionada && $ctrl.peca.Cor == 0,
                'selecionadaPreta': $ctrl.peca == $ctrl.selecionada && $ctrl.peca.Cor == 1,
-               'podeMexerBranca': movimentos.length != 0 && $ctrl.peca.Cor == 0,
-               'podeMexerPreta': movimentos.length != 0 && $ctrl.peca.Cor == 1}"
+               'podeMexerBranca': movimentos.length != 0 && $ctrl.peca.Cor == 0 && $rootScope.corJogando == 0,
+               'podeMexerPreta': movimentos.length != 0 && $ctrl.peca.Cor == 1 && $rootScope.corJogando == 1}"
     class="peca" 
     style="position: absolute; 
            left: {{peca.x}}%; 

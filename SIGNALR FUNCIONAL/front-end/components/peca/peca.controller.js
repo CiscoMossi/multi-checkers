@@ -15,7 +15,7 @@ angular.module('app')
 
             $scope.movimentos = [];
             movimentosString.forEach(
-                n => $scope.movimentos.push({"x": parseInt(n[0]), 
+                n => $scope.movimentos.push({"x": parseInt(n[0]),
                              "y": parseInt(n[1])}
                             ));
         }
