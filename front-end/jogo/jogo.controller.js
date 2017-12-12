@@ -13,11 +13,14 @@ angular.module('app')
     function rodarJogo(){   
         jogoService.insereUsuario('CheckersKing', $routeParams.urlSala);
         $rootScope.$on('infoJogador', function(event, jogador){
+
             if(jogador == 'BRANCAS'){
                 $sessionStorage.usuarioCor = 0;
             }else if(jogador == 'PRETAS'){
                 $sessionStorage.usuarioCor = 1;
             }
+
+            $scope.corJogador = $sessionStorage.usuarioCor;
             jogoService.consultar($routeParams.urlSala);
             $scope.$apply();
         });
@@ -29,10 +32,11 @@ angular.module('app')
         $rootScope.$on('jogada', function(){
             var peca = pecaService.getPosicaoPecas();
             jogoService.atualizar(peca.pecaMovimento, peca.pecaCor, $routeParams.urlSala)
-            $timeout(jogoService.consultar($routeParams.urlSala), 1000)
+            $timeout( function(){
+                jogoService.consultar($routeParams.urlSala);
+            }, 500 );
         });
     
-        $scope.corDoJogador = 0;
         $scope.$on('buscarJogo', function (event, partida) {
             $scope.pecas = partida.Tabuleiro.Pecas;
             $scope.corJogando = parseInt(partida.Tabuleiro.CorTurnoAtual);
@@ -47,7 +51,7 @@ angular.module('app')
             $scope.$apply();
         });
     
-        $scope.mostrarMovimentos = function(peca){
+        $scope.mostrarMovimentos = function(peca,cor){
             if($scope.corJogando == peca.Cor && 
                 peca.PosicoesPossiveis.length != 0 &&
                 $scope.corJogando == $sessionStorage.usuarioCor)
@@ -67,11 +71,7 @@ angular.module('app')
 
     $scope.mostrar = false;    
 
-    $scope.mostrarUrl = function(){
-        $scope.mostrar = true;
-    }
-
-    $scope.fechar = function(){
-        $scope.mostrar = false;
+    $scope.alterarMostrar = function(){
+        $scope.mostrar = !$scope.mostrar;
     }
 });
