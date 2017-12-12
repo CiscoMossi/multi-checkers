@@ -78,6 +78,10 @@
     <Compile Include="Migrations\201712121712249_IgnoreUserHash.Designer.cs">
       <DependentUpon>201712121712249_IgnoreUserHash.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201712122016328_IgnoreSalaHash.cs" />
+    <Compile Include="Migrations\201712122016328_IgnoreSalaHash.Designer.cs">
+      <DependentUpon>201712122016328_IgnoreSalaHash.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="MultiCheckersContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -98,6 +102,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201712121712249_IgnoreUserHash.resx">
       <DependentUpon>201712121712249_IgnoreUserHash.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712122016328_IgnoreSalaHash.resx">
+      <DependentUpon>201712122016328_IgnoreSalaHash.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

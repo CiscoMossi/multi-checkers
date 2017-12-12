@@ -33,9 +33,16 @@ namespace Dominio
 
         public string UserHash { get; private set; }
 
+        public string SalaHash { get; private set; }
+
         public void InserirUserHash(string userHash)
         {
             this.UserHash = userHash;
+        }
+
+        public void InserirsalaHash(string salaHash)
+        {
+            this.SalaHash = salaHash;
         }
 
         public List<string> Validar()

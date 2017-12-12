@@ -34,6 +34,8 @@ namespace Infra.Mapping
 
             Ignore(x => x.UserHash);
 
+            Ignore(x => x.SalaHash);
+
         }
     }
 }
