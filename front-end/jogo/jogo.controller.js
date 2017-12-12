@@ -63,13 +63,16 @@ angular.module('app')
             texto.select();
             document.execCommand("Copy");
         }
-    
+
+        $scope.numPecasBrancas = $scope.pecas;
+        $scope.numPecasPretas = seila;
+
         var modal = document.getElementById('myModal'); 
     }
 
     var modal = document.getElementById('myModal');
 
-    $scope.mostrar = false;    
+    $scope.mostrar = false;
 
     $scope.alterarMostrar = function(){
         $scope.mostrar = !$scope.mostrar;

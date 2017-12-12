@@ -23,16 +23,4 @@ angular.module('app')
         document.execCommand("Copy");
     }
 
-    $scope.fecharCadastro = function(){
-        $scope.mostrarCadastro = false;
-    }
-
-    $scope.cadastrar = function(usuario){
-        usuarioService.cadastrar(usuario);
-    }
-
-    //TODO: implementar metodo de login
-    $scope.logar = function(usuario){
-
-    }
 });

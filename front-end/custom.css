@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Lobster|Coda');
+
 * {
     box-sizing: border-box
 }
@@ -12,12 +14,19 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-direction: column;
     height: 100%;
     width: 100%;
 }
 
+.titulo{
+    font-family: 'Lobster', cursive;
+    font-size: 70px;
+    color: white;
+}
+
 .login {
-    min-width: 240px;
+    min-width: 300px;
     min-height: 195px;
 }
 
@@ -210,6 +219,11 @@ body {
     max-width: 26%;
 }
 
+.in-the-middle{
+    position: fixed;
+    top: 150px;
+}
+
 .box.shadow {
     -webkit-box-shadow: 7px 10px 19px 0px rgba(0,0,0,1);
     -moz-box-shadow: 7px 10px 19px 0px rgba(0,0,0,1);
@@ -384,6 +398,7 @@ body {
 
     .content {
         word-wrap: break-word;
+        font-family: 'Coda', cursive;
     }
 }
 
@@ -494,6 +509,14 @@ body {
         box-shadow: 7px 10px 19px 0px rgba(0,0,0,0.59);
     
     }
+}
+
+@keyframes login-erro {
+    0%   {border: 1px solid red;
+          transform: rotate(7deg);}
+    25%  {transform: rotate(-7deg);}
+    50%  {transform: rotate(7deg);}
+    100% {transform: rotate(0deg);}
 }
 
 

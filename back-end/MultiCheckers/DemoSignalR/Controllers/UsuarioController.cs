@@ -10,9 +10,11 @@ using System.Net;
 using System.Net.Http;
 using System.Threading;
 using System.Web.Http;
+using System.Web.Http.Cors;
 
 namespace MultiCheckers.Api.Controllers
 {
+    [EnableCors("*", "*", "*")]
     [RoutePrefix("api/usuario")]
     public class UsuarioController : ApiController
     {
@@ -23,7 +25,7 @@ namespace MultiCheckers.Api.Controllers
             this.contexto = contexto;
         }
 
-        //[BasicAuthorization(Roles = "Jogador")]
+        [BasicAuthorization(Roles = "Jogador")]
         [HttpGet]
         public IHttpActionResult ObterUsuario(int id)
         {
@@ -55,7 +57,7 @@ namespace MultiCheckers.Api.Controllers
             return Ok(usuario);
         }
 
-        //[BasicAuthorization]
+        [BasicAuthorization]
         [HttpGet, Route("usuariologado")]
         public IHttpActionResult Obter()
         {

@@ -13,11 +13,11 @@ angular.module('app').constant('authConfig', {
     urlUsuario: 'http://localhost:1431/api/usuario/usuariologado',
 
     // Obrigatória - URL da aplicação que possui o formulário de login
-    urlLogin: '/home',
+    urlLogin: '/login',
 
     // Opcional - URL da aplicação para onde será redirecionado (se for informado) após o LOGIN com sucesso
-    urlPrivado: '/reservar',
+    urlPrivado: '/home',
 
     // Opcional - URL da aplicação para onde será redirecionado (se for informado) após o LOGOUT
-    urlLogout: '/home'
+    urlLogout: '/login'
 });
