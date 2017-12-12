@@ -24,6 +24,11 @@ angular.module('app')
             jogoService.consultar($routeParams.urlSala);
             $scope.$apply();
         });
+        $rootScope.$on('partidaInexistente', function(event, mensagem){
+            alert(mensagem);
+            $location.path('/home');
+            $scope.$apply();
+        });
         $rootScope.$on('jogada', function(){
             var peca = pecaService.getPosicaoPecas();
             jogoService.atualizar(peca.pecaMovimento, peca.pecaCor, $routeParams.urlSala)
@@ -35,7 +40,7 @@ angular.module('app')
         $scope.$on('buscarJogo', function (event, partida) {
             $scope.pecas = partida.Tabuleiro.Pecas;
             $scope.corJogando = parseInt(partida.Tabuleiro.CorTurnoAtual);
-            $scope.jogadorBrancas = partida.JogadorBrancas       
+            $scope.jogadorBrancas = partida.JogadorBrancas           
             if(!!partida.JogadorPretas)
                 $scope.jogadorPretas = partida.JogadorPretas
             $scope.$apply();

@@ -1,5 +1,6 @@
 ﻿using Dominio;
 using Infra.Migrations;
+using MultiCheckers.Api.App_Start;
 using MultiCheckers.Api.Models;
 using Newtonsoft.Json;
 using System;
@@ -21,7 +22,7 @@ namespace MultiCheckers.Api.Controllers
             this.contexto = contexto;
         }
 
-        //[BasicAuthorization(Roles = "Administrador")]
+        [BasicAuthorization(Roles = "Jogador")]
         [HttpGet]
         public IHttpActionResult ObterUsuario(int id)
         {
@@ -53,7 +54,7 @@ namespace MultiCheckers.Api.Controllers
             return Ok(usuario);
         }
 
-        //[BasicAuthorization]
+        [BasicAuthorization]
         [HttpGet, Route("usuariologado")]
         public IHttpActionResult Obter()
         {
@@ -62,7 +63,9 @@ namespace MultiCheckers.Api.Controllers
             if (usuario == null)
                 return BadRequest("Usuário não encontrado.");
 
-            return Ok(usuario);
+            var resposta = usuario.GerarUsuarioResposta();
+
+            return Ok(resposta);
         }
     }
 }

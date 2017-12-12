@@ -8,6 +8,8 @@ using System.Threading.Tasks;
 using Dominio.Entidades;
 using MultiCheckers.Api.Models;
 using Microsoft.AspNet.SignalR.Hubs;
+using Infra.Migrations;
+using Infra;
 
 namespace MultiCheckers.Api
 {
@@ -16,6 +18,7 @@ namespace MultiCheckers.Api
     {
         private static Dictionary<string, Partida> SALAS = new Dictionary<string, Partida>();
         private static List<Usuario> USUARIOS = new List<Usuario>();
+        private IMultiCheckersContext contexto = new MultiCheckersContext();
 
         public override Task OnConnected()
         {
@@ -86,24 +89,46 @@ namespace MultiCheckers.Api
 
         public void InserirUsuario(string login, string salaHash)
         {
-            USUARIOS.Add(new Usuario("CheckersKing", "email@email.com", "senha"));
-
-            Usuario usuario = USUARIOS.FirstOrDefault(u => u.Login == login);
+            //Usuario usuario = contexto.Usuarios.FirstOrDefault(x => x.Login == login);
+            //APAGAR DEPOIS
+            Usuario usuario = new Usuario("teste", "teste@email.com","1234");
+            //
             Partida partida = SALAS.FirstOrDefault(s => s.Key == salaHash).Value;
-
             if (partida == null)
             {
-                Clients.Caller.infoJogador("Esta partida não existe.");
+                Clients.Caller.partidaInexistente("Esta partida não existe.");
                 return;
             }
             usuario.InserirUserHash(Context.ConnectionId);
+            USUARIOS.Add(usuario);
             string jogador = partida.InserirUsuario(usuario);
             Groups.Add(Context.ConnectionId, salaHash);
             Clients.Caller.infoJogador(jogador);
         }
+        public void AtualizarJogadores(JogadorModel jogador)
+        {
+            Clients.Client(jogador.IdConexao).infoJogador(jogador.Funcao);
+        }
+
         public override Task OnDisconnected(bool stopCalled)
         {
             Usuario usuario = USUARIOS.FirstOrDefault(x => x.UserHash == Context.ConnectionId);
+            try {
+                var sala = SALAS.FirstOrDefault(x => x.Value.JogadorBrancas.UserHash == Context.ConnectionId || x.Value.JogadorPretas.UserHash == Context.ConnectionId || x.Value.Expectadores.FirstOrDefault(y => y.UserHash == Context.ConnectionId).UserHash == Context.ConnectionId);
+                Partida partida = sala.Value == null ? null : sala.Value;
+                if (partida != null)
+                {
+                    JogadorModel jogador = partida.RemoverJogador(usuario);
+                    if (jogador != null)
+                    {
+                        AtualizarJogadores(jogador);
+                    }
+                }
+            }
+            catch (NullReferenceException e)
+            {
+                
+            }
             return base.OnDisconnected(stopCalled);
         }
     }

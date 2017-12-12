@@ -29,6 +29,9 @@ function ($, $rootScope) {
             proxy.on('infoJogador', function(jogador){
                 $rootScope.$broadcast('infoJogador', jogador);
             });
+            proxy.on('partidaInexistente', function(mensagem){
+                $rootScope.$broadcast('partidaInexistente', mensagem);
+            });
         },
         isConnecting: function () {
             return connection.state === 0;
