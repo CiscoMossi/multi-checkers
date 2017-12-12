@@ -68,7 +68,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IMultiCheckersContext.cs" />
-    <Compile Include="Migrations\UsuarioMapping.cs" />
+    <Compile Include="Mapping\HistoricoMapping.cs" />
+    <Compile Include="Mapping\UsuarioMapping.cs" />
+    <Compile Include="Migrations\201712121706516_PrimeiraMigration.cs" />
+    <Compile Include="Migrations\201712121706516_PrimeiraMigration.Designer.cs">
+      <DependentUpon>201712121706516_PrimeiraMigration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201712121712249_IgnoreUserHash.cs" />
+    <Compile Include="Migrations\201712121712249_IgnoreUserHash.Designer.cs">
+      <DependentUpon>201712121712249_IgnoreUserHash.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="MultiCheckersContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -82,6 +92,13 @@
       <Name>MuiltCheckers.Dominio</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201712121706516_PrimeiraMigration.resx">
+      <DependentUpon>201712121706516_PrimeiraMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712121712249_IgnoreUserHash.resx">
+      <DependentUpon>201712121712249_IgnoreUserHash.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

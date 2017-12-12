@@ -1,4 +1,5 @@
 ﻿using Dominio;
+using Infra.Mapping;
 using Infra.Migrations;
 using System;
 using System.Collections.Generic;
@@ -11,7 +12,7 @@ namespace Infra
 {
     public class MultiCheckersContext : DbContext, IMultiCheckersContext
     {
-        public MultiCheckersContext() : this("name=MultiCheckersDB") { }
+        public MultiCheckersContext() : this("name=MultiCheckers") { }
 
         public MultiCheckersContext(string nameOrConnectionString) : base(nameOrConnectionString)
         {
@@ -21,9 +22,13 @@ namespace Infra
 
         public DbSet<Usuario> Usuarios { get; set; }
 
+        public DbSet<Historico> Historicos { get; set; }
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Configurations.Add(new UsuarioMapping());
+
+            modelBuilder.Configurations.Add(new HistoricoMapping());
 
             base.OnModelCreating(modelBuilder);
         }
