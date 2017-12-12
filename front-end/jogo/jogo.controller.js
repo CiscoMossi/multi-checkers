@@ -3,10 +3,11 @@ angular.module('app')
     if($routeParams.urlSala == null || $routeParams.urlSala == undefined){
         $location.path('/home');
     }
-    if($sessionStorage.connect == true){
+    if($sessionStorage.connect != undefined){
         rodarJogo();
     }
     $scope.$on('isConnect', function(event, connect){
+        debugger;
         $sessionStorage.connect = connect;
         rodarJogo();
     });
@@ -16,11 +17,11 @@ angular.module('app')
             debugger;
             if(jogador == 'BRANCAS'){
                 $sessionStorage.usuarioCor = 0;
-                return;
             }else if(jogador == 'PRETAS'){
                 $sessionStorage.usuarioCor = 1;
-                return;
             }
+            jogoService.consultar($routeParams.urlSala);
+            $scope.$apply();
         });
         $rootScope.$on('jogada', function(){
             var peca = pecaService.getPosicaoPecas();
@@ -29,7 +30,6 @@ angular.module('app')
         });
     
         $scope.corDoJogador = 0;
-        jogoService.consultar($routeParams.urlSala);
         $scope.$on('buscarJogo', function (event, partida) {
             $scope.pecas = partida.Tabuleiro.Pecas;
             $scope.corJogando = parseInt(partida.Tabuleiro.CorTurnoAtual);

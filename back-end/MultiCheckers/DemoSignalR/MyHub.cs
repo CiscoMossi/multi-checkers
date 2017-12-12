@@ -96,11 +96,15 @@ namespace MultiCheckers.Api
                 Clients.Caller.infoJogador("Esta partida não existe.");
                 return;
             }
-            string jogador = partida.InserirUsuario(usuario);
             usuario.InserirUserHash(Context.ConnectionId);
-
+            string jogador = partida.InserirUsuario(usuario);
             Groups.Add(Context.ConnectionId, salaHash);
             Clients.Caller.infoJogador(jogador);
+        }
+        public override Task OnDisconnected(bool stopCalled)
+        {
+            Usuario usuario = USUARIOS.FirstOrDefault(x => x.UserHash == Context.ConnectionId);
+            return base.OnDisconnected(stopCalled);
         }
     }
 }

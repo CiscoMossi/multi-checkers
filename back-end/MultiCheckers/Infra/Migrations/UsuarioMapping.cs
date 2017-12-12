@@ -15,6 +15,7 @@ namespace Infra.Migrations
             ToTable("Usuario", "mc");
 
             HasKey(x => x.Id);
+            
 
             Property(x => x.Login).HasMaxLength(128).IsRequired();
 
