@@ -105,9 +105,30 @@ namespace MultiCheckers.Api
             Groups.Add(Context.ConnectionId, salaHash);
             Clients.Caller.infoJogador(jogador);
         }
+        public void AtualizarJogadores(JogadorModel jogador)
+        {
+            Clients.Client(jogador.IdConexao).infoJogador(jogador.Funcao);
+        }
+
         public override Task OnDisconnected(bool stopCalled)
         {
             Usuario usuario = USUARIOS.FirstOrDefault(x => x.UserHash == Context.ConnectionId);
+            try {
+                var sala = SALAS.FirstOrDefault(x => x.Value.JogadorBrancas.UserHash == Context.ConnectionId || x.Value.JogadorPretas.UserHash == Context.ConnectionId || x.Value.Expectadores.FirstOrDefault(y => y.UserHash == Context.ConnectionId).UserHash == Context.ConnectionId);
+                Partida partida = sala.Value == null ? null : sala.Value;
+                if (partida != null)
+                {
+                    JogadorModel jogador = partida.RemoverJogador(usuario);
+                    if (jogador != null)
+                    {
+                        AtualizarJogadores(jogador);
+                    }
+                }
+            }
+            catch (NullReferenceException e)
+            {
+                
+            }
             return base.OnDisconnected(stopCalled);
         }
     }

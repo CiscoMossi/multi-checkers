@@ -13,6 +13,7 @@ angular.module('app')
     function rodarJogo(){   
         jogoService.insereUsuario('CheckersKing', $routeParams.urlSala);
         $rootScope.$on('infoJogador', function(event, jogador){
+            debugger;
             if(jogador == 'BRANCAS'){
                 $sessionStorage.usuarioCor = 0;
             }else if(jogador == 'PRETAS'){

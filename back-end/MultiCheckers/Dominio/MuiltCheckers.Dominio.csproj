@@ -44,6 +44,7 @@
     <Compile Include="Entidades\Cor.cs" />
     <Compile Include="Entidades\GeradorUrl.cs" />
     <Compile Include="Entidades\Jogada.cs" />
+    <Compile Include="Entidades\JogadorModel.cs" />
     <Compile Include="Entidades\Partida.cs" />
     <Compile Include="Entidades\Usuario.cs" />
     <Compile Include="Entidades\Peca.cs" />

@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
 using Dominio.Entidades;
+using MultiCheckers.Api.Models;
 
 namespace Dominio
 {
@@ -64,6 +65,43 @@ namespace Dominio
         public void EditarTabuleiro(Tabuleiro tabuleiro)
         {
             this.Tabuleiro = tabuleiro;
+        }
+
+        public void SetPartidaFinalizada(bool partida)
+        {
+            this.PartidaFinalizada = partida;
+        }
+
+        public JogadorModel RemoverJogador(Usuario usuario)
+        {
+            if (Expectadores.Count > 0 && (this.JogadorBrancas.Equals(usuario) || this.JogadorPretas.Equals(usuario)))
+            {
+                if (this.JogadorBrancas.Equals(usuario))
+                {
+                    this.JogadorBrancas = null;
+                }
+                if (this.JogadorPretas.Equals(usuario))
+                {
+                    this.JogadorPretas = null;
+                }
+                string funcao = this.InserirUsuario(this.Expectadores[0]);
+                string idConexao = this.Expectadores[0].UserHash;
+                this.Expectadores.RemoveAt(0);
+                return new JogadorModel(idConexao, funcao);
+            }else if (Expectadores.Count == 0)
+            {
+                if (this.JogadorBrancas.Equals(usuario))
+                {
+                    this.JogadorBrancas = null;
+                }
+                if (this.JogadorPretas.Equals(usuario))
+                {
+                    this.JogadorPretas = null;
+                }
+                return null;
+            }
+            this.Expectadores.Remove(usuario);
+            return null;
         }
     }
 }
