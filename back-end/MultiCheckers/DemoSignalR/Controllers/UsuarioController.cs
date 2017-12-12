@@ -13,6 +13,7 @@ using System.Web.Http;
 
 namespace MultiCheckers.Api.Controllers
 {
+    [RoutePrefix("api/usuario")]
     public class UsuarioController : ApiController
     {
         private IMultiCheckersContext contexto;
@@ -22,7 +23,7 @@ namespace MultiCheckers.Api.Controllers
             this.contexto = contexto;
         }
 
-        [BasicAuthorization(Roles = "Jogador")]
+        //[BasicAuthorization(Roles = "Jogador")]
         [HttpGet]
         public IHttpActionResult ObterUsuario(int id)
         {
@@ -54,7 +55,7 @@ namespace MultiCheckers.Api.Controllers
             return Ok(usuario);
         }
 
-        [BasicAuthorization]
+        //[BasicAuthorization]
         [HttpGet, Route("usuariologado")]
         public IHttpActionResult Obter()
         {

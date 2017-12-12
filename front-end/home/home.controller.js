@@ -1,5 +1,5 @@
 angular.module('app')
-.controller('HomeCtrl', function($scope, jogoService, $location, $sessionStorage) {
+.controller('HomeCtrl', function($scope, jogoService, $location, $sessionStorage, usuarioService) {
     $scope.gerarPartida = function(){
         $scope.url = "";
         jogoService.gerarUrl();
@@ -21,6 +21,14 @@ angular.module('app')
         let texto = document.getElementById("url");
         texto.select();
         document.execCommand("Copy");
+    }
+
+    $scope.fecharCadastro = function(){
+        $scope.mostrarCadastro = false;
+    }
+
+    $scope.cadastrar = function(usuario){
+        usuarioService.cadastrar(usuario);
     }
 
     //TODO: implementar metodo de login

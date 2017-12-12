@@ -22,12 +22,12 @@ namespace MultiCheckers.Api.Controllers
             this.contexto = contexto;
         }
 
-        [BasicAuthorization(Roles = "Jogador")]
+        //[BasicAuthorization(Roles = "Jogador")]
         [HttpGet]
         public IHttpActionResult ObterPontosDoUsuario(int usuarioId)
         {
             var historicos = contexto.Historicos.Where(h => h.Usuario.Id == usuarioId);
-            if (historicos == null)
+            if (historicos.Count() == 0)
                 return Ok(0);
 
             return Ok(historicos.Sum(p => p.Pontos));
