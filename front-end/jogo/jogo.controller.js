@@ -24,6 +24,7 @@ angular.module('app')
         $rootScope.$on('partidaInexistente', function(event, mensagem){
             alert(mensagem);
             $location.path('/home');
+            $scope.$apply();
         });
         $rootScope.$on('jogada', function(){
             var peca = pecaService.getPosicaoPecas();
