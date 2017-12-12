@@ -95,8 +95,8 @@ namespace MultiCheckers.Api
             string jogador = partida.InserirUsuario(usuario);
             usuario.InserirUserHash(Context.ConnectionId);
 
-            Clients.Group(salaHash).infoJogador(jogador);
             Groups.Add(Context.ConnectionId, salaHash);
+            Clients.Caller.infoJogador(jogador);
         }
     }
 }

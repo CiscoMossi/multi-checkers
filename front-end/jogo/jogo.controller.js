@@ -1,5 +1,8 @@
 angular.module('app')
-.controller('JogoCtrl', function($scope, $timeout, jogoService, $routeParams, $interval, pecaService, $rootScope, $sessionStorage) {
+.controller('JogoCtrl', function($scope, $location, $timeout, jogoService, $routeParams, $interval, pecaService, $rootScope, $sessionStorage) {
+    if($routeParams.urlSala == null || $routeParams.urlSala == undefined){
+        $location.path('/home');
+    }
     if($sessionStorage.connect == true){
         rodarJogo();
     }
@@ -9,6 +12,16 @@ angular.module('app')
     });
     function rodarJogo(){   
         jogoService.insereUsuario('CheckersKing', $routeParams.urlSala);
+        $rootScope.$on('infoJogador', function(event, jogador){
+            debugger;
+            if(jogador == 'BRANCAS'){
+                $sessionStorage.usuarioCor = 0;
+                return;
+            }else if(jogador == 'PRETAS'){
+                $sessionStorage.usuarioCor = 1;
+                return;
+            }
+        });
         $rootScope.$on('jogada', function(){
             var peca = pecaService.getPosicaoPecas();
             jogoService.atualizar(peca.pecaMovimento, peca.pecaCor, $routeParams.urlSala)
