@@ -38,11 +38,11 @@ angular.module('app')
         });
     
         $scope.$on('buscarJogo', function (event, partida) {
+            debugger;
             $scope.pecas = partida.Tabuleiro.Pecas;
             $scope.corJogando = parseInt(partida.Tabuleiro.CorTurnoAtual);
             $scope.jogadorBrancas = partida.JogadorBrancas           
-            if(!!partida.JogadorPretas)
-                $scope.jogadorPretas = partida.JogadorPretas
+            $scope.jogadorPretas = partida.JogadorPretas
             $scope.$apply();
         });
         $scope.$on('fimJogo', function (event, mensagem) {

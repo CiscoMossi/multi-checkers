@@ -1,5 +1,5 @@
 angular
-.module('app', ['ngRoute', 'auth', 'ngStorage'])
+.module('app', ['ngRoute'/*, 'auth'*/, 'ngStorage'])
 .value('$', $)
 .run(function(jogoService) {
     jogoService.connect();
