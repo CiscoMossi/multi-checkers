@@ -1,18 +1,26 @@
 <div class="novo-jogo">
-    <a class="add" ng-click="gerarPartida()" ng-show="!gerado">+</a></a>
-
-    <div class="notification" ng-show="gerado">
-        <button class="delete" ng-click="alterar()"></button>
-
-        <div class="field has-addons is-not-first">
-            <div class="control">
-                <input class="input" type="text" id="url" ng-model="url">
+    <a class="add" ng-click="gerarPartida()" ng-show="!!usuario">+</a>
+    </a>
+</div>
+<div class="main">
+    <div class="box shadow login">
+        <form>
+            <div class="field">
+                <div class="control">
+                    <input class="input" type="email" placeholder="Your Email" autofocus="">
+                </div>
             </div>
-            <div class="control">
-                <a class="button is-info" ng-click="copiar(url)">
-                    Copiar
-                </a>
+
+            <div class="field">
+                <div class="control">
+                    <input class="input" type="password" placeholder="Your Password">
+                </div>
             </div>
-        </div>
-    </div>  
+            <a class="button is-block is-info" ng-click="logar(usuario)">Login</a>
+        </form>
+
+        <a href="">
+            <small>Não possui uma conta? Cadastre-se!</small>
+        </a>
+    </div>
 </div>

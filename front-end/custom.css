@@ -16,6 +16,11 @@ body {
     width: 100%;
 }
 
+.login {
+    min-width: 240px;
+    min-height: 195px;
+}
+
 .novo-jogo{
     display: flex;
     align-items: center;
