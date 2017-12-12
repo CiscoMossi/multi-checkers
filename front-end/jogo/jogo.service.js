@@ -24,7 +24,6 @@ function ($, $rootScope) {
                 $rootScope.$broadcast('criarSala', urlSala);
             });
             proxy.on('isConnect', function(connect){
-                debugger;
                 $rootScope.$broadcast('isConnect', connect);
             });
             proxy.on('infoJogador', function(jogador){

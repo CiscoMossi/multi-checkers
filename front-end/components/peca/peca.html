@@ -2,15 +2,12 @@
     ng-class="{'branca': $ctrl.peca.Cor == 0, 
                'preta': $ctrl.peca.Cor == 1,
                'dama': $ctrl.peca.IsDama,
-               'selecionadaBranca': $ctrl.peca == $ctrl.selecionada && $ctrl.peca.Cor == 0,
-               'selecionadaPreta': $ctrl.peca == $ctrl.selecionada && $ctrl.peca.Cor == 1,
-               'podeMexerBranca': movimentos.length != 0 && $ctrl.peca.Cor == 0,
-               'podeMexerPreta': movimentos.length != 0 && $ctrl.peca.Cor == 1}"
+               'selecionada': $ctrl.peca == $ctrl.selecionada,
+               'podeMexer': movimentos.length != 0 && $ctrl.corJogador == $ctrl.peca.Cor}"
     class="peca" 
     style="position: absolute; 
            left: {{peca.x}}%; 
-           top: {{peca.y}}%;"
-    ng-click="mostrarMovimentos($ctrl.selecionada)">
+           top: {{peca.y}}%;">
 </div>
 
 <div class="movimento" ng-show="$ctrl.peca == $ctrl.selecionada"

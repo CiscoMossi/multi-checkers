@@ -137,7 +137,6 @@ body {
 }
 
 .branca {
-    filter: sepia(.5);
     background-image: url("images/peca.png");
     background-size: cover;
 }
@@ -166,20 +165,13 @@ body {
     transition-duration: 0.5s;
 }
 
-.podeMexerBranca {
-    filter: drop-shadow(0 0 10px #fff) sepia(.5);
+.podeMexer {
+    filter: drop-shadow(0 0 10px #fff);
 }
 
-.podeMexerPreta {
-    filter: drop-shadow(0 0 10px #fff)
-}
-
-.selecionadaBranca {
-    filter: drop-shadow(0 0 10px #0f0) sepia(.5)
-}
-
-.selecionadaPreta {
-    filter: drop-shadow(0 0 10px #0f0)
+.selecionada {
+    filter: drop-shadow(0 0 10px #0f0);
+    z-index: 1;
 }
 
 .movimento {
@@ -196,11 +188,11 @@ body {
 }
 
 #usuario1 {
-    left: 5vw;
+    left: 2vw;
 }
 
 #usuario2 {
-    right: 5vw;
+    right: 2vw;
 }
 
 .usuario img {
@@ -209,13 +201,13 @@ body {
 }
 
 .media-content {
-    max-width: 300px;
+    max-width: 200px;
 }
 
 .box {
     position: fixed;
     top: 50px;
-    max-width: 25%;
+    max-width: 26%;
 }
 
 .box.shadow {
@@ -231,7 +223,7 @@ body {
     }
     
     .media-content {
-        max-width: 300px;
+        max-width: 200px;
     }
 
     figure.image.tamanho{
@@ -241,6 +233,7 @@ body {
     
     .content {
         font-size: 1.5vw;
+        word-wrap: break-word;
     }
 }
 
@@ -251,6 +244,76 @@ body {
 
     #usuario2{
         right: 3vw;
+    }
+
+    .content {
+        font-size: 2.5vw;
+        word-wrap: break-word;
+    }
+
+    .box {
+        width: 43vw;
+        height: 23vw;
+        max-width: 650px;
+        -webkit-box-shadow: 7px 10px 19px 0px rgba(0,0,0,0.59);
+        -moz-box-shadow: 7px 10px 19px 0px rgba(0,0,0,0.59);
+        box-shadow: 7px 10px 19px 0px rgba(0,0,0,0.59);
+    }
+
+    .media-content{
+        max-width: 140px;
+    }
+
+    .media-left {
+        top: 10px;
+        left: 10px;
+        position: absolute
+    }
+    
+    .content {
+        left: 52%;
+        top: 0;
+        position: absolute;
+        word-wrap: break-word;
+        max-width: 150px;
+    }
+
+}
+
+@media screen and (min-height: 1024px) and (max-width: 1400px){
+    .tabuleiro {
+        width: 70vw;
+        height: 70vw;
+        background-image: url("images/tabuleiro.jpg");
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .content {
+        font-size: 2.5vw;
+        word-wrap: break-word;
+    }
+
+    .box {
+        width: 43vw;
+        height: 23vw;
+        max-width: 650px;
+        -webkit-box-shadow: 7px 10px 19px 0px rgba(0,0,0,0.59);
+        -moz-box-shadow: 7px 10px 19px 0px rgba(0,0,0,0.59);
+        box-shadow: 7px 10px 19px 0px rgba(0,0,0,0.59);
+    
+    }
+
+    .media {
+        width: 10vw;
+        height: 10vw;
+    }
+
+    figure.image.tamanho{
+        width: 20vw;
+        height: 20vw;
     }
 }
 
@@ -272,6 +335,10 @@ body {
     #usuario2 {
         top: 60%;
         left: 26%;
+    }
+
+    .content {
+        word-wrap: break-word;
     }
 }
 
@@ -314,9 +381,23 @@ body {
         top: 78vh;
         left: 25%;
     }
+
+    .content {
+        word-wrap: break-word;
+    }
 }
 
-@media screen and (min-height: 1024px) and (max-width: 1400px){
+@media screen and (max-width: 425px) {
+    #usuario1 {
+        top: 3.5vh;
+        left: 24%;
+    }
+
+    #usuario2 {
+        top: 78vh;
+        left: 24%;
+    }
+
     .tabuleiro {
         width: 70vw;
         height: 70vw;
@@ -327,78 +408,91 @@ body {
         align-items: center;
     }
 
+    .media-left {
+        top: 10px;
+        left: 10px;
+        position: absolute
+    }
+    
     .content {
-        font-size: 2.5vw;
+        left: 50%;
+        top: 0;
+        position: absolute;
+        word-wrap: break-word;
+        font-size: 3.5vw;
+        max-width: 100px;
     }
 
     .box {
-        width: 40vw;
-        height: 23vw;
+        width: 50vw;
+        height: 25vw;
         max-width: 400px;
         -webkit-box-shadow: 7px 10px 19px 0px rgba(0,0,0,0.59);
         -moz-box-shadow: 7px 10px 19px 0px rgba(0,0,0,0.59);
         box-shadow: 7px 10px 19px 0px rgba(0,0,0,0.59);
     
     }
-
-    .media {
-        width: 10vw;
-        height: 10vw;
-    }
-
-    figure.image.tamanho{
-        width: 20vw;
-        height: 20vw;
-    }
-}
-
-@media screen and (max-width: 425px) {
-    #usuario1 {
-        top: .5vh;
-        left: 25%;
-    }
-
-    #usuario2 {
-        top: 77vh;
-        left: 25%;
-    }
-
-    .tabuleiro {
-        width: 70vw;
-        height: 70vw;
-        background-image: url("images/tabuleiro.jpg");
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-    }
-
-    .content {
-        font-size: 3.5vw;
-    }
 }
 
 @media screen and (max-width: 375px) {
     #usuario1 {
         top: 2vh;
-        left: 25%;
+        left: 20%;
     }
 
     #usuario2 {
         top: 80vh;
-        left: 25%;
+        left: 20%;
+    }
+
+    .media-left {
+        top: 10px;
+        left: 10px;
+        position: absolute
+    }
+    
+    .content {
+        left: 50%;
+        top: 0;
+        position: absolute;
+        word-wrap: break-word;
+        max-width: 100px;
+    }
+
+    .box {
+        width: 60vw;
+        height: 25vw;
+        max-width: 400px;
+        -webkit-box-shadow: 7px 10px 19px 0px rgba(0,0,0,0.59);
+        -moz-box-shadow: 7px 10px 19px 0px rgba(0,0,0,0.59);
+        box-shadow: 7px 10px 19px 0px rgba(0,0,0,0.59);
+    
     }
 }
 
 @media screen and (max-width: 320px) {
-    #usuario1 {
-        top: 3vh;
-        left: 25%;
+    .media-left {
+        top: 10px;
+        left: 10px;
+        position: absolute
+    }
+    
+    .content {
+        left: 50%;
+        top: 0;
+        position: absolute;
+        word-wrap: break-word;
+        max-width: 70px;
     }
 
-    #usuario2 {
-        top: 80vh;
-        left: 25%;
+    .box {
+        width: 55vw;
+        height: 30vw;
+        max-width: 400px;
+        -webkit-box-shadow: 7px 10px 19px 0px rgba(0,0,0,0.59);
+        -moz-box-shadow: 7px 10px 19px 0px rgba(0,0,0,0.59);
+        box-shadow: 7px 10px 19px 0px rgba(0,0,0,0.59);
+    
     }
 }
 

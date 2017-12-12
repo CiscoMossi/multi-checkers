@@ -3,6 +3,7 @@ angular.module('app').component('peca', {
     controller: 'PecaCtrl',
     bindings: {
       peca: '=',
-      selecionada: '='
+      selecionada: '=',
+      corJogador: '='
     }
   });

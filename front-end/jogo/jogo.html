@@ -9,7 +9,7 @@
     <div class="media-content">
       <div class="content">
         <p>
-          <div><strong>Francisco</strong></div>
+          <div><strong>{{jogadorBrancas.Login}}aaaaaaaaa</strong></div>
           <div><small><img src="images/icon.png" alt="pontos">5</small></div>
           <div><small>1/12 peças</small></div>
 
@@ -41,7 +41,7 @@
 <div class="tabuleiro">
   <div class="borda">
 
-    <peca peca=peca selecionada=selecionada ng-repeat="peca in pecas" ng-click="mostrarMovimentos(peca)"></peca>
+    <peca peca="peca" selecionada="selecionada" cor-jogador="corJogador" ng-repeat="peca in pecas" ng-click="mostrarMovimentos(peca)"></peca>
 
     <div class="linha">
       <div id="a1" class="quadrado"></div>
