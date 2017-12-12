@@ -26,6 +26,9 @@ function ($, $rootScope) {
             proxy.on('isConnect', function(connect){
                 $rootScope.$broadcast('isConnect', connect);
             });
+            proxy.on('infoJogador', function(jogador){
+                $rootScope.$broadcast('infoJogador', jogador);
+            });
         },
         isConnecting: function () {
             return connection.state === 0;

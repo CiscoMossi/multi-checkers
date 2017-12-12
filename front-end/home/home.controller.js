@@ -21,10 +21,8 @@ angular.module('app')
         document.execCommand("Copy");
     }
 
-    $scope.alterar = function(){
-        $scope.gerado = !$scope.gerado;
-    }
-    $scope.fechar = function(){
-        
+    //TODO: implementar metodo de login
+    $scope.logar = function(usuario){
+
     }
 });
