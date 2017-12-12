@@ -100,6 +100,7 @@ namespace MultiCheckers.Api
                 return;
             }
             usuario.InserirUserHash(Context.ConnectionId);
+            usuario.InserirsalaHash(salaHash);
             USUARIOS.Add(usuario);
             string jogador = partida.InserirUsuario(usuario);
             Groups.Add(Context.ConnectionId, salaHash);
@@ -113,21 +114,26 @@ namespace MultiCheckers.Api
         public override Task OnDisconnected(bool stopCalled)
         {
             Usuario usuario = USUARIOS.FirstOrDefault(x => x.UserHash == Context.ConnectionId);
-            try {
-                var sala = SALAS.FirstOrDefault(x => x.Value.JogadorBrancas.UserHash == Context.ConnectionId || x.Value.JogadorPretas.UserHash == Context.ConnectionId || x.Value.Expectadores.FirstOrDefault(y => y.UserHash == Context.ConnectionId).UserHash == Context.ConnectionId);
-                Partida partida = sala.Value == null ? null : sala.Value;
-                if (partida != null)
+            var partida = SALAS.FirstOrDefault(x => x.Key == usuario.SalaHash).Value;
+            if (partida != null)
+            {
+                try
                 {
                     JogadorModel jogador = partida.RemoverJogador(usuario);
                     if (jogador != null)
                     {
                         AtualizarJogadores(jogador);
                     }
+                    USUARIOS.Remove(usuario);
+                    this.Consultar(usuario.SalaHash);
                 }
-            }
-            catch (NullReferenceException e)
-            {
-                
+                catch(Exception e)
+                {
+                    if (partida.JogadorBrancas == null && partida.JogadorPretas == null && partida.Expectadores.Count==0)
+                    {
+                        SALAS.Remove(usuario.SalaHash);
+                    }
+                }
             }
             return base.OnDisconnected(stopCalled);
         }
