@@ -14,6 +14,7 @@ angular.module('app')
     $scope.$on('isConnect', function(event, connect){
         $sessionStorage.connect = connect;
     });
+
     $scope.copiar = function(){
         let texto = document.getElementById("url");
         texto.select();

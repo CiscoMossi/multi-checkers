@@ -17,7 +17,10 @@ namespace Dominio
             this.Email = email;
             this.Senha = senha;
             this.GerarGravatarHash(email);
+            this.Pontos = new List<decimal>();
         }
+
+        public int Id { get; private set; }
 
         public string Login { get; private set; }
 
@@ -29,9 +32,45 @@ namespace Dominio
 
         public string UserHash { get; private set; }
 
+        public List<decimal> Pontos { get; private set; }
+
         public void InserirUserHash(string userHash)
         {
             this.UserHash = userHash;
+        }
+
+        public List<string> Validar()
+        {
+            List<string> mensagens = new List<string>();
+
+            if (string.IsNullOrEmpty(Login))
+                mensagens.Add("Login não pode ser nulo");
+
+            if (Login.Length > 128)
+                mensagens.Add("Login deve ter até 128 caracteres");
+
+            if (string.IsNullOrEmpty(Email))
+                mensagens.Add("Email não pode ser nulo");
+
+            if (Email.Length > 128)
+                mensagens.Add("Email deve ter até 128 caracteres");
+
+            if (!Email.Contains('@'))
+                mensagens.Add("Email deve ter formato com @");
+
+            return mensagens;
+        }
+
+        private string CriptografarSenha(string senha)
+        {
+            MD5 md5 = MD5.Create();
+            byte[] inputBytes = Encoding.Default.GetBytes(Email + senha);
+            byte[] hash = md5.ComputeHash(inputBytes);
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < hash.Length; i++)
+                sb.Append(hash[i].ToString("x2"));
+
+            return sb.ToString();
         }
 
         // https://gist.github.com/danesparza/973923
