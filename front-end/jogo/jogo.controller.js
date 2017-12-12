@@ -25,7 +25,7 @@ angular.module('app')
         $rootScope.$on('jogada', function(){
             var peca = pecaService.getPosicaoPecas();
             jogoService.atualizar(peca.pecaMovimento, peca.pecaCor, $routeParams.urlSala)
-            jogoService.consultar($routeParams.urlSala);
+            $timeout(jogoService.consultar($routeParams.urlSala), 1000)
         });
     
         $scope.corDoJogador = 0;
@@ -46,7 +46,9 @@ angular.module('app')
         });
     
         $scope.mostrarMovimentos = function(peca){
-            if($scope.corJogando == peca.Cor && peca.PosicoesPossiveis.length != 0)
+            if($scope.corJogando == peca.Cor && 
+                peca.PosicoesPossiveis.length != 0 &&
+                $scope.corJogando == $sessionStorage.usuarioCor)
                 $scope.selecionada = peca;
         }
     
