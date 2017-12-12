@@ -37,7 +37,11 @@ namespace MultiCheckers.Api
         public void Consultar(string salaHash)
         {
             Partida partida = SALAS.FirstOrDefault(s => s.Key == salaHash).Value;
-
+            if (partida == null)
+            {
+                Clients.Caller.infoJogador("Esta partida não existe.");
+                return;
+            }
             Clients.Group(salaHash).buscarJogo(partida);
             if (partida.PartidaFinalizada)
             {
@@ -89,7 +93,7 @@ namespace MultiCheckers.Api
 
             if (partida == null)
             {
-                Clients.Caller.infoJogador("Esta partida já acabou");
+                Clients.Caller.infoJogador("Esta partida não existe.");
                 return;
             }
             string jogador = partida.InserirUsuario(usuario);
