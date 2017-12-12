@@ -7,20 +7,23 @@ angular.module('app')
         rodarJogo();
     }
     $scope.$on('isConnect', function(event, connect){
-        debugger;
         $sessionStorage.connect = connect;
         rodarJogo();
     });
     function rodarJogo(){   
         jogoService.insereUsuario('CheckersKing', $routeParams.urlSala);
         $rootScope.$on('infoJogador', function(event, jogador){
-            debugger;
             if(jogador == 'BRANCAS'){
                 $sessionStorage.usuarioCor = 0;
             }else if(jogador == 'PRETAS'){
                 $sessionStorage.usuarioCor = 1;
             }
             jogoService.consultar($routeParams.urlSala);
+            $scope.$apply();
+        });
+        $rootScope.$on('partidaInexistente', function(event, mensagem){
+            alert(mensagem);
+            $location.path('/home');
             $scope.$apply();
         });
         $rootScope.$on('jogada', function(){
@@ -33,8 +36,7 @@ angular.module('app')
         $scope.$on('buscarJogo', function (event, partida) {
             $scope.pecas = partida.Tabuleiro.Pecas;
             $scope.corJogando = parseInt(partida.Tabuleiro.CorTurnoAtual);
-            $scope.jogadorBrancas = partida.JogadorBrancas
-            console.log($scope.corJogando);            
+            $scope.jogadorBrancas = partida.JogadorBrancas           
             if(!!partida.JogadorPretas)
                 $scope.jogadorPretas = partida.JogadorPretas
             $scope.$apply();
