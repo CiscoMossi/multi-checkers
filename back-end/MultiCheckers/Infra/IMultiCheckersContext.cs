@@ -13,5 +13,7 @@ namespace Infra.Migrations
         int SaveChanges();
 
         DbSet<Usuario> Usuarios { get; set; }
+
+        DbSet<Historico> Historicos { get; set; }
     }
 }

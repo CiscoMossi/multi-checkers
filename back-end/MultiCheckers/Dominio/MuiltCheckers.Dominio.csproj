@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="Entidades\Cor.cs" />
     <Compile Include="Entidades\GeradorUrl.cs" />
+    <Compile Include="Entidades\Historico.cs" />
     <Compile Include="Entidades\Jogada.cs" />
     <Compile Include="Entidades\Partida.cs" />
     <Compile Include="Entidades\Usuario.cs" />

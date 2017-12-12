@@ -11,13 +11,14 @@ namespace Dominio
 {
     public class Usuario
     {
+        private Usuario() { }
+
         public Usuario(string login, string email, string senha)
         {
             this.Login = login;
             this.Email = email;
-            this.Senha = senha;
+            this.Senha = Criptografar(senha);
             this.GerarGravatarHash(email);
-            this.Pontos = new List<decimal>();
         }
 
         public int Id { get; private set; }
@@ -31,8 +32,6 @@ namespace Dominio
         public string GravatarHash { get; private set; }
 
         public string UserHash { get; private set; }
-
-        public List<decimal> Pontos { get; private set; }
 
         public void InserirUserHash(string userHash)
         {
@@ -61,10 +60,15 @@ namespace Dominio
             return mensagens;
         }
 
-        private string CriptografarSenha(string senha)
+        public bool ValidarSenha(string senha)
+        {
+            return Criptografar(this.Email + senha) == Senha;
+        }
+
+        private string Criptografar(string texto)
         {
             MD5 md5 = MD5.Create();
-            byte[] inputBytes = Encoding.Default.GetBytes(Email + senha);
+            byte[] inputBytes = Encoding.Default.GetBytes(texto);
             byte[] hash = md5.ComputeHash(inputBytes);
             StringBuilder sb = new StringBuilder();
             for (int i = 0; i < hash.Length; i++)
@@ -73,29 +77,28 @@ namespace Dominio
             return sb.ToString();
         }
 
-        // https://gist.github.com/danesparza/973923
         private void GerarGravatarHash(string email)
         {
             email.Trim();
             email.ToLower();
-            // Create a new instance of the MD5CryptoServiceProvider object.  
-            MD5 md5Hasher = MD5.Create();
+            
+            this.GravatarHash = this.Criptografar(email);
+        }
 
-            // Convert the input string to a byte array and compute the hash.  
-            byte[] data = md5Hasher.ComputeHash(Encoding.Default.GetBytes(email));
+        public Object GerarUsuarioResposta()
+        {
+            List<string> papeis = new List<string>() { "Jogador" };
 
-            // Create a new Stringbuilder to collect the bytes  
-            // and create a string.  
-            StringBuilder sBuilder = new StringBuilder();
-
-            // Loop through each byte of the hashed data  
-            // and format each one as a hexadecimal string.  
-            for (int i = 0; i < data.Length; i++)
+            Object resposta = new
             {
-                sBuilder.Append(data[i].ToString("x2"));
-            }
-            // Return the hexadecimal string.
-            GravatarHash = sBuilder.ToString();
+                this.Id,
+                this.Login,
+                this.Email,
+                this.GravatarHash,
+                papeis
+            };
+
+            return resposta;
         }
 
     }
