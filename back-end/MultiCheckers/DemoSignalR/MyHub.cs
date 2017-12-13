@@ -131,7 +131,6 @@ namespace MultiCheckers.Api
                 {
                     if (partida.JogadorBrancas == null && partida.JogadorPretas == null && partida.Expectadores.Count==0)
                     {
-
                         SALAS.Remove(usuario.SalaHash);
                     }
                 }

@@ -11,9 +11,12 @@ using System.Net.Http;
 using System.Threading;
 using System.Web.Http;
 using PagedList;
+using System.Web.Http.Cors;
 
 namespace MultiCheckers.Api.Controllers
 {
+    [EnableCors("*", "*", "*")]
+    [RoutePrefix("api/historico")]
     public class HistoricoController : ApiController
     {
         private IMultiCheckersContext contexto;
@@ -25,9 +28,9 @@ namespace MultiCheckers.Api.Controllers
 
         [BasicAuthorization(Roles = "Jogador")]
         [HttpGet, Route("{id}")]
-        public IHttpActionResult ObterPontosDoUsuario(int usuarioId)
+        public IHttpActionResult ObterPontosDoUsuario(int id)
         {
-            var historicos = contexto.Historicos.Where(h => h.Usuario.Id == usuarioId);
+            var historicos = contexto.Historicos.Where(h => h.Usuario.Id == id);
             if (historicos.Count() == 0)
             {
                 return Ok(0);
