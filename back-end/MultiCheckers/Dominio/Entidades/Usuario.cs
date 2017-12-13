@@ -17,7 +17,7 @@ namespace Dominio
         {
             this.Login = login;
             this.Email = email;
-            this.Senha = Criptografar(senha);
+            this.Senha = Criptografar(this.Email + senha);
             this.GerarGravatarHash(email);
         }
 
@@ -69,7 +69,7 @@ namespace Dominio
 
         public bool ValidarSenha(string senha)
         {
-            return Criptografar(this.Email + senha) == Senha;
+            return Criptografar(senha) == Senha;
         }
 
         private string Criptografar(string texto)

@@ -1,0 +1,54 @@
+<h1 class="titulo">Multi-Checkers</h1>
+<div class="main">
+    <div class="box in-the-middle shadow login">
+        <form novalidate name="formLogin">
+            <div class="field">
+                <label for="email">Email</label>
+                <div class="control">
+                    <input ng-model="usuario.email" name="email" class="input" type="email" placeholder="Email" autofocus="" ng-maxlength="128" required  data-ng-class="{'is-danger':formLogin.email.$invalid && formLogin.email.$touched}">
+                </div>
+            </div>
+
+            <div class="field">
+                <label for="senha">Senha</label>
+                <div class="control">
+                    <input ng-model="usuario.senha" name="senha" class="input" type="password" placeholder="*****" ng-minlength="5" ng-maxlength="50" required  data-ng-class="{'is-danger':formLogin.senha.$invalid && formLogin.senha.$touched}">
+                </div>
+            </div>
+            <span ng-show="erroNoLogin" class="help is-danger">Email ou Senha inválidos</span>
+            <a class="button is-block is-info" ng-click="login(usuario)">Entrar</a>
+        </form>
+
+        <a ng-click="mostrarCadastro = true">
+            <small>Não possui uma conta? Cadastre-se!</small>
+        </a>
+    </div>
+</div>
+<div ng-if="mostrarCadastro" class="main">
+    <div class="box in-the-middle shadow login">
+        <button class="delete is-small" ng-click="fecharCadastro()"></button>
+        <form novalidate name="formCadastro">
+            <div class="field">
+                <label for="email">Email</label>
+                <div class="control">
+                    <input name="email" ng-model="usuario.Email" class="input" type="email" placeholder="Email" autofocus="" ng-maxlength="128" required  data-ng-class="{'is-danger':formCadastro.email.$invalid && formCadastro.email.$touched}">
+                </div>
+            </div>
+
+            <div class="field">
+                <label for="login">Login</label>
+                <div class="control">
+                    <input name="login" ng-model="usuario.Login" class="input" type="text" placeholder="Login" autofocus="" ng-maxlength="128" required  data-ng-class="{'is-danger':formCadastro.login.$invalid && formCadastro.login.$touched}">
+                </div>
+            </div>
+
+            <div class="field">
+                <label for="email">Senha</label>
+                <div class="control">
+                    <input name="senha" ng-model="usuario.Senha" class="input" type="password" placeholder="*****" ng-minlength="5" ng-maxlength="50" required  data-ng-class="{'is-danger':formCadastro.senha.$invalid && formCadastro.senha.$touched}">
+                </div>
+            </div>
+            <a class="button is-block is-info" ng-click="cadastrar(usuario)">Cadastrar</a>
+        </form>
+    </div>
+</div>

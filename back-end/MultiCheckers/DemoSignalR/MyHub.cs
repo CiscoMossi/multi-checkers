@@ -124,9 +124,15 @@ namespace MultiCheckers.Api
                     {
                         AtualizarJogadores(jogador);
                     }
-                }catch(Exception e)
+                    USUARIOS.Remove(usuario);
+                    this.Consultar(usuario.SalaHash);
+                }
+                catch(Exception e)
                 {
-                    SALAS.Remove(usuario.SalaHash);
+                    if (partida.JogadorBrancas == null && partida.JogadorPretas == null && partida.Expectadores.Count==0)
+                    {
+                        SALAS.Remove(usuario.SalaHash);
+                    }
                 }
             }
             return base.OnDisconnected(stopCalled);

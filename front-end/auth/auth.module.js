@@ -1,4 +1,4 @@
-angular.module('auth', ['ngStorage']);
+/*angular.module('auth', ['ngStorage']);
 
 angular.module('auth').config(function ($httpProvider) {
   let headerAuth = JSON.parse(window.localStorage.getItem('ngStorage-headerAuth'));
@@ -34,7 +34,7 @@ angular.module('auth').factory('authService', function (authConfig, $http, $q, $
       function (response) {
 
         // Adiciona usuário e header ao localstorage
-        $localStorage.usuarioLogado = response.data.dados;
+        $localStorage.usuarioLogado = response.data;
         $localStorage.headerAuth = montarHeader(usuario)['Authorization'];
 
         // Adiciona header de autenticação em todos os próximos requests
@@ -136,4 +136,4 @@ angular.module('auth').factory('authService', function (authConfig, $http, $q, $
     isAutenticadoPromise: isAutenticadoPromise,
     possuiPermissaoPromise: possuiPermissaoPromise,
   };
-});
+});*/

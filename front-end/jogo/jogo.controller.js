@@ -38,13 +38,13 @@ angular.module('app')
         });
     
         $scope.$on('buscarJogo', function (event, partida) {
+            debugger;
             $scope.pecas = partida.Tabuleiro.Pecas;
             $scope.brancas = $scope.pecas.filter(p => p.Cor == 0);
             $scope.pretas = $scope.pecas.filter(p => p.Cor == 1);
             $scope.corJogando = parseInt(partida.Tabuleiro.CorTurnoAtual);
             $scope.jogadorBrancas = partida.JogadorBrancas           
-            if(!!partida.JogadorPretas)
-                $scope.jogadorPretas = partida.JogadorPretas
+            $scope.jogadorPretas = partida.JogadorPretas
             $scope.$apply();
         });
         $scope.$on('fimJogo', function (event, mensagem) {
@@ -65,13 +65,16 @@ angular.module('app')
             texto.select();
             document.execCommand("Copy");
         }
-    
+
+        $scope.numPecasBrancas = $scope.pecas;
+        $scope.numPecasPretas = seila;
+
         var modal = document.getElementById('myModal'); 
     }
 
     var modal = document.getElementById('myModal');
 
-    $scope.mostrar = false;    
+    $scope.mostrar = false;
 
     $scope.alterarMostrar = function(){
         $scope.mostrar = !$scope.mostrar;
