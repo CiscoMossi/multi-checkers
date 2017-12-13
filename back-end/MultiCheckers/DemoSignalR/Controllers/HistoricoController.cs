@@ -62,7 +62,7 @@ namespace MultiCheckers.Api.Controllers
             if (historicos.Count() == 0)
                 return BadRequest("Nenhum historico encontrado.");
 
-            int pageSize = 1;
+            int pageSize = 10;
             int pageNumber = (page ?? 1);
             return Ok(historicos.ToPagedList(pageNumber, pageSize));
         }

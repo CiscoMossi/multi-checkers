@@ -43,7 +43,7 @@ angular.module('app')
             $scope.pretas = $scope.pecas.filter(p => p.Cor == 1);
             $scope.corJogando = parseInt(partida.Tabuleiro.CorTurnoAtual);
             
-            /*if(partida.JogadorBrancas.Id != $scope.jogadorBrancas.Id)
+            if(partida.JogadorBrancas.Id == null || partida.JogadorBrancas.Id != $scope.jogadorBrancas.Id)
             {
                 usuarioService.buscar(partida.JogadorBrancas.Id)
                     .then(function (response) {
@@ -54,7 +54,7 @@ angular.module('app')
                         }
                     });
             }
-            if(partida.JogadorPretas.Id != $scope.jogadorPretas.Id)
+            if(partida.JogadorBrancas.Id == null || partida.JogadorPretas.Id != $scope.jogadorPretas.Id)
             {
                 usuarioService.buscar(partida.JogadorPretas.Id)
                     .then(function (response) {
@@ -64,12 +64,10 @@ angular.module('app')
                             $scope.jogadorPretas.pontos = response.data.pontos;
                         }
                     });
-            }*/
+            }
 
             $scope.jogadorBrancas = partida.JogadorBrancas;  
             $scope.jogadorPretas = partida.JogadorPretas;
-
-            console.log(partida.JogadorPretas.Id);
 
             $scope.$apply();
         });
