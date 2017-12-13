@@ -1,4 +1,4 @@
-/*angular.module('auth', ['ngStorage']);
+angular.module('auth', ['ngStorage']);
 
 angular.module('auth').config(function ($httpProvider) {
   let headerAuth = JSON.parse(window.localStorage.getItem('ngStorage-headerAuth'));
@@ -136,4 +136,4 @@ angular.module('auth').factory('authService', function (authConfig, $http, $q, $
     isAutenticadoPromise: isAutenticadoPromise,
     possuiPermissaoPromise: possuiPermissaoPromise,
   };
-});*/
+});

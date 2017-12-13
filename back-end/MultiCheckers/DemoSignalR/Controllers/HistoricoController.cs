@@ -22,7 +22,7 @@ namespace MultiCheckers.Api.Controllers
             this.contexto = contexto;
         }
 
-        //[BasicAuthorization(Roles = "Jogador")]
+        [BasicAuthorization(Roles = "Jogador")]
         [HttpGet]
         public IHttpActionResult ObterPontosDoUsuario(int usuarioId)
         {
@@ -30,7 +30,30 @@ namespace MultiCheckers.Api.Controllers
             if (historicos.Count() == 0)
                 return Ok(0);
 
-            return Ok(historicos.Sum(p => p.Pontos));
+            int pontos = historicos.Sum(h => h.Pontos);
+            int partidas = historicos.Count();
+            int vitorias = historicos.Where(h => h.Venceu).Count();
+            int pecasDestruidas = historicos.Sum(h => h.PecasElimandas);
+
+            Object resposta = new
+            {
+                pontos,
+                partidas,
+                vitorias,
+                pecasDestruidas
+            };
+            return Ok(resposta);
+        }
+
+        [BasicAuthorization(Roles = "Jogador")]
+        [HttpGet]
+        public IHttpActionResult Listar()
+        {
+            var historicos = contexto.Historicos.GroupBy(h => h.Usuario.Id);
+            if (historicos.Count() == 0)
+                return Ok(0);
+
+            return Ok(historicos);
         }
 
     }

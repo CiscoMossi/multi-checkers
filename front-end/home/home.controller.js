@@ -1,9 +1,22 @@
 angular.module('app')
-.controller('HomeCtrl', function($scope, jogoService, $location, $sessionStorage, usuarioService) {
+.controller('HomeCtrl', function($scope, jogoService, $location, $sessionStorage, usuarioService, $localStorage) {
     $scope.gerarPartida = function(){
         $scope.url = "";
         jogoService.gerarUrl();
     }
+
+    $scope.usuarioLogado = $localStorage.usuarioLogado;
+    
+    function buscar(id) {
+        historicoService.buscar(id)
+            .then(function (response) {
+                $scope.usuarioLogado.pontos = response.data.pontos;
+                $scope.usuarioLogado.partidas = response.data.partidas;
+                $scope.usuarioLogado.vitorias = response.data.vitorias;
+                $scope.usuarioLogado.pecasDestruidas = response.data.pecasDestruidas;
+            })
+    }
+    buscar(usuarioLogado.Id);
 
     $scope.$on('criarSala', function(event, urlSala){
         $scope.url = urlSala;

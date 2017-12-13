@@ -64,8 +64,11 @@ angular.module('app')
             document.execCommand("Copy");
         }
 
-        $scope.numPecasBrancas = $scope.pecas;
-        $scope.numPecasPretas = seila;
+        $scope.numPecas = function(cor){
+            return $scope.pecas.filter(function(peca){
+                return peca.Cor == cor;
+            }).length;
+        }
 
         var modal = document.getElementById('myModal'); 
     }

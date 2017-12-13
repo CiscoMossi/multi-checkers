@@ -34,7 +34,7 @@ namespace Dominio
 
         private void CalcularPontos()
         {
-            this.Pontos = (this.Venceu ? 20 : 0);
+            this.Pontos = (this.Venceu ? 20 : 2);
             this.Pontos += (this.PecasElimandas - this.PecasRestantes) * 3;
         }
     }

@@ -1,6 +1,7 @@
 angular.module('app').controller('LoginCtrl', function ($scope, authService, usuarioService) {
 
   $scope.auth = authService;
+  $scope.erroNoLogin = false;
 
   $scope.login = function (usuario) {
     if ($scope.formLogin.$invalid) {

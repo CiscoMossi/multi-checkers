@@ -69,7 +69,7 @@ namespace Dominio
 
         public bool ValidarSenha(string senha)
         {
-            return Criptografar(senha) == Senha;
+            return Criptografar(this.Email + senha) == Senha;
         }
 
         private string Criptografar(string texto)
