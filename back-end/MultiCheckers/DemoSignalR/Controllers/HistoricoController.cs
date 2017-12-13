@@ -57,7 +57,7 @@ namespace MultiCheckers.Api.Controllers
                                                 .Select(x => new { Login = x.FirstOrDefault().Usuario.Login, Pontos = x.Sum(t => t.Pontos) })
                                                 .ToList();
             if (historicos.Count() == 0)
-                return Ok(0);
+                return BadRequest("Nenhum historico encontrado.");
 
             int pageSize = 1;
             int pageNumber = (page ?? 1);

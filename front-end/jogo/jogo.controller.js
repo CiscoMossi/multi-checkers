@@ -38,7 +38,6 @@ angular.module('app')
         });
     
         $scope.$on('buscarJogo', function (event, partida) {
-            debugger;
             $scope.pecas = partida.Tabuleiro.Pecas;
             $scope.brancas = $scope.pecas.filter(p => p.Cor == 0);
             $scope.pretas = $scope.pecas.filter(p => p.Cor == 1);
