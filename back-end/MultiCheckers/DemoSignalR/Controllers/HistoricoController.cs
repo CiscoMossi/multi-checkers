@@ -10,6 +10,7 @@ using System.Net;
 using System.Net.Http;
 using System.Threading;
 using System.Web.Http;
+using PagedList;
 
 namespace MultiCheckers.Api.Controllers
 {
@@ -47,21 +48,21 @@ namespace MultiCheckers.Api.Controllers
             return Ok(resposta);
         }
 
-        //[BasicAuthorization(Roles = "Jogador")]
-        //[HttpGet]
-        //public IHttpActionResult Listar()
-        //{
-        //    var historicos = contexto.Historicos.OrderByDescending(x => x.Pontos)
-        //                                        .GroupBy(h => h.Usuario.Id)
-        //                                        .Select(x => new { Login = x.FirstOrDefault().Usuario.Login, Pontos = x.Sum(t => t.Pontos) })
-        //                                        .ToList();
-        //    if (historicos.Count() == 0)
-        //        return Ok(0);
+        [BasicAuthorization(Roles = "Jogador")]
+        [HttpGet, Route("leaderboard/{page}")]
+        public IHttpActionResult Listar(int? page)
+        {
+            var historicos = contexto.Historicos.OrderByDescending(x => x.Pontos)
+                                                .GroupBy(h => h.Usuario.Id)
+                                                .Select(x => new { Login = x.FirstOrDefault().Usuario.Login, Pontos = x.Sum(t => t.Pontos) })
+                                                .ToList();
+            if (historicos.Count() == 0)
+                return Ok(0);
 
-        //    int pageSize = 10;
-        //    int pageNumber = (page ?? 1);
-        //    return View(historicos.ToPagedList(pageNumber, pageSize));
-        //}
+            int pageSize = 1;
+            int pageNumber = (page ?? 1);
+            return Ok(historicos.ToPagedList(pageNumber, pageSize));
+        }
 
     }
 }
