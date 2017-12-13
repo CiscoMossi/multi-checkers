@@ -1,12 +1,14 @@
 angular.module('app')
-    .controller('HomeCtrl', function ($scope, jogoService, $location, $sessionStorage, usuarioService, $localStorage, historicoService) {
+    .controller('HomeCtrl', function ($scope, jogoService, $window, $sessionStorage, usuarioService, $localStorage, historicoService) {
         $scope.gerarPartida = function () {
             $scope.url = "";
             jogoService.gerarUrl();
         }
 
+        carregarLeaderBoard();
+
         function carregarLeaderBoard(){
-            historicoService.listar().then(
+            historicoService.listar(1).then(
                 (response) => $scope.leaderboard = response.data
             );
         }
@@ -33,7 +35,7 @@ angular.module('app')
 
         $scope.$on('criarSala', function (event, urlSala) {
             $scope.url = urlSala;
-            $location.path(`sala/${$scope.url}`);
+            $window.open(`/#!/sala/${$scope.url}`);
             $scope.gerado = !!$scope.url;
             $scope.$apply();
         });
