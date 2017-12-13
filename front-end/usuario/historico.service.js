@@ -7,7 +7,12 @@ angular.module('app')
         return $http.get(urlBase + id);
     }
 
+    function listar(page) {
+        return $http.get(urlBase + "leaderboard/" + page);
+    }
+
     return {
-        buscar: buscar
+        buscar: buscar,
+        listar: listar
     };
 })

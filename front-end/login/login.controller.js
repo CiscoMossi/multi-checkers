@@ -3,6 +3,11 @@ angular.module('app').controller('LoginCtrl', function ($scope, authService, usu
   $scope.auth = authService;
   $scope.erroNoLogin = false;
 
+  $scope.$on('isConnect', function(event, connect){
+    $sessionStorage.connect = connect;
+    $scope.$apply();
+  });
+
   $scope.login = function (usuario) {
     if ($scope.formLogin.$invalid) {
       return;
