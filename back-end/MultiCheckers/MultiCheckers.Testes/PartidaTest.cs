@@ -3,6 +3,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Dominio;
 using System.Drawing;
 using Dominio.Entidades;
+using MultiCheckers.Api.Models;
 
 namespace MultiCheckers.Testes
 {
