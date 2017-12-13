@@ -27,10 +27,10 @@ namespace MultiCheckers.Api.Controllers
         }
 
         [BasicAuthorization(Roles = "Jogador")]
-        [HttpGet]
-        public IHttpActionResult ObterPontosDoUsuario(int usuarioId)
+        [HttpGet, Route("{id}")]
+        public IHttpActionResult ObterPontosDoUsuario(int id)
         {
-            var historicos = contexto.Historicos.Where(h => h.Usuario.Id == usuarioId);
+            var historicos = contexto.Historicos.Where(h => h.Usuario.Id == id);
             if (historicos.Count() == 0)
             {
                 return Ok(0);
@@ -62,7 +62,7 @@ namespace MultiCheckers.Api.Controllers
             if (historicos.Count() == 0)
                 return BadRequest("Nenhum historico encontrado.");
 
-            int pageSize = 1;
+            int pageSize = 10;
             int pageNumber = (page ?? 1);
             return Ok(historicos.ToPagedList(pageNumber, pageSize));
         }

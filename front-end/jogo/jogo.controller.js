@@ -44,11 +44,30 @@ angular.module('app')
             $scope.corJogando = parseInt(partida.Tabuleiro.CorTurnoAtual);
             $scope.jogadorBrancas = partida.JogadorBrancas           
             $scope.jogadorPretas = partida.JogadorPretas
+            if($sessionStorage.usuarioCor == 0){
+                $scope.quantidadeDePecasUsuario = $scope.brancas.length;
+                $scope.quantidadeDePecasOponente = $scope.pretas.length;
+            }else{
+                $scope.quantidadeDePecasUsuario = $scope.pretas.length;
+                $scope.quantidadeDePecasOponente = $scope.brancas.length;
+            }
             $scope.$apply();
         });
         $scope.$on('fimJogo', function (event, mensagem) {
+            console.log(mensagem);
+            if(mensagem == "BRANCAS"){
+                $scope.corGanhadora = 0;
+            }else{
+                $scope.corGanhadora = 1;
+            }
+            if($scope.corGanhadora == $sessionStorage.usuarioCor){
+                jogoService.finalizaJogo({"LoginUsuario": authService.getUsuario().Login, "Venceu": true, "PecasRestantes":  $scope.quantidadeDePecasUsuario, "PecasEliminadas": $scope.quantidadeDePecasOponente});
+            }else if($scope.corGanhadora != $sessionStorage.usuarioCor){
+                jogoService.finalizaJogo({"LoginUsuario": authService.getUsuario().Login, "Venceu": false, "PecasRestantes":  $scope.quantidadeDePecasUsuario, "PecasEliminadas": $scope.quantidadeDePecasOponente});
+            }
             modal.style.display = "flex";
             modal.style.justifyContent = "center";
+            $scope.corGanhadora;
             $scope.$apply();
         });
     

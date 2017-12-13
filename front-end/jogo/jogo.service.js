@@ -61,7 +61,13 @@ function ($, $rootScope) {
             if(this.isConnected()) {
                 proxy.invoke('InserirUsuario', login, salaHash);
             }
-        }
+        },
+        finalizaJogo: function (historicoModel){
+            debugger;
+            if(this.isConnected()){
+                proxy.invoke('FinalizarJogo', historicoModel);
+            }
+        },
     }
 }]);
 

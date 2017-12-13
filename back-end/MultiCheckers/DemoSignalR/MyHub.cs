@@ -48,9 +48,7 @@ namespace MultiCheckers.Api
             Clients.Group(salaHash).buscarJogo(partida);
             if (partida.PartidaFinalizada)
             {
-                Clients.Group(salaHash).fimJogo(String.Concat("Jogo Finalizado. ",
-                                               (partida.Tabuleiro.CorTurnoAtual == Cor.BRANCA ? Cor.PRETA : Cor.BRANCA).ToString(),
-                                                "S venceram."));
+                Clients.Group(salaHash).fimJogo((partida.Tabuleiro.CorTurnoAtual == Cor.BRANCA ? Cor.PRETA : Cor.BRANCA).ToString());
                 return;
             }
         }
@@ -89,10 +87,6 @@ namespace MultiCheckers.Api
 
         public void InserirUsuario(string login, string salaHash)
         {
-            //Usuario usuario = contexto.Usuarios.FirstOrDefault(x => x.Login == login);
-            //APAGAR DEPOIS
-            //Usuario usuario = new Usuario("teste", "teste@email.com","1234");
-            //
             Usuario usuario = contexto.Usuarios.FirstOrDefault(x => x.Login == login);
             Partida partida = SALAS.FirstOrDefault(s => s.Key == salaHash).Value;
             if (partida == null)
@@ -110,6 +104,13 @@ namespace MultiCheckers.Api
         public void AtualizarJogadores(JogadorModel jogador)
         {
             Clients.Client(jogador.IdConexao).infoJogador(jogador.Funcao);
+        }
+        public void FinalizarJogo(HistoricoModel historicoModel)
+        {
+            Usuario usuario = USUARIOS.FirstOrDefault(x => x.Login == historicoModel.LoginUsuario);
+            Historico historico = new Historico(usuario, historicoModel.Venceu, historicoModel.PecasRestantes, historicoModel.PecasEliminadas);
+            contexto.Historicos.Add(historico);
+            contexto.SaveChanges();
         }
 
         public override Task OnDisconnected(bool stopCalled)
@@ -132,7 +133,6 @@ namespace MultiCheckers.Api
                 {
                     if (partida.JogadorBrancas == null && partida.JogadorPretas == null && partida.Expectadores.Count==0)
                     {
-
                         SALAS.Remove(usuario.SalaHash);
                     }
                 }

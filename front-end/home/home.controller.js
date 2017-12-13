@@ -46,7 +46,6 @@ angular.module('app')
             $scope.$apply();
         });
         $scope.$on('isConnect', function (event, connect) {
-            debugger;
             $sessionStorage.connect = connect;
             $scope.$apply();
         });
