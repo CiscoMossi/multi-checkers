@@ -5,6 +5,12 @@ angular.module('app')
             jogoService.gerarUrl();
         }
 
+        function carregarLeaderBoard(){
+            historicoService.listar().then(
+                (response) => $scope.leaderboard = response.data
+            );
+        }
+
         $scope.usuarioLogado = $localStorage.usuarioLogado;
 
         function buscar(id) {
