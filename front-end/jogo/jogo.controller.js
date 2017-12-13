@@ -42,8 +42,35 @@ angular.module('app')
             $scope.brancas = $scope.pecas.filter(p => p.Cor == 0);
             $scope.pretas = $scope.pecas.filter(p => p.Cor == 1);
             $scope.corJogando = parseInt(partida.Tabuleiro.CorTurnoAtual);
-            $scope.jogadorBrancas = partida.JogadorBrancas           
-            $scope.jogadorPretas = partida.JogadorPretas
+            
+            /*if(partida.JogadorBrancas.Id != $scope.jogadorBrancas.Id)
+            {
+                usuarioService.buscar(partida.JogadorBrancas.Id)
+                    .then(function (response) {
+                        if (response.data == 0) {
+                            $scope.jogadorBrancas.pontos = response.data;
+                        } else {
+                            $scope.jogadorBrancas.pontos = response.data.pontos;
+                        }
+                    });
+            }
+            if(partida.JogadorPretas.Id != $scope.jogadorPretas.Id)
+            {
+                usuarioService.buscar(partida.JogadorPretas.Id)
+                    .then(function (response) {
+                        if (response.data == 0) {
+                            $scope.jogadorPretas.pontos = response.data;
+                        } else {
+                            $scope.jogadorPretas.pontos = response.data.pontos;
+                        }
+                    });
+            }*/
+
+            $scope.jogadorBrancas = partida.JogadorBrancas;  
+            $scope.jogadorPretas = partida.JogadorPretas;
+
+            console.log(partida.JogadorPretas.Id);
+
             $scope.$apply();
         });
         $scope.$on('fimJogo', function (event, mensagem) {

@@ -89,10 +89,6 @@ namespace MultiCheckers.Api
 
         public void InserirUsuario(string login, string salaHash)
         {
-            //Usuario usuario = contexto.Usuarios.FirstOrDefault(x => x.Login == login);
-            //APAGAR DEPOIS
-            //Usuario usuario = new Usuario("teste", "teste@email.com","1234");
-            //
             Usuario usuario = contexto.Usuarios.FirstOrDefault(x => x.Login == login);
             Partida partida = SALAS.FirstOrDefault(s => s.Key == salaHash).Value;
             if (partida == null)
