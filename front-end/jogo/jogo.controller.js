@@ -1,5 +1,5 @@
 angular.module('app')
-.controller('JogoCtrl', function($scope, authService, $location, $timeout, jogoService, $routeParams, $interval, pecaService, $rootScope, $sessionStorage) {
+.controller('JogoCtrl', function($scope, authService, $location, $timeout, jogoService, $routeParams, $interval, pecaService, $rootScope, $sessionStorage, historicoService) {
     if($routeParams.urlSala == null || $routeParams.urlSala == undefined){
         $location.path('/home');
     }
@@ -37,6 +37,7 @@ angular.module('app')
             }, 500 );
         });
     
+
         $scope.$on('buscarJogo', function (event, partida) {
             $scope.pecas = partida.Tabuleiro.Pecas;
             $scope.brancas = $scope.pecas.filter(p => p.Cor == 0);
@@ -44,6 +45,22 @@ angular.module('app')
             $scope.corJogando = parseInt(partida.Tabuleiro.CorTurnoAtual);
             $scope.jogadorBrancas = partida.JogadorBrancas           
             $scope.jogadorPretas = partida.JogadorPretas
+
+            buscarPontos = function(jogadorId){
+                if(jogadorId != null || jogadorId != undefined){
+                    historicoService.buscar(jogadorId)
+                        .then(function(response) {
+                            if (response.data == 0) {
+                                return response.data;
+                            } else {
+                                return response.data.pontos;
+                            }
+                    })
+                }
+            }
+            //$scope.pontosBrancas = buscarPontos($scope.jogadorBrancas.Id);
+            //$scope.pontosPretas = buscarPontos($scope.jogadorPretas.Id);
+
             if($sessionStorage.usuarioCor == 0){
                 $scope.quantidadeDePecasUsuario = $scope.brancas.length;
                 $scope.quantidadeDePecasOponente = $scope.pretas.length;

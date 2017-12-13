@@ -1,4 +1,4 @@
-angular.module('app').controller('LoginCtrl', function ($scope, authService, usuarioService) {
+angular.module('app').controller('LoginCtrl', function ($scope, authService, usuarioService, $sessionStorage) {
 
   $scope.auth = authService;
   $scope.erroNoLogin = false;
