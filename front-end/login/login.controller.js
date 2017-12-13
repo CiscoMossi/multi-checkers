@@ -22,7 +22,8 @@ angular.module('app').controller('LoginCtrl', function ($scope, authService, usu
   }
 
   $scope.cadastrar = function(usuario){
-    if ($scope.formCadastro == undefined || $scope.formCadastro.$invalid) {
+    console.log(usuario);
+    if (usuario.email == undefined || usuario.login == undefined || usuario.senha == undefined) {
       $scope.mostrarCadastro = false;
       return;
     }

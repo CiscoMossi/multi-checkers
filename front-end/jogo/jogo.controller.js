@@ -58,21 +58,10 @@ angular.module('app')
                 peca.PosicoesPossiveis.length != 0 &&
                 $scope.corJogando == $sessionStorage.usuarioCor)
                 $scope.selecionada = peca;
-        }
-    
-        $scope.copiar = function(){
-            let texto = document.getElementById("url");
-            texto.select();
-            document.execCommand("Copy");
-        }
-
-        $scope.numPecas = function(cor){
-            return $scope.pecas.filter(function(peca){
-                return peca.Cor == cor;
-            }).length;
-        }
+        
 
         var modal = document.getElementById('myModal'); 
+        }
     }
 
     var modal = document.getElementById('myModal');

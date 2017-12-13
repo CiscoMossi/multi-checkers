@@ -23,7 +23,7 @@ namespace MultiCheckers.Api.Controllers
         }
 
         [BasicAuthorization(Roles = "Jogador")]
-        [HttpGet]
+        [HttpGet, Route("{id}")]
         public IHttpActionResult ObterPontosDoUsuario(int usuarioId)
         {
             var historicos = contexto.Historicos.Where(h => h.Usuario.Id == usuarioId);

@@ -7,7 +7,6 @@ angular.module('app')
         return $http.get(urlBase + id);
     }
     function cadastrar(usuario) {
-        console.log(usuario);
         return $http.post(urlBase, usuario)    
     }
 
