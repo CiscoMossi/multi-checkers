@@ -28,7 +28,9 @@ namespace MultiCheckers.Api.Controllers
         {
             var historicos = contexto.Historicos.Where(h => h.Usuario.Id == usuarioId);
             if (historicos.Count() == 0)
+            {
                 return Ok(0);
+            }
 
             int pontos = historicos.Sum(h => h.Pontos);
             int partidas = historicos.Count();
@@ -45,16 +47,21 @@ namespace MultiCheckers.Api.Controllers
             return Ok(resposta);
         }
 
-        [BasicAuthorization(Roles = "Jogador")]
-        [HttpGet]
-        public IHttpActionResult Listar()
-        {
-            var historicos = contexto.Historicos.GroupBy(h => h.Usuario.Id);
-            if (historicos.Count() == 0)
-                return Ok(0);
+        //[BasicAuthorization(Roles = "Jogador")]
+        //[HttpGet]
+        //public IHttpActionResult Listar()
+        //{
+        //    var historicos = contexto.Historicos.OrderByDescending(x => x.Pontos)
+        //                                        .GroupBy(h => h.Usuario.Id)
+        //                                        .Select(x => new { Login = x.FirstOrDefault().Usuario.Login, Pontos = x.Sum(t => t.Pontos) })
+        //                                        .ToList();
+        //    if (historicos.Count() == 0)
+        //        return Ok(0);
 
-            return Ok(historicos);
-        }
+        //    int pageSize = 10;
+        //    int pageNumber = (page ?? 1);
+        //    return View(historicos.ToPagedList(pageNumber, pageSize));
+        //}
 
     }
 }

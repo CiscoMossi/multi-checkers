@@ -1,5 +1,5 @@
 angular.module('app')
-.controller('HomeCtrl', function($scope, jogoService, $location, $sessionStorage, usuarioService, $localStorage) {
+.controller('HomeCtrl', function($scope, jogoService, $location, $sessionStorage, usuarioService, $localStorage, historicoService) {
     $scope.gerarPartida = function(){
         $scope.url = "";
         jogoService.gerarUrl();
@@ -16,7 +16,7 @@ angular.module('app')
                 $scope.usuarioLogado.pecasDestruidas = response.data.pecasDestruidas;
             })
     }
-    buscar(usuarioLogado.Id);
+    buscar($scope.usuarioLogado.Id);
 
     $scope.$on('criarSala', function(event, urlSala){
         $scope.url = urlSala;
