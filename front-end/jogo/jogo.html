@@ -9,9 +9,9 @@
     <div class="media-content">
       <div class="content">
         <p>
-          <div><strong>{{jogadorBrancas.Login}}aaaaaaaaa</strong></div>
+          <div><strong>{{jogadorBrancas.Login}}</strong></div>
           <div><small><img src="images/icon.png" alt="pontos">5</small></div>
-          <div><small>1/12 peças</small></div>
+          <div><small>{{brancas.length}}/12 peças</small></div>
 
         </p>
       </div>
@@ -133,7 +133,7 @@
   </div>
 </div>
 
-<div class="box shadow" id="usuario2" ng-if="!!jogadorPretas">
+<div class="box shadow" id="usuario2">
   <article class="media">
     <div class="media-left">
       <figure class="image tamanho">
@@ -143,15 +143,16 @@
     <div class="media-content">
       <div class="content">
         <p>
-          <div><strong>Francisco</strong></div>
+          <div><strong>{{jogadorPretas.Login}}</strong></div>
           <div><small><img src="images/icon.png" alt="pontos">5</small></div>
-          <div><small>1/12 peças</small></div>
+          <div><small>{{pretas.length}}/12 peças</small></div>
 
         </p>
       </div>
     </div>
   </article>
 </div>
+
 
 <div id="myModal" class="modal">
   <div class="modal-content">

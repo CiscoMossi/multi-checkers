@@ -216,68 +216,20 @@ body {
     box-shadow: 7px 10px 19px 0px rgba(0,0,0,1);
 }
 
-@media screen and (max-width: 2560px){
-    .usuario img {
-        width: 280px;
-        height: 280px;
-    }
-    
+@media screen and (min-width: 2560px){
     .media-content {
         max-width: 200px;
     }
 
     figure.image.tamanho{
-        width: 10vw;
-        height: 10vw;
+        width: 1vw;
+        height: 1vw;
     }
     
     .content {
         font-size: 1.5vw;
         word-wrap: break-word;
     }
-}
-
-@media screen and (max-width: 1100px){
-    #usuario1 {
-        left: 3vw;
-    }
-
-    #usuario2{
-        right: 3vw;
-    }
-
-    .content {
-        font-size: 2.5vw;
-        word-wrap: break-word;
-    }
-
-    .box {
-        width: 43vw;
-        height: 23vw;
-        max-width: 650px;
-        -webkit-box-shadow: 7px 10px 19px 0px rgba(0,0,0,0.59);
-        -moz-box-shadow: 7px 10px 19px 0px rgba(0,0,0,0.59);
-        box-shadow: 7px 10px 19px 0px rgba(0,0,0,0.59);
-    }
-
-    .media-content{
-        max-width: 140px;
-    }
-
-    .media-left {
-        top: 10px;
-        left: 10px;
-        position: absolute
-    }
-    
-    .content {
-        left: 52%;
-        top: 0;
-        position: absolute;
-        word-wrap: break-word;
-        max-width: 150px;
-    }
-
 }
 
 @media screen and (min-height: 1024px) and (max-width: 1400px){
@@ -314,6 +266,80 @@ body {
     figure.image.tamanho{
         width: 20vw;
         height: 20vw;
+    }
+}
+
+@media screen and (min-height: 1024px){
+    .content {
+        font-size: 2.5vw;
+        word-wrap: break-word;
+    }
+
+    .box {
+        width: 43vw;
+        height: 23vw;
+        max-width: 650px;
+        -webkit-box-shadow: 7px 10px 19px 0px rgba(0,0,0,0.59);
+        -moz-box-shadow: 7px 10px 19px 0px rgba(0,0,0,0.59);
+        box-shadow: 7px 10px 19px 0px rgba(0,0,0,0.59);
+    
+    }
+
+    .media {
+        width: 10vw;
+        height: 10vw;
+    }
+
+    figure.image.tamanho{
+        width: 10vw;
+        height: 10vw;
+    }
+}
+
+@media screen and (max-width: 1100px){
+    #usuario1 {
+        left: 3vw;
+    }
+
+    #usuario2{
+        right: 3vw;
+    }
+
+    .content {
+        font-size: 2vw;
+        word-wrap: break-word;
+    }
+
+    .box {
+        width: 30vw;
+        height: 17vw;
+        max-width: 650px;
+        -webkit-box-shadow: 7px 10px 19px 0px rgba(0,0,0,0.59);
+        -moz-box-shadow: 7px 10px 19px 0px rgba(0,0,0,0.59);
+        box-shadow: 7px 10px 19px 0px rgba(0,0,0,0.59);
+    }
+
+    .media-content{
+        max-width: 140px;
+    }
+
+    .media-left {
+        top: 10px;
+        left: 10px;
+        position: absolute
+    }
+    
+    .content {
+        left: 57%;
+        top: 0;
+        position: absolute;
+        word-wrap: break-word;
+        max-width: 150px;
+    }
+    
+    figure.image.tamanho{
+        width: 15vw;
+        height: 15vw;
     }
 }
 
@@ -487,12 +513,11 @@ body {
 
     .box {
         width: 55vw;
-        height: 30vw;
+        height: 25vw;
         max-width: 400px;
         -webkit-box-shadow: 7px 10px 19px 0px rgba(0,0,0,0.59);
         -moz-box-shadow: 7px 10px 19px 0px rgba(0,0,0,0.59);
         box-shadow: 7px 10px 19px 0px rgba(0,0,0,0.59);
-    
     }
 }
 

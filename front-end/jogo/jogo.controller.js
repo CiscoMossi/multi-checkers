@@ -39,6 +39,8 @@ angular.module('app')
     
         $scope.$on('buscarJogo', function (event, partida) {
             $scope.pecas = partida.Tabuleiro.Pecas;
+            $scope.brancas = $scope.pecas.filter(p => p.Cor == 0);
+            $scope.pretas = $scope.pecas.filter(p => p.Cor == 1);
             $scope.corJogando = parseInt(partida.Tabuleiro.CorTurnoAtual);
             $scope.jogadorBrancas = partida.JogadorBrancas           
             if(!!partida.JogadorPretas)
