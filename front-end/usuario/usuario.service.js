@@ -1,7 +1,7 @@
 angular.module('app')
 .factory('usuarioService', function($http) {
     
-    let urlBase = 'http://localhost:1431/api/usuario/';
+    let urlBase = 'http://localhost:1431/api/Usuario/';
 
     function buscar(id) {
         return $http.get(urlBase + id);
