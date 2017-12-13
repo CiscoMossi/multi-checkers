@@ -25,6 +25,21 @@ body {
     color: white;
 }
 
+.leaderboard{
+    position: absolute;
+    right: 5vw;
+    top: 5vw;
+}
+
+th {
+    max-width: 10vw;
+    word-wrap: break-word;
+}
+
+td:hover{
+    background-color: #dddddd;
+}
+
 .login {
     min-width: 300px;
     min-height: 195px;
@@ -209,8 +224,17 @@ body {
     height: 140px;
 }
 
+table.table {
+    font-family: 'Coda', cursive;
+    margin: 0;
+}
+
 .media-content {
     max-width: 200px;
+}
+
+.media-content .content {
+    font-family: 'Coda', cursive;
 }
 
 .box {
@@ -228,6 +252,12 @@ body {
     -webkit-box-shadow: 7px 10px 19px 0px rgba(0,0,0,1);
     -moz-box-shadow: 7px 10px 19px 0px rgba(0,0,0,1);
     box-shadow: 7px 10px 19px 0px rgba(0,0,0,1);
+}
+
+.shadow {
+    -webkit-box-shadow: 7px 10px 19px 0px rgba(0,0,0,5);
+    -moz-box-shadow: 7px 10px 19px 0px rgba(0,0,0,5);
+    box-shadow: 7px 10px 19px 0px rgba(0,0,0,5);
 }
 
 @media screen and (min-width: 2560px){
@@ -424,7 +454,6 @@ body {
 
     .content {
         word-wrap: break-word;
-        font-family: 'Coda', cursive;
     }
 }
 
