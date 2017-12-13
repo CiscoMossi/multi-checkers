@@ -29,11 +29,14 @@ body {
     position: absolute;
     right: 5vw;
     top: 5vw;
+    min-height: 80vh;
+    background-color: #fff;
 }
 
 th {
     max-width: 10vw;
-    word-wrap: break-word;
+    min-width: 10vw;
+    /* word-wrap: p; */
 }
 
 td:hover{
