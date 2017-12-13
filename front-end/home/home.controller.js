@@ -5,12 +5,18 @@ angular.module('app')
             jogoService.gerarUrl();
         }
 
-        carregarLeaderBoard();
+        $scope.pagina = 1;
 
-        function carregarLeaderBoard(){
-            historicoService.listar(1).then(
-                (response) => $scope.leaderboard = response.data
-            );
+        carregarLeaderBoard($scope.pagina);
+
+        function carregarLeaderBoard(pagina){
+            historicoService.listar(pagina).then(function(response) {
+                if(response.data.length > 0){
+                    $scope.leaderboard = response.data
+                }else{
+                    $scope.pagina--;
+                }
+            });
         }
 
         $scope.usuarioLogado = $localStorage.usuarioLogado;
@@ -50,5 +56,11 @@ angular.module('app')
             texto.select();
             document.execCommand("Copy");
         }
-
+        
+        $scope.addIndicePag = function(quant){
+            if($scope.pagina + quant > 0){
+                $scope.pagina = $scope.pagina + quant;
+                carregarLeaderBoard($scope.pagina);
+            }
+        }
     });

@@ -1,42 +1,46 @@
-
-<div class="box shadow" id="usuario1">
-    <article class="media">
-      <div class="media-left">
-        <figure class="image tamanho">
-          <img ng-src="https://www.gravatar.com/avatar/{{usuarioLogado.GravatarHash}}?d=retro&s=128" alt="Usuario Image">
-        </figure>
+<div class="box sombra" id="usuario1">
+  <article class="media">
+    <div class="media-left">
+      <figure class="image tamanho">
+        <img ng-src="https://www.gravatar.com/avatar/{{usuarioLogado.GravatarHash}}?d=retro&s=128" alt="Usuario Image">
+      </figure>
+    </div>
+    <div class="media-content">
+      <div class="content">
+        <p>
+          <div><strong>{{usuarioLogado.Login}}</strong></div>
+          <div><small><img src="images/icon.png" alt="pontos">{{usuarioLogado.pontos}} pontos</small></div>
+          <div><small>{{usuarioLogado.partidas}} partidas disputadas</small></div>
+          <div><small>{{usuarioLogado.vitorias}} partidas vencidas</small></div>
+          <div><small>{{usuarioLogado.pecasDestruidas}} peças destruídas</small></div>
+        </p>
       </div>
-      <div class="media-content">
-        <div class="content">
-          <p>
-            <div><strong>{{usuarioLogado.Login}}</strong></div>
-            <div><small><img src="images/icon.png" alt="pontos">{{usuarioLogado.pontos}} pontos</small></div>
-            <div><small>{{usuarioLogado.partidas}} partidas disputadas</small></div>
-            <div><small>{{usuarioLogado.vitorias}} partidas vencidas</small></div>
-            <div><small>{{usuarioLogado.pecasDestruidas}} peças destruídas</small></div>
-          </p>
-        </div>
-      </div>
-    </article>
-  </div>
+    </div>
+  </article>
+</div>
 
 <div class="novo-jogo">
-    <a class="add" ng-click="gerarPartida()">+</a>
+  <a class="add" ng-click="gerarPartida()">+</a>
 </div>
 
 
-<div class="leaderboard shadow">
+<div class="leaderboard sombra">
   <table class="table">
-  <thead>
-    <tr>
-      <th><abbr>Login</abbr></th>
-      <th>Pontos</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr ng-repeat="usuario in leaderboard">
-      <td>{{usuario.Login}}</th>
-      <td>{{usuario.Pontos}}</td>
-    </tr>
-  </tbody>
+    <thead>
+      <tr>
+        <th><abbr>Login</abbr></th>
+        <th>Pontos</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="usuario in leaderboard">
+        <td>{{usuario.Login}}</th>
+          <td>{{usuario.Pontos}}</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="botoes">
+    <a class="button is-small" id="anterior" ng-click="addIndicePag(-1)"></a>
+    <a class="button is-small" id="proxima" ng-click="addIndicePag(1)"></a>
+  </div>
 </div>
