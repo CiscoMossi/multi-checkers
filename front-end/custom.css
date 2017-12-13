@@ -33,10 +33,10 @@ body {
     background-color: #fff;
 }
 
-th {
+td {
     max-width: 10vw;
     min-width: 10vw;
-    /* word-wrap: p; */
+    overflow-y: hidden;
 }
 
 td:hover{
@@ -251,16 +251,32 @@ table.table {
     top: 150px;
 }
 
-.box.shadow {
+.box.sombra {
     -webkit-box-shadow: 7px 10px 19px 0px rgba(0,0,0,1);
     -moz-box-shadow: 7px 10px 19px 0px rgba(0,0,0,1);
     box-shadow: 7px 10px 19px 0px rgba(0,0,0,1);
 }
 
-.shadow {
+.sombra {
     -webkit-box-shadow: 7px 10px 19px 0px rgba(0,0,0,5);
     -moz-box-shadow: 7px 10px 19px 0px rgba(0,0,0,5);
     box-shadow: 7px 10px 19px 0px rgba(0,0,0,5);
+}
+
+.botoes {
+    position: absolute;
+    bottom: 10px;
+    left: 40%;
+}
+
+#anterior {
+    background-image: url("images/seta.png");
+    transform: scaleX(-1);
+
+}
+
+#proxima {
+    background-image: url("images/seta.png");
 }
 
 @media screen and (min-width: 2560px){
