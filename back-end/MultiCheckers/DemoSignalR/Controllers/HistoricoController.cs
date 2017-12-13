@@ -10,6 +10,7 @@ using System.Net;
 using System.Net.Http;
 using System.Threading;
 using System.Web.Http;
+using PagedList;
 
 namespace MultiCheckers.Api.Controllers
 {
@@ -28,7 +29,9 @@ namespace MultiCheckers.Api.Controllers
         {
             var historicos = contexto.Historicos.Where(h => h.Usuario.Id == usuarioId);
             if (historicos.Count() == 0)
+            {
                 return Ok(0);
+            }
 
             int pontos = historicos.Sum(h => h.Pontos);
             int partidas = historicos.Count();
@@ -46,14 +49,19 @@ namespace MultiCheckers.Api.Controllers
         }
 
         [BasicAuthorization(Roles = "Jogador")]
-        [HttpGet]
-        public IHttpActionResult Listar()
+        [HttpGet, Route("leaderboard/{page}")]
+        public IHttpActionResult Listar(int? page)
         {
-            var historicos = contexto.Historicos.GroupBy(h => h.Usuario.Id);
+            var historicos = contexto.Historicos.OrderByDescending(x => x.Pontos)
+                                                .GroupBy(h => h.Usuario.Id)
+                                                .Select(x => new { Login = x.FirstOrDefault().Usuario.Login, Pontos = x.Sum(t => t.Pontos) })
+                                                .ToList();
             if (historicos.Count() == 0)
                 return Ok(0);
 
-            return Ok(historicos);
+            int pageSize = 1;
+            int pageNumber = (page ?? 1);
+            return Ok(historicos.ToPagedList(pageNumber, pageSize));
         }
 
     }
