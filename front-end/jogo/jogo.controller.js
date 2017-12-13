@@ -42,38 +42,32 @@ angular.module('app')
             $scope.brancas = $scope.pecas.filter(p => p.Cor == 0);
             $scope.pretas = $scope.pecas.filter(p => p.Cor == 1);
             $scope.corJogando = parseInt(partida.Tabuleiro.CorTurnoAtual);
-            
-            if(partida.JogadorBrancas.Id == null || partida.JogadorBrancas.Id != $scope.jogadorBrancas.Id)
-            {
-                usuarioService.buscar(partida.JogadorBrancas.Id)
-                    .then(function (response) {
-                        if (response.data == 0) {
-                            $scope.jogadorBrancas.pontos = response.data;
-                        } else {
-                            $scope.jogadorBrancas.pontos = response.data.pontos;
-                        }
-                    });
+            $scope.jogadorBrancas = partida.JogadorBrancas           
+            $scope.jogadorPretas = partida.JogadorPretas
+            if($sessionStorage.usuarioCor == 0){
+                $scope.quantidadeDePecasUsuario = $scope.brancas.length;
+                $scope.quantidadeDePecasOponente = $scope.pretas.length;
+            }else{
+                $scope.quantidadeDePecasUsuario = $scope.pretas.length;
+                $scope.quantidadeDePecasOponente = $scope.brancas.length;
             }
-            if(partida.JogadorBrancas.Id == null || partida.JogadorPretas.Id != $scope.jogadorPretas.Id)
-            {
-                usuarioService.buscar(partida.JogadorPretas.Id)
-                    .then(function (response) {
-                        if (response.data == 0) {
-                            $scope.jogadorPretas.pontos = response.data;
-                        } else {
-                            $scope.jogadorPretas.pontos = response.data.pontos;
-                        }
-                    });
-            }
-
-            $scope.jogadorBrancas = partida.JogadorBrancas;  
-            $scope.jogadorPretas = partida.JogadorPretas;
-
             $scope.$apply();
         });
         $scope.$on('fimJogo', function (event, mensagem) {
+            console.log(mensagem);
+            if(mensagem == "BRANCAS"){
+                $scope.corGanhadora = 0;
+            }else{
+                $scope.corGanhadora = 1;
+            }
+            if($scope.corGanhadora == $sessionStorage.usuarioCor){
+                jogoService.finalizaJogo({"LoginUsuario": authService.getUsuario().Login, "Venceu": true, "PecasRestantes":  $scope.quantidadeDePecasUsuario, "PecasEliminadas": $scope.quantidadeDePecasOponente});
+            }else if($scope.corGanhadora != $sessionStorage.usuarioCor){
+                jogoService.finalizaJogo({"LoginUsuario": authService.getUsuario().Login, "Venceu": false, "PecasRestantes":  $scope.quantidadeDePecasUsuario, "PecasEliminadas": $scope.quantidadeDePecasOponente});
+            }
             modal.style.display = "flex";
             modal.style.justifyContent = "center";
+            $scope.corGanhadora;
             $scope.$apply();
         });
     

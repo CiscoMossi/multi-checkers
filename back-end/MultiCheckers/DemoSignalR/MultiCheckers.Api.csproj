@@ -169,6 +169,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\HistoricoController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
+    <Compile Include="Models\HistoricoModel.cs" />
     <Compile Include="Models\JogadaModel.cs" />
     <Compile Include="Models\UsuarioModel.cs" />
     <Compile Include="MyHub.cs" />
