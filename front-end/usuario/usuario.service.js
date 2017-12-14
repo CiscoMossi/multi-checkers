@@ -1,7 +1,7 @@
 angular.module('app')
 .factory('usuarioService', function($http) {
     
-    let urlBase = 'http://localhost:1431/api/Usuario/';
+    let urlBase = 'http://multicheckers.azurewebsites.net/api/usuario/';
 
     function buscar(id) {
         return $http.get(urlBase + id);
