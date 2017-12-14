@@ -30,14 +30,14 @@ body {
     padding: 3px;
     right: 5vw;
     top: 5vw;
-    min-height: 80vh;
+    min-height: 83vh;
     background-color: #fff;
     border-radius: 5px;
 }
 
 td {
     max-width: 10vw;
-    min-width: 10vw;
+    min-width: 13vw;
     overflow-y: hidden;
 }
 
