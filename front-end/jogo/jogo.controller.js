@@ -10,7 +10,8 @@ angular.module('app')
         $sessionStorage.connect = connect;
         rodarJogo();
     });
-    function rodarJogo(){   
+    function rodarJogo(){
+        var acabouPartida = false;   
         jogoService.insereUsuario(authService.getUsuario().Login, $routeParams.urlSala);
         $rootScope.$on('infoJogador', function(event, jogador){
 
@@ -71,16 +72,19 @@ angular.module('app')
             $scope.$apply();
         });
         $scope.$on('fimJogo', function (event, mensagem) {
-            console.log(mensagem);
-            if(mensagem == "BRANCAS"){
+
+            if(mensagem == "BRANCA"){
                 $scope.corGanhadora = 0;
             }else{
                 $scope.corGanhadora = 1;
             }
-            if($scope.corGanhadora == $sessionStorage.usuarioCor){
-                jogoService.finalizaJogo({"LoginUsuario": authService.getUsuario().Login, "Venceu": true, "PecasRestantes":  $scope.quantidadeDePecasUsuario, "PecasEliminadas": $scope.quantidadeDePecasOponente});
-            }else if($scope.corGanhadora != $sessionStorage.usuarioCor){
-                jogoService.finalizaJogo({"LoginUsuario": authService.getUsuario().Login, "Venceu": false, "PecasRestantes":  $scope.quantidadeDePecasUsuario, "PecasEliminadas": $scope.quantidadeDePecasOponente});
+            if(acabouPartida == false){
+                if($scope.corGanhadora == $sessionStorage.usuarioCor){
+                    jogoService.finalizaJogo({"LoginUsuario": authService.getUsuario().Login, "Venceu": true, "PecasRestantes":  $scope.quantidadeDePecasUsuario, "PecasEliminadas": 12 - $scope.quantidadeDePecasOponente});
+                }else if($scope.corGanhadora != $sessionStorage.usuarioCor){
+                    jogoService.finalizaJogo({"LoginUsuario": authService.getUsuario().Login, "Venceu": false, "PecasRestantes":  $scope.quantidadeDePecasUsuario, "PecasEliminadas": 12 - $scope.quantidadeDePecasOponente});
+                }
+                acabouPartida = true;
             }
             modal.style.display = "flex";
             modal.style.justifyContent = "center";
