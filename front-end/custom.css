@@ -37,7 +37,7 @@ body {
 
 td {
     max-width: 10vw;
-    min-width: 10vw;
+    min-width: 12vw;
     overflow-y: hidden;
 }
 
@@ -47,7 +47,7 @@ tr:hover{
 
 .login {
     min-width: 300px;
-    min-height: 230px;
+    min-height: 250px;
 }
 
 .cadastro {
@@ -74,7 +74,7 @@ tr:hover{
 }
 
 .url-button{
-    font-size: 125%;
+    font-size: 100%;
     color: #fff;
     font-weight: bold;
     background-color: #209cee;
@@ -303,18 +303,47 @@ table.table {
 }
 
 @media screen and (min-width: 2560px){
+    .box {
+        position: fixed;
+        top: 50px;
+        max-width: 26%;
+        z-index: 1;
+    }    
+    
     .media-content {
         max-width: 200px;
     }
 
     figure.image.tamanho{
-        width: 1vw;
-        height: 1vw;
+        width: .5vw;
+        height: .5vw;
     }
     
     .content {
         font-size: 1.5vw;
         word-wrap: break-word;
+    }
+    
+    .url {
+        position: fixed;
+        left: 5vw;
+        top: 85vh;
+    }
+    
+    .url-button{
+        font-size: 250%;
+        color: #fff;
+        font-weight: bold;
+        background-color: #209cee;
+        -webkit-box-shadow: 7px 10px 19px 0px rgba(0,0,0,0.59);
+        -moz-box-shadow: 7px 10px 19px 0px rgba(0,0,0,0.59);
+        box-shadow: 7px 10px 19px 0px rgba(0,0,0,0.59);
+    }
+    
+    .notification.url-input {
+        position: fixed;
+        left: 2vw;
+        top: 82vh;
     }
 }
 
@@ -357,13 +386,13 @@ table.table {
 
 @media screen and (min-height: 1024px){
     .content {
-        font-size: 2.5vw;
+        font-size: 275%;
         word-wrap: break-word;
     }
 
     .box {
-        width: 43vw;
-        height: 23vw;
+        width: 25vw;
+        height: 20vh;
         max-width: 650px;
         -webkit-box-shadow: 7px 10px 19px 0px rgba(0,0,0,0.59);
         -moz-box-shadow: 7px 10px 19px 0px rgba(0,0,0,0.59);
@@ -371,9 +400,13 @@ table.table {
         z-index: 1;
     }
 
+    .content .tag {
+        font-size: 50%;
+    }
+
     .media {
-        width: 10vw;
-        height: 10vw;
+        width: 100%;
+        height: 100%;
     }
 
     figure.image.tamanho{
@@ -396,9 +429,13 @@ table.table {
         word-wrap: break-word;
     }
 
+    .content .tag {
+        font-size: 75%;
+    }
+
     .box {
-        width: 30vw;
-        height: 17vw;
+        width: 25vw;
+        height: 15vw;
         max-width: 650px;
         -webkit-box-shadow: 7px 10px 19px 0px rgba(0,0,0,0.59);
         -moz-box-shadow: 7px 10px 19px 0px rgba(0,0,0,0.59);
@@ -425,8 +462,8 @@ table.table {
     }
     
     figure.image.tamanho{
-        width: 15vw;
-        height: 15vw;
+        width: 12vw;
+        height: 12vw;
     }
 }
 
@@ -441,13 +478,13 @@ table.table {
     }
 
     #usuario1 {
-        top: 10px;
-        left: 26%;
+        top: 30px;
+        left: 36%;
     }
 
     #usuario2 {
-        top: 60%;
-        left: 26%;
+        top: 75%;
+        left: 36%;
     }
 
     .content {
