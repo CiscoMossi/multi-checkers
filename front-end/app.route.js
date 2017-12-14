@@ -10,7 +10,8 @@ angular.module('app')
             controller: 'HomeCtrl',
             resolve: {
                 autenticado: function (authService) {
-                return authService.possuiPermissaoPromise("Jogador");
+                //return authService.possuiPermissaoPromise("Jogador");
+                return authService.isAutenticadoPromise();
                 }
             }
         })
@@ -19,7 +20,8 @@ angular.module('app')
             controller: 'JogoCtrl',
             resolve: {
                 autenticado: function (authService) {
-                return authService.possuiPermissaoPromise("Jogador");
+                //return authService.possuiPermissaoPromise("Jogador");
+                return authService.isAutenticadoPromise();
                 }
             }
         })

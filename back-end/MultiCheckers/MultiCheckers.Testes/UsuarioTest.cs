@@ -15,7 +15,7 @@ namespace MultiCheckers.Testes
 
             Assert.AreEqual("login", usuario.Login);
             Assert.AreEqual("email@email.com", usuario.Email);
-            Assert.AreEqual("senha", usuario.Senha);
+            Assert.AreEqual("a9c071cb8d49c3505a9a0f4eea814e1e", usuario.Senha);
             Assert.AreEqual("hash", usuario.UserHash);
         }
 
@@ -26,7 +26,7 @@ namespace MultiCheckers.Testes
 
             Assert.AreEqual("login", usuario.Login);
             Assert.AreEqual("email@email.com", usuario.Email);
-            Assert.AreEqual("senha", usuario.Senha);
+            Assert.AreEqual("a9c071cb8d49c3505a9a0f4eea814e1e", usuario.Senha);
             Assert.AreEqual("4f64c9f81bb0d4ee969aaf7b4a5a6f40", usuario.GravatarHash);
         }
     }

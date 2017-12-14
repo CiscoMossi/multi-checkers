@@ -116,32 +116,21 @@ namespace MultiCheckers.Api
 
         public override Task OnDisconnected(bool stopCalled)
         {
-            try {
-                Usuario usuario = USUARIOS.FirstOrDefault(x => x.UserHash == Context.ConnectionId);
+            Usuario usuario = USUARIOS.FirstOrDefault(x => x.UserHash == Context.ConnectionId);
+            if (usuario != null)
+            {
                 var partida = SALAS.FirstOrDefault(x => x.Key == usuario.SalaHash).Value;
                 if (partida != null)
                 {
-                    try
+                    JogadorModel jogador = partida.RemoverJogador(usuario);
+                    if (jogador != null)
                     {
-                        USUARIOS.Remove(usuario);
-                        JogadorModel jogador = partida.RemoverJogador(usuario);
-                        if (jogador != null)
-                        {
-                            AtualizarJogadores(jogador);
-                        }
-                        this.Consultar(usuario.SalaHash);
-                    }
-                    catch (Exception e)
-                    {
-                        if (partida.JogadorBrancas == null && partida.JogadorPretas == null && partida.Expectadores.Count == 0)
-                        {
-                            SALAS.Remove(usuario.SalaHash);
-                        }
+                        AtualizarJogadores(jogador);
                     }
                 }
-            } catch (Exception e)
-            {
-                return base.OnDisconnected(stopCalled);
+                this.Consultar(usuario.SalaHash);
+                USUARIOS.Remove(usuario);
+                SALAS.Remove(usuario.SalaHash);
             }
             return base.OnDisconnected(stopCalled);
         }
