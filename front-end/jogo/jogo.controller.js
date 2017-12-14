@@ -1,37 +1,7 @@
 angular.module('app')
-<<<<<<< HEAD
     .controller('JogoCtrl', function ($scope, authService, $location, $timeout, jogoService, $routeParams, $interval, pecaService, $rootScope, $sessionStorage, historicoService) {
+        var acabouPartida = false;
         if ($routeParams.urlSala == null || $routeParams.urlSala == undefined) {
-=======
-.controller('JogoCtrl', function($scope, authService, $location, $timeout, jogoService, $routeParams, $interval, pecaService, $rootScope, $sessionStorage, historicoService) {
-    if($routeParams.urlSala == null || $routeParams.urlSala == undefined){
-        $location.path('/home');
-    }
-    if($sessionStorage.connect != undefined){
-        rodarJogo();
-    }
-    $scope.$on('isConnect', function(event, connect){
-        $sessionStorage.connect = connect;
-        rodarJogo();
-    });
-    function rodarJogo(){
-        var acabouPartida = false;   
-        jogoService.insereUsuario(authService.getUsuario().Login, $routeParams.urlSala);
-        $rootScope.$on('infoJogador', function(event, jogador){
-
-            if(jogador == 'BRANCAS'){
-                $sessionStorage.usuarioCor = 0;
-            }else if(jogador == 'PRETAS'){
-                $sessionStorage.usuarioCor = 1;
-            }
-
-            $scope.corJogador = $sessionStorage.usuarioCor;
-            jogoService.consultar($routeParams.urlSala);
-            $scope.$apply();
-        });
-        $rootScope.$on('partidaInexistente', function(event, mensagem){
-            alert(mensagem);
->>>>>>> 5ff006486d1bbb59ebd118664a8526fb578487df
             $location.path('/home');
         }
         if ($sessionStorage.connect != undefined) {
@@ -102,7 +72,6 @@ angular.module('app')
             $scope.$apply();
         });
         $scope.$on('fimJogo', function (event, mensagem) {
-
             if(mensagem == "BRANCA"){
                 $scope.corGanhadora = 0;
             }else{

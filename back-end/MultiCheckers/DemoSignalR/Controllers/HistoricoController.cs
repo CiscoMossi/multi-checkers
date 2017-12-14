@@ -58,7 +58,7 @@ namespace MultiCheckers.Api.Controllers
             var historicos = contexto.Historicos.OrderByDescending(x => x.Pontos)
                                                 .GroupBy(h => h.Usuario.Id)
                                                 .Select(x => new { Login = x.FirstOrDefault().Usuario.Login, Pontos = x.Sum(t => t.Pontos) })
-                                                .ToList();
+                                                .ToList().OrderByDescending(a => a.Pontos);
             if (historicos.Count() == 0)
                 return BadRequest("Nenhum historico encontrado.");
 
