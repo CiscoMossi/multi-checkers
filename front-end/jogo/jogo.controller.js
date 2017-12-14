@@ -96,10 +96,6 @@ angular.module('app')
                 peca.PosicoesPossiveis.length != 0 &&
                 $scope.corJogando == $sessionStorage.usuarioCor)
                 $scope.selecionada = peca;
-        
-
-
-                var modal = document.getElementById('myModal');
             }
         }
 
@@ -109,6 +105,12 @@ angular.module('app')
 
         $scope.mostrarUrl = function () {
             $scope.mostrar = !$scope.mostrar;
-            $scope.url = $routeParams.urlSala;
+            $scope.url = "localhost:8081/#!/sala/"+$routeParams.urlSala;
+        }
+
+        $scope.copiar = function () {
+            let texto = document.getElementById("url");
+            texto.select();
+            document.execCommand("Copy");
         }
     });

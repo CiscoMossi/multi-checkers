@@ -24,5 +24,5 @@ angular.module('app')
             }
         })
 
-        .otherwise('/home');
+        .otherwise('/login');
 })

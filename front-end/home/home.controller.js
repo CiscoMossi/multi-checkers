@@ -1,7 +1,6 @@
 angular.module('app')
     .controller('HomeCtrl', function ($scope, jogoService, $window, $sessionStorage, usuarioService, $localStorage, historicoService) {
         $scope.gerarPartida = function () {
-            $scope.url = "";
             jogoService.gerarUrl();
         }
 
@@ -49,12 +48,6 @@ angular.module('app')
             $sessionStorage.connect = connect;
             $scope.$apply();
         });
-
-        $scope.copiar = function () {
-            let texto = document.getElementById("url");
-            texto.select();
-            document.execCommand("Copy");
-        }
         
         $scope.addIndicePag = function(quant){
             if($scope.pagina + quant > 0){
