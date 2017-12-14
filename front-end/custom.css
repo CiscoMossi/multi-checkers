@@ -7,7 +7,7 @@
 body {
     margin: 0;
     height: 100vh;
-    background-image: url("https://static1.squarespace.com/static/54e5f8d8e4b0c694a3dc90e4/t/5604087fe4b0d28c824e3a2a/1443104899453/Substation+Wood+Texture.jpg?format=2500w");
+    background-image: url("images/background.jpg");
 }
 
 .main {
