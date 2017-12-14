@@ -21,7 +21,7 @@ body {
 
 .titulo{
     font-family: 'Lobster', cursive;
-    font-size: 5vh;
+    font-size: 400%;
     color: white;
 }
 
@@ -30,7 +30,7 @@ body {
     padding: 3px;
     right: 5vw;
     top: 5vw;
-    min-height: 80vh;
+    min-height: 83vh;
     background-color: #fff;
     border-radius: 5px;
 }

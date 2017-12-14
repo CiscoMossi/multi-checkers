@@ -10,7 +10,7 @@ angular.module('app').constant('authConfig', {
 
     // Obrigatória - URL da API que retorna o usuário
     //urlUsuario: 'http://10.99.0.12:3296/api/acessos/usuarioLogado',
-    urlUsuario: 'http://localhost:1431/api/usuario/usuariologado',
+    urlUsuario: 'http://multicheckers.azurewebsites.net/api/usuario/usuariologado',
 
     // Obrigatória - URL da aplicação que possui o formulário de login
     urlLogin: '/login',
