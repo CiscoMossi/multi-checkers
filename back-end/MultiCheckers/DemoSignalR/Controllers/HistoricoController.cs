@@ -16,7 +16,7 @@ using System.Web.Http.Cors;
 namespace MultiCheckers.Api.Controllers
 {
     [EnableCors("*", "*", "*")]
-    [RoutePrefix("api/historico")]
+    [RoutePrefix("historico")]
     public class HistoricoController : ApiController
     {
         private IMultiCheckersContext contexto;

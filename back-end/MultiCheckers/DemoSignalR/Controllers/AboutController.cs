@@ -8,7 +8,7 @@ using System.Web.Http;
 
 namespace MultiCheckers.Api.Controllers
 {
-    [RoutePrefix("api/about")]
+    [RoutePrefix("about")]
     public class AboutController : ApiController
     {
         static string ApiVersion;
