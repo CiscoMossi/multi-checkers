@@ -206,6 +206,10 @@ tr:hover{
     transition-timing-function: ease-in-out;
 }
 
+.turnoUser {
+    filter: drop-shadow(0 0 10px #209cee);
+}
+
 .podeMexer {
     filter: drop-shadow(0 0 10px #fff);
     cursor: pointer;

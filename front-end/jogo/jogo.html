@@ -3,7 +3,7 @@
   <article class="media">
     <div class="media-left">
       <figure class="image tamanho">
-        <img ng-src="https://www.gravatar.com/avatar/{{jogadorBrancas.GravatarHash}}?d=retro&s=128" alt="Usuario Image">
+        <img ng-class="'turnoUser': corJogando == 0" ng-src="https://www.gravatar.com/avatar/{{jogadorBrancas.GravatarHash}}?d=retro&s=128" alt="Usuario Image">
       </figure>
     </div>
     <div class="media-content">
@@ -136,7 +136,7 @@
   <article class="media">
     <div class="media-left">
       <figure class="image tamanho">
-        <img ng-src="https://www.gravatar.com/avatar/{{jogadorPretas.GravatarHash}}?d=retro&s=128" alt="Usuario Image">
+        <img ng-class="'turnoUser': corJogando == 1" ng-src="https://www.gravatar.com/avatar/{{jogadorPretas.GravatarHash}}?d=retro&s=128" alt="Usuario Image">
       </figure>
     </div>
     <div class="media-content">
