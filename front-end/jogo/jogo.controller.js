@@ -1,6 +1,37 @@
 angular.module('app')
+<<<<<<< HEAD
     .controller('JogoCtrl', function ($scope, authService, $location, $timeout, jogoService, $routeParams, $interval, pecaService, $rootScope, $sessionStorage, historicoService) {
         if ($routeParams.urlSala == null || $routeParams.urlSala == undefined) {
+=======
+.controller('JogoCtrl', function($scope, authService, $location, $timeout, jogoService, $routeParams, $interval, pecaService, $rootScope, $sessionStorage, historicoService) {
+    if($routeParams.urlSala == null || $routeParams.urlSala == undefined){
+        $location.path('/home');
+    }
+    if($sessionStorage.connect != undefined){
+        rodarJogo();
+    }
+    $scope.$on('isConnect', function(event, connect){
+        $sessionStorage.connect = connect;
+        rodarJogo();
+    });
+    function rodarJogo(){
+        var acabouPartida = false;   
+        jogoService.insereUsuario(authService.getUsuario().Login, $routeParams.urlSala);
+        $rootScope.$on('infoJogador', function(event, jogador){
+
+            if(jogador == 'BRANCAS'){
+                $sessionStorage.usuarioCor = 0;
+            }else if(jogador == 'PRETAS'){
+                $sessionStorage.usuarioCor = 1;
+            }
+
+            $scope.corJogador = $sessionStorage.usuarioCor;
+            jogoService.consultar($routeParams.urlSala);
+            $scope.$apply();
+        });
+        $rootScope.$on('partidaInexistente', function(event, mensagem){
+            alert(mensagem);
+>>>>>>> 5ff006486d1bbb59ebd118664a8526fb578487df
             $location.path('/home');
         }
         if ($sessionStorage.connect != undefined) {
@@ -61,38 +92,42 @@ angular.module('app')
                 //$scope.pontosBrancas = buscarPontos($scope.jogadorBrancas.Id);
                 //$scope.pontosPretas = buscarPontos($scope.jogadorPretas.Id);
 
-                if ($sessionStorage.usuarioCor == 0) {
-                    $scope.quantidadeDePecasUsuario = $scope.brancas.length;
-                    $scope.quantidadeDePecasOponente = $scope.pretas.length;
-                } else {
-                    $scope.quantidadeDePecasUsuario = $scope.pretas.length;
-                    $scope.quantidadeDePecasOponente = $scope.brancas.length;
-                }
-                $scope.$apply();
-            });
-            $scope.$on('fimJogo', function (event, mensagem) {
-                console.log(mensagem);
-                if (mensagem == "BRANCAS") {
-                    $scope.corGanhadora = 0;
-                } else {
-                    $scope.corGanhadora = 1;
-                }
-                if ($scope.corGanhadora == $sessionStorage.usuarioCor) {
-                    jogoService.finalizaJogo({ "LoginUsuario": authService.getUsuario().Login, "Venceu": true, "PecasRestantes": $scope.quantidadeDePecasUsuario, "PecasEliminadas": $scope.quantidadeDePecasOponente });
-                } else if ($scope.corGanhadora != $sessionStorage.usuarioCor) {
-                    jogoService.finalizaJogo({ "LoginUsuario": authService.getUsuario().Login, "Venceu": false, "PecasRestantes": $scope.quantidadeDePecasUsuario, "PecasEliminadas": $scope.quantidadeDePecasOponente });
-                }
-                modal.style.display = "flex";
-                modal.style.justifyContent = "center";
-                $scope.corGanhadora;
-                $scope.$apply();
-            });
+            if($sessionStorage.usuarioCor == 0){
+                $scope.quantidadeDePecasUsuario = $scope.brancas.length;
+                $scope.quantidadeDePecasOponente = $scope.pretas.length;
+            }else{
+                $scope.quantidadeDePecasUsuario = $scope.pretas.length;
+                $scope.quantidadeDePecasOponente = $scope.brancas.length;
+            }
+            $scope.$apply();
+        });
+        $scope.$on('fimJogo', function (event, mensagem) {
 
-            $scope.mostrarMovimentos = function (peca, cor) {
-                if ($scope.corJogando == peca.Cor &&
-                    peca.PosicoesPossiveis.length != 0 &&
-                    $scope.corJogando == $sessionStorage.usuarioCor)
-                    $scope.selecionada = peca;
+            if(mensagem == "BRANCA"){
+                $scope.corGanhadora = 0;
+            }else{
+                $scope.corGanhadora = 1;
+            }
+            if(acabouPartida == false){
+                if($scope.corGanhadora == $sessionStorage.usuarioCor){
+                    jogoService.finalizaJogo({"LoginUsuario": authService.getUsuario().Login, "Venceu": true, "PecasRestantes":  $scope.quantidadeDePecasUsuario, "PecasEliminadas": 12 - $scope.quantidadeDePecasOponente});
+                }else if($scope.corGanhadora != $sessionStorage.usuarioCor){
+                    jogoService.finalizaJogo({"LoginUsuario": authService.getUsuario().Login, "Venceu": false, "PecasRestantes":  $scope.quantidadeDePecasUsuario, "PecasEliminadas": 12 - $scope.quantidadeDePecasOponente});
+                }
+                acabouPartida = true;
+            }
+            modal.style.display = "flex";
+            modal.style.justifyContent = "center";
+            $scope.corGanhadora;
+            $scope.$apply();
+        });
+    
+        $scope.mostrarMovimentos = function(peca,cor){
+            if($scope.corJogando == peca.Cor && 
+                peca.PosicoesPossiveis.length != 0 &&
+                $scope.corJogando == $sessionStorage.usuarioCor)
+                $scope.selecionada = peca;
+        
 
 
                 var modal = document.getElementById('myModal');

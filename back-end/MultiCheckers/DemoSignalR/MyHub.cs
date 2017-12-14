@@ -108,34 +108,40 @@ namespace MultiCheckers.Api
         public void FinalizarJogo(HistoricoModel historicoModel)
         {
             Usuario usuario = USUARIOS.FirstOrDefault(x => x.Login == historicoModel.LoginUsuario);
-            Historico historico = new Historico(usuario, historicoModel.Venceu, historicoModel.PecasRestantes, historicoModel.PecasEliminadas);
+            Usuario user = contexto.Usuarios.FirstOrDefault(x => x.Id == usuario.Id);
+            Historico historico = new Historico(user, historicoModel.Venceu, historicoModel.PecasRestantes, historicoModel.PecasEliminadas);
             contexto.Historicos.Add(historico);
             contexto.SaveChanges();
         }
 
         public override Task OnDisconnected(bool stopCalled)
         {
-            Usuario usuario = USUARIOS.FirstOrDefault(x => x.UserHash == Context.ConnectionId);
-            var partida = SALAS.FirstOrDefault(x => x.Key == usuario.SalaHash).Value;
-            if (partida != null)
+            try {
+                Usuario usuario = USUARIOS.FirstOrDefault(x => x.UserHash == Context.ConnectionId);
+                var partida = SALAS.FirstOrDefault(x => x.Key == usuario.SalaHash).Value;
+                if (partida != null)
+                {
+                    try
+                    {
+                        USUARIOS.Remove(usuario);
+                        JogadorModel jogador = partida.RemoverJogador(usuario);
+                        if (jogador != null)
+                        {
+                            AtualizarJogadores(jogador);
+                        }
+                        this.Consultar(usuario.SalaHash);
+                    }
+                    catch (Exception e)
+                    {
+                        if (partida.JogadorBrancas == null && partida.JogadorPretas == null && partida.Expectadores.Count == 0)
+                        {
+                            SALAS.Remove(usuario.SalaHash);
+                        }
+                    }
+                }
+            } catch (Exception e)
             {
-                try
-                {
-                    JogadorModel jogador = partida.RemoverJogador(usuario);
-                    if (jogador != null)
-                    {
-                        AtualizarJogadores(jogador);
-                    }
-                    USUARIOS.Remove(usuario);
-                    this.Consultar(usuario.SalaHash);
-                }
-                catch(Exception e)
-                {
-                    if (partida.JogadorBrancas == null && partida.JogadorPretas == null && partida.Expectadores.Count==0)
-                    {
-                        SALAS.Remove(usuario.SalaHash);
-                    }
-                }
+                return base.OnDisconnected(stopCalled);
             }
             return base.OnDisconnected(stopCalled);
         }
