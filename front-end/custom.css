@@ -27,10 +27,12 @@ body {
 
 .leaderboard{
     position: absolute;
+    padding: 3px;
     right: 5vw;
     top: 5vw;
     min-height: 80vh;
     background-color: #fff;
+    border-radius: 5px;
 }
 
 td {
@@ -39,7 +41,7 @@ td {
     overflow-y: hidden;
 }
 
-td:hover{
+tr:hover{
     background-color: #dddddd;
 }
 
@@ -587,14 +589,6 @@ table.table {
         -moz-box-shadow: 7px 10px 19px 0px rgba(0,0,0,0.59);
         box-shadow: 7px 10px 19px 0px rgba(0,0,0,0.59);
     }
-}
-
-@keyframes login-erro {
-    0%   {border: 1px solid red;
-          transform: rotate(7deg);}
-    25%  {transform: rotate(-7deg);}
-    50%  {transform: rotate(7deg);}
-    100% {transform: rotate(0deg);}
 }
 
 
