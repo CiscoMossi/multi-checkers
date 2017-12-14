@@ -1,7 +1,7 @@
 angular.module('app')
 .factory('historicoService', function($http) {
     
-    let urlBase = 'http://localhost:1431/api/historico/';
+    let urlBase = 'http://multicheckers.azurewebsites.net/api/historico/';
 
     function buscar(id) {
         return $http.get(urlBase + id);
