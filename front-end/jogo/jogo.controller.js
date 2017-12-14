@@ -109,5 +109,6 @@ angular.module('app')
 
         $scope.mostrarUrl = function () {
             $scope.mostrar = !$scope.mostrar;
+            $scope.url = $routeParams.urlSala;
         }
     });
