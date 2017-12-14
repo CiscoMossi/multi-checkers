@@ -31,21 +31,21 @@
             <div class="field">
                 <label for="email">Email</label>
                 <div class="control">
-                    <input name="email" ng-model="usuario.email" class="input" type="email" placeholder="Email" autofocus="" ng-maxlength="128" required  data-ng-class="{'is-danger':formCadastro.email.$invalid && formCadastro.email.$touched}">
+                    <input name="email" ng-model="usuario.Email" class="input" type="email" placeholder="Email" autofocus="" ng-maxlength="128" required  data-ng-class="{'is-danger':formCadastro.email.$invalid && formCadastro.email.$touched}">
                 </div>
             </div>
 
             <div class="field">
                 <label for="login">Login</label>
                 <div class="control">
-                    <input name="login" ng-model="usuario.login" class="input" type="text" placeholder="Login" autofocus="" ng-maxlength="128" required  data-ng-class="{'is-danger':formCadastro.login.$invalid && formCadastro.login.$touched}">
+                    <input name="login" ng-model="usuario.Login" class="input" type="text" placeholder="Login" autofocus="" ng-maxlength="128" required  data-ng-class="{'is-danger':formCadastro.login.$invalid && formCadastro.login.$touched}">
                 </div>
             </div>
 
             <div class="field">
                 <label for="senha">Senha</label>
                 <div class="control">
-                    <input name="senha" ng-model="usuario.senha" class="input" type="password" placeholder="*****" ng-minlength="5" ng-maxlength="50" required  data-ng-class="{'is-danger':formCadastro.senha.$invalid && formCadastro.senha.$touched}">
+                    <input name="senha" ng-model="usuario.Senha" class="input" type="password" placeholder="*****" ng-minlength="5" ng-maxlength="50" required  data-ng-class="{'is-danger':formCadastro.senha.$invalid && formCadastro.senha.$touched}">
                 </div>
             </div>
             <a class="button is-block is-info" ng-click="cadastrar(usuario)">Cadastrar</a>
