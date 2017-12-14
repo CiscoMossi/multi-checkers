@@ -55,8 +55,7 @@ namespace MultiCheckers.Api.Controllers
         [HttpGet, Route("leaderboard/{page}")]
         public IHttpActionResult Listar(int? page)
         {
-            var historicos = contexto.Historicos.OrderByDescending(x => x.Pontos)
-                                                .GroupBy(h => h.Usuario.Id)
+            var historicos = contexto.Historicos.GroupBy(h => h.Usuario.Id)
                                                 .Select(x => new { Login = x.FirstOrDefault().Usuario.Login, Pontos = x.Sum(t => t.Pontos) })
                                                 .ToList().OrderByDescending(a => a.Pontos);
             if (historicos.Count() == 0)
