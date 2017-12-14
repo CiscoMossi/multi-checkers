@@ -47,28 +47,6 @@ angular.module('app')
                 $scope.jogadorBrancas = partida.JogadorBrancas
                 $scope.jogadorPretas = partida.JogadorPretas
 
-                if (!!$scope.jogadorBrancas) {
-                    historicoService.buscar($scope.jogadorBrancas.Id)
-                        .then(function (response) {
-                            if (response.data === 0) {
-                                $scope.pontosBrancas = response.data;
-                            } else {
-                                $scope.pontosBrancas = response.data.pontos;
-                            }
-                    })
-                }
-                
-                if (!!$scope.jogadorPretas) {
-                    historicoService.buscar($scope.jogadorPretas.Id)
-                        .then(function (response) {
-                            if (response.data === 0) {
-                                $scope.pontosPretas = response.data;
-                            } else {
-                                $scope.pontosPretas = response.data.pontos;
-                            }
-                    })
-                }
-
             if($sessionStorage.usuarioCor == 0){
                 $scope.quantidadeDePecasUsuario = $scope.brancas.length;
                 $scope.quantidadeDePecasOponente = $scope.pretas.length;

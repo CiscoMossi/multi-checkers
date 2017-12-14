@@ -50,11 +50,21 @@ tr:hover{
     min-height: 230px;
 }
 
-.novo-jogo{
+.cadastro {
+    min-width: 300px;
+    min-height: 280px;
+}
+
+.custom-button{
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
+    padding: 10px;
+}
+
+.custom-button-content{
+    padding: 5px;
 }
 
 .url {
@@ -68,9 +78,6 @@ tr:hover{
     color: #fff;
     font-weight: bold;
     background-color: #209cee;
-    width: 70px;
-    height: 70px;
-    padding: 10px;
     -webkit-box-shadow: 7px 10px 19px 0px rgba(0,0,0,0.59);
     -moz-box-shadow: 7px 10px 19px 0px rgba(0,0,0,0.59);
     box-shadow: 7px 10px 19px 0px rgba(0,0,0,0.59);
@@ -88,20 +95,18 @@ tr:hover{
 
 .add{
     color: #fff;
-    font-size: 40px;
+    font-size: 150%;
     font-weight: bold;
     background-color: #209cee;
-    width: 70px;
-    height: 70px;
-    padding-left: 22px;
     -webkit-box-shadow: 7px 10px 19px 0px rgba(0,0,0,0.59);
     -moz-box-shadow: 7px 10px 19px 0px rgba(0,0,0,0.59);
     box-shadow: 7px 10px 19px 0px rgba(0,0,0,0.59);
 }
 
-.add:hover{
+.custom-button-content:hover{
     background-color: #187abc;
     transition: .2s;
+    transition-timing-function: ease-in-out;
     color: #fff;
 }
 
@@ -193,19 +198,23 @@ tr:hover{
 .peca {  
     height: 10%;
     width: 10%;
-    -webkit-transition-property: top, left;
+    -webkit-transition-property: all;
     -webkit-transition-duration: 0.5s;
-    transition-property: top, left;
+    -webkit-transition-timing-function: ease-in-out;
+    transition-property: all;
     transition-duration: 0.5s;
+    transition-timing-function: ease-in-out;
 }
 
 .podeMexer {
     filter: drop-shadow(0 0 10px #fff);
+    cursor: pointer;
 }
 
 .selecionada {
     filter: drop-shadow(0 0 10px #0f0);
     z-index: 1;
+    transform: scale(1.1);
 }
 
 .movimento {
@@ -251,11 +260,18 @@ table.table {
     position: fixed;
     top: 50px;
     max-width: 26%;
+    z-index: 1;
 }
 
 .in-the-middle{
     position: fixed;
     top: 150px;
+}
+
+.delete.cadastro-button {
+    position: absolute;
+    top: 5px;
+    right: 5px;
 }
 
 .box.sombra {
@@ -325,7 +341,7 @@ table.table {
         -webkit-box-shadow: 7px 10px 19px 0px rgba(0,0,0,0.59);
         -moz-box-shadow: 7px 10px 19px 0px rgba(0,0,0,0.59);
         box-shadow: 7px 10px 19px 0px rgba(0,0,0,0.59);
-    
+        z-index: 1;
     }
 
     .media {
@@ -352,7 +368,7 @@ table.table {
         -webkit-box-shadow: 7px 10px 19px 0px rgba(0,0,0,0.59);
         -moz-box-shadow: 7px 10px 19px 0px rgba(0,0,0,0.59);
         box-shadow: 7px 10px 19px 0px rgba(0,0,0,0.59);
-    
+        z-index: 1;
     }
 
     .media {
@@ -387,6 +403,7 @@ table.table {
         -webkit-box-shadow: 7px 10px 19px 0px rgba(0,0,0,0.59);
         -moz-box-shadow: 7px 10px 19px 0px rgba(0,0,0,0.59);
         box-shadow: 7px 10px 19px 0px rgba(0,0,0,0.59);
+        z-index: 1;
     }
 
     .media-content{
@@ -420,7 +437,7 @@ table.table {
         -webkit-box-shadow: 7px 10px 19px 0px rgba(0,0,0,0.59);
         -moz-box-shadow: 7px 10px 19px 0px rgba(0,0,0,0.59);
         box-shadow: 7px 10px 19px 0px rgba(0,0,0,0.59);
-    
+        z-index: 1;
     }
 
     #usuario1 {
@@ -455,7 +472,7 @@ table.table {
         -webkit-box-shadow: 7px 10px 19px 0px rgba(0,0,0,0.59);
         -moz-box-shadow: 7px 10px 19px 0px rgba(0,0,0,0.59);
         box-shadow: 7px 10px 19px 0px rgba(0,0,0,0.59);
-    
+        z-index: 1;
     }
 
     .media {
@@ -526,7 +543,7 @@ table.table {
         -webkit-box-shadow: 7px 10px 19px 0px rgba(0,0,0,0.59);
         -moz-box-shadow: 7px 10px 19px 0px rgba(0,0,0,0.59);
         box-shadow: 7px 10px 19px 0px rgba(0,0,0,0.59);
-    
+        z-index: 1;
     }
 }
 
@@ -562,7 +579,7 @@ table.table {
         -webkit-box-shadow: 7px 10px 19px 0px rgba(0,0,0,0.59);
         -moz-box-shadow: 7px 10px 19px 0px rgba(0,0,0,0.59);
         box-shadow: 7px 10px 19px 0px rgba(0,0,0,0.59);
-    
+        z-index: 1;
     }
 }
 
@@ -588,6 +605,7 @@ table.table {
         -webkit-box-shadow: 7px 10px 19px 0px rgba(0,0,0,0.59);
         -moz-box-shadow: 7px 10px 19px 0px rgba(0,0,0,0.59);
         box-shadow: 7px 10px 19px 0px rgba(0,0,0,0.59);
+        z-index: 1;
     }
 }
 

@@ -19,12 +19,12 @@
   </article>
 </div>
 
-<div class="novo-jogo">
-  <a class="add" ng-click="gerarPartida()">+</a>
+<div class="custom-button">
+  <a class="add custom-button-content" ng-click="gerarPartida()">Criar Sala</a>
 </div>
 
 
-<div class="leaderboard sombra shadow">
+<div class="leaderboard sombra">
   <p class="title has-text-info has-text-centered">Leaderboard</p>
   <table class="table">
     <thead>
@@ -36,7 +36,7 @@
     <tbody>
       <tr ng-repeat="usuario in leaderboard">
         <td>{{usuario.Login}}</th>
-          <td>{{usuario.Pontos}}</td>
+        <td>{{usuario.Pontos}}</td>
       </tr>
     </tbody>
   </table>
