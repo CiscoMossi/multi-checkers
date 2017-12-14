@@ -6,7 +6,7 @@ function ($, $rootScope) {
         connect: function () {
             var self = this;
 
-            connection = $.hubConnection('http://multicheckers.azurewebsites.net/signalr');
+            connection = $.hubConnection('http://multicheckers.azurewebsites.net/api/signalr');
             proxy = connection.createHubProxy('HubMessage');
             connection.start().done(function() {
                 console.log('Conectado');
