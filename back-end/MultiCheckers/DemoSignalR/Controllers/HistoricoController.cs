@@ -31,7 +31,7 @@ namespace MultiCheckers.Api.Controllers
         public IHttpActionResult ObterPontosDoUsuario(int id)
         {
             var historicos = contexto.Historicos.Where(h => h.Usuario.Id == id);
-            if (historicos.Count() == 0)
+            if (!historicos.Any())
             {
                 return Ok(0);
             }

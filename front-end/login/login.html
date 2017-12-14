@@ -25,8 +25,8 @@
     </div>
 </div>
 <div ng-if="mostrarCadastro" class="main">
-    <div class="box in-the-middle sombra login">
-        <button class="delete is-small" ng-click="fecharCadastro()"></button>
+    <div class="box in-the-middle sombra cadastro">
+        <button class="delete is-small cadastro-button" ng-click="fecharCadastro()"></button>
         <form novalidate name="formCadastro">
             <div class="field">
                 <label for="email">Email</label>
@@ -43,7 +43,7 @@
             </div>
 
             <div class="field">
-                <label for="email">Senha</label>
+                <label for="senha">Senha</label>
                 <div class="control">
                     <input name="senha" ng-model="usuario.senha" class="input" type="password" placeholder="*****" ng-minlength="5" ng-maxlength="50" required  data-ng-class="{'is-danger':formCadastro.senha.$invalid && formCadastro.senha.$touched}">
                 </div>
