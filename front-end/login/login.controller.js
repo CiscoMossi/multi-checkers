@@ -3,7 +3,7 @@ angular.module('app').controller('LoginCtrl', function ($scope, authService, usu
   $scope.auth = authService;
   $scope.erroNoLogin = false;
 
-  $scope.$on('isConnect', function(event, connect){
+  $scope.$on('isConnect', function (event, connect) {
     $sessionStorage.connect = connect;
     $scope.$apply();
   });
@@ -22,11 +22,11 @@ angular.module('app').controller('LoginCtrl', function ($scope, authService, usu
       });
   };
 
-  $scope.fecharCadastro = function(){
+  $scope.fecharCadastro = function () {
     $scope.mostrarCadastro = false;
   }
 
-  $scope.cadastrar = function(usuario){
+  $scope.cadastrar = function (usuario) {
     if (usuario.email == undefined || usuario.login == undefined || usuario.senha == undefined) {
       $scope.mostrarCadastro = false;
       return;

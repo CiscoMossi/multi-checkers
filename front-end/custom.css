@@ -21,7 +21,7 @@ body {
 
 .titulo{
     font-family: 'Lobster', cursive;
-    font-size: 70px;
+    font-size: 5vh;
     color: white;
 }
 
@@ -45,7 +45,7 @@ td:hover{
 
 .login {
     min-width: 300px;
-    min-height: 195px;
+    min-height: 230px;
 }
 
 .novo-jogo{
@@ -72,6 +72,12 @@ td:hover{
     -webkit-box-shadow: 7px 10px 19px 0px rgba(0,0,0,0.59);
     -moz-box-shadow: 7px 10px 19px 0px rgba(0,0,0,0.59);
     box-shadow: 7px 10px 19px 0px rgba(0,0,0,0.59);
+}
+
+.notification.url-input {
+    position: fixed;
+    left: 2vw;
+    top: 82vh;
 }
 
 .is-not-first{
@@ -101,7 +107,6 @@ td:hover{
     -webkit-box-shadow: 0px 0px 38px 10px rgba(0,0,0,0.59);
     -moz-box-shadow: 0px 0px 38px 10px rgba(0,0,0,0.59);
     box-shadow: 0px 0px 38px 10px rgba(0,0,0,0.59);
-    position: fixed
 }
 
 .delete{
