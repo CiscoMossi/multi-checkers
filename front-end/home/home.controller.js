@@ -1,8 +1,12 @@
 angular.module('app')
-    .controller('HomeCtrl', function ($scope, jogoService, $window, $sessionStorage, usuarioService, $localStorage, historicoService) {
+    .controller('HomeCtrl', function ($scope, jogoService, authService, $window, $sessionStorage, usuarioService, $localStorage, historicoService) {
         $scope.gerarPartida = function () {
             jogoService.gerarUrl();
         }
+
+        $scope.logout = function(){
+            authService.logout();
+        } 
 
         $scope.pagina = 1;
 
@@ -36,6 +40,7 @@ angular.module('app')
                     }
                 })
         }
+
         buscar($scope.usuarioLogado.Id);
 
         $scope.$on('criarSala', function (event, urlSala) {

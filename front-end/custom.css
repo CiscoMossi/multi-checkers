@@ -45,6 +45,12 @@ tr:hover{
     background-color: #dddddd;
 }
 
+.sair{
+    position: fixed;
+    left: 20px;
+    bottom: 20px;
+}
+
 .login {
     min-width: 300px;
     min-height: 250px;
