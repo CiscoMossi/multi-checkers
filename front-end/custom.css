@@ -232,12 +232,14 @@ tr:hover{
     width: 10%;
     opacity: .4;
     background-image: url("images/peca.png");
-    background-size: cover
+    background-size: cover;
+    cursor: pointer;
 }
 
 .movimentoPreta {
     background-image: url("images/peca-preta.png");
     opacity: .4;
+    cursor: pointer;
 }
 
 #usuario1 {
@@ -548,6 +550,52 @@ table.table {
 }
 
 @media screen and (max-width: 425px) {
+.url {
+        position: fixed;
+        left: 75vw;
+        top: 15vh;
+    }
+
+    .url-button{
+        font-size: 50%;
+        color: #fff;
+        font-weight: bold;
+        background-color: #209cee;
+        -webkit-box-shadow: 7px 10px 19px 0px rgba(0,0,0,0.59);
+        -moz-box-shadow: 7px 10px 19px 0px rgba(0,0,0,0.59);
+        box-shadow: 7px 10px 19px 0px rgba(0,0,0,0.59);
+    }
+
+    .notification.url-input {
+        position: fixed;
+        left: 35vw;
+        top: 15vh;
+        font-size: 20%;
+        min-width: 60vw;
+        z-index: 1
+    }
+
+    .field.has-addons.is-not-first {
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+
+    .is-not-first {
+        margin: 2px;
+        margin-right: 30px
+    }
+
+    .field.has-addons.is-not-first *{
+        top: 5px;
+        height: 20px;
+    }
+
+    .notification {
+        max-height: 5vw;
+        
+    }
+    
     #usuario1 {
         top: 3.5vh;
         left: 24%;
@@ -595,6 +643,52 @@ table.table {
 }
 
 @media screen and (max-width: 375px) {
+    .url {
+        position: fixed;
+        left: 55vw;
+        top: 19vh;
+    }
+
+    .url-button{
+        font-size: 75%;
+        color: #fff;
+        font-weight: bold;
+        background-color: #209cee;
+        -webkit-box-shadow: 7px 10px 19px 0px rgba(0,0,0,0.59);
+        -moz-box-shadow: 7px 10px 19px 0px rgba(0,0,0,0.59);
+        box-shadow: 7px 10px 19px 0px rgba(0,0,0,0.59);
+    }
+
+    .notification.url-input {
+        position: fixed;
+        left: 35vw;
+        top: 20vh;
+        font-size: 20%;
+        min-width: 60vw;
+        z-index: 1
+    }
+
+    .field.has-addons.is-not-first {
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+
+    .is-not-first {
+        margin: 2px;
+        margin-right: 30px
+    }
+
+    .field.has-addons.is-not-first *{
+        top: 1px;
+        height: 30px;
+    }
+
+    .notification {
+        max-height: 5vw;
+        
+    }
+    
     #usuario1 {
         top: 2vh;
         left: 20%;
@@ -631,6 +725,51 @@ table.table {
 }
 
 @media screen and (max-width: 320px) {
+    .url {
+        position: fixed;
+        left: 55vw;
+        top: 19.5vh;
+    }
+
+    .url-button{
+        font-size: 75%;
+        color: #fff;
+        font-weight: bold;
+        background-color: #209cee;
+        -webkit-box-shadow: 7px 10px 19px 0px rgba(0,0,0,0.59);
+        -moz-box-shadow: 7px 10px 19px 0px rgba(0,0,0,0.59);
+        box-shadow: 7px 10px 19px 0px rgba(0,0,0,0.59);
+    }
+
+    .notification.url-input {
+        position: fixed;
+        left: 35vw;
+        top: 20vh;
+        font-size: 20%;
+        min-width: 60vw;
+    }
+
+    .field.has-addons.is-not-first {
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+
+    .is-not-first {
+        margin: 2px;
+        margin-right: 30px
+    }
+
+    .field.has-addons.is-not-first *{
+        top: 1px;
+        height: 30px;
+    }
+
+    .notification {
+        max-height: 5vw;
+        
+    }
+    
     .media-left {
         top: 10px;
         left: 10px;
