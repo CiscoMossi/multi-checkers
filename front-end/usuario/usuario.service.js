@@ -7,7 +7,7 @@ angular.module('app')
         return $http.get(urlBase + id);
     }
     function cadastrar(usuario) {
-        return $http.post(urlBase, usuario)    
+        return $http.post("http://multicheckers.azurewebsites.net/api/api/Usuario", usuario)    
     }
 
     return {
