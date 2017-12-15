@@ -112,7 +112,7 @@ angular.module('app')
 
         $scope.mostrarUrl = function () {
             $scope.mostrar = !$scope.mostrar;
-            $scope.url = "localhost:8081/#!/sala/" + $routeParams.urlSala;
+            $scope.url = "http://multicheckers.azurewebsites.net/#!/sala/" + $routeParams.urlSala;
         }
 
         $scope.copiar = function () {
