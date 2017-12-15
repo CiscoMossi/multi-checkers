@@ -78,6 +78,7 @@ angular.module('app')
                 }
                 $scope.$apply();
             });
+            $scope.corGanhadora;
             $scope.$on('fimJogo', function (event, mensagem) {
                 if (mensagem == "BRANCA") {
                     $scope.corGanhadora = 0;
@@ -94,7 +95,6 @@ angular.module('app')
                 }
                 modal.style.display = "flex";
                 modal.style.justifyContent = "center";
-                $scope.corGanhadora;
                 $scope.$apply();
             });
 
