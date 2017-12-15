@@ -119,7 +119,7 @@ namespace MultiCheckers.Api
             Usuario usuario = USUARIOS.FirstOrDefault(x => x.UserHash == Context.ConnectionId);
             if (usuario != null)
             {
-                var partida = SALAS.FirstOrDefault(x => x.Key == usuario.SalaHash).Value;
+                Partida partida = SALAS.FirstOrDefault(x => x.Key == usuario.SalaHash).Value;
                 if (partida != null)
                 {
                     JogadorModel jogador = partida.RemoverJogador(usuario);
@@ -127,10 +127,13 @@ namespace MultiCheckers.Api
                     {
                         AtualizarJogadores(jogador);
                     }
+                    if (partida.JogadorBrancas == null && partida.JogadorPretas == null && partida.Expectadores.Count == 0)
+                    {
+                        SALAS.Remove(usuario.SalaHash);
+                    }
                 }
                 this.Consultar(usuario.SalaHash);
                 USUARIOS.Remove(usuario);
-                SALAS.Remove(usuario.SalaHash);
             }
             return base.OnDisconnected(stopCalled);
         }
