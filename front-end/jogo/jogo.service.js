@@ -32,6 +32,9 @@ function ($, $rootScope) {
             proxy.on('partidaInexistente', function(mensagem){
                 $rootScope.$broadcast('partidaInexistente', mensagem);
             });
+            proxy.on('ativaSom', function(som){
+                $rootScope.$broadcast('ativaSom', som);
+            });
         },
         isConnecting: function () {
             return connection.state === 0;

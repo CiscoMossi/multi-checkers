@@ -1,8 +1,7 @@
 angular.module('app')
-    .controller('JogoCtrl', function ($scope, authService, $location, $timeout, jogoService, $routeParams, $interval, pecaService, $rootScope, $sessionStorage, historicoService, $localStorage) {
+    .controller('JogoCtrl', function ($scope, authService, $location, $timeout, jogoService, $routeParams, $interval, pecaService, $rootScope, $sessionStorage, historicoService, $localStorage, toastr) {
         var vitoria = new Audio('../sounds/vitoria.mp3');
         var movimentacao = new Audio('../sounds/movimentacao_peca.mp3');
-        //var virandoJogador = new Audio('../sounds/virando_jogador.mp3');
         var virandoJogador = new Audio('../sounds/v-jogador.mp3');
         $scope.usuarioLogado = $localStorage.usuarioLogado;
         
@@ -19,7 +18,6 @@ angular.module('app')
         function rodarJogo() {
             jogoService.insereUsuario(authService.getUsuario().Login, $routeParams.urlSala);
             $rootScope.$on('infoJogador', function (event, jogador) {
-                virandoJogador.play();
                 if (jogador == 'BRANCAS') {
                     $sessionStorage.usuarioCor = 0;
                 } else if (jogador == 'PRETAS') {
@@ -33,7 +31,7 @@ angular.module('app')
                 $scope.$apply();
             });
             $rootScope.$on('partidaInexistente', function (event, mensagem) {
-                alert(mensagem);
+                toastr.error(mensagem, 'Error');
                 $location.path('/home');
                 $scope.$apply();
             });
@@ -44,39 +42,35 @@ angular.module('app')
                     jogoService.consultar($routeParams.urlSala);
                 }, 500);
             });
+            $scope.$on('alterarTabuleiro', function(event, resposta){
+                if(resposta == 'Você venceu!'){
+                    toastr.success(resposta, 'Vitória');
+                    return;
+                }
+                toastr.error(mensagem, 'Error');                
+            });
 
+            $scope.$on('ativaSom', function(event, som){
+                if(som == "movimentacao peca"){
+                    $timeout(function () {
+                        movimentacao.play();
+                    }, 1000);
+                }
+                if(som == "troca usuario"){
+                    virandoJogador.play();
+                }
+                if(som == "vitoria"){
+                    vitoria.play();
+                }
+            });
 
             $scope.$on('buscarJogo', function (event, partida) {
-                movimentacao.play();
                 $scope.pecas = partida.Tabuleiro.Pecas;
                 $scope.brancas = $scope.pecas.filter(p => p.Cor == 0);
                 $scope.pretas = $scope.pecas.filter(p => p.Cor == 1);
                 $scope.corJogando = parseInt(partida.Tabuleiro.CorTurnoAtual);
                 $scope.jogadorBrancas = partida.JogadorBrancas
                 $scope.jogadorPretas = partida.JogadorPretas
-                /*
-                if (!!$scope.jogadorBrancas) {
-                    historicoService.buscar($scope.jogadorBrancas.Id)
-                        .then(function (response) {
-                            if (response.data === 0) {
-                                $scope.pontosBrancas = response.data;
-                            } else {
-                                $scope.pontosBrancas = response.data.pontos;
-                            }
-                        })
-                }
-
-                if (!!$scope.jogadorPretas) {
-                    historicoService.buscar($scope.jogadorPretas.Id)
-                        .then(function (response) {
-                            if (response.data === 0) {
-                                $scope.pontosPretas = response.data;
-                            } else {
-                                $scope.pontosPretas = response.data.pontos;
-                            }
-                        })
-                }
-                */
                 if ($sessionStorage.usuarioCor == 0) {
                     $scope.quantidadeDePecasUsuario = $scope.brancas.length;
                     $scope.quantidadeDePecasOponente = $scope.pretas.length;
@@ -88,7 +82,6 @@ angular.module('app')
             });
             $scope.corGanhadora;
             $scope.$on('fimJogo', function (event, mensagem) {
-                vitoria.play();
                 if (mensagem == "BRANCA") {
                     $scope.corGanhadora = 0;
                 } else {
