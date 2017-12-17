@@ -26,6 +26,8 @@ namespace Dominio
 
         public Tabuleiro Tabuleiro { get; private set; }
 
+        public int HistoricoInserido = 0;
+
         public bool PartidaFinalizada { get; private set; }
 
         private void CriarTabuleiro()

@@ -82,6 +82,7 @@ namespace MultiCheckers.Api
                 Clients.Group(salaHash).alterarTabuleiro("Você venceu!");
                 return;
             }
+            Clients.Group(salaHash).ativaSom("movimentacao peca");
             Clients.Group(salaHash).alterarTabuleiro(tabuleiro.CorTurnoAtual.ToString());
         }
 
@@ -104,14 +105,24 @@ namespace MultiCheckers.Api
         public void AtualizarJogadores(JogadorModel jogador)
         {
             Clients.Client(jogador.IdConexao).infoJogador(jogador.Funcao);
+            Clients.Client(jogador.IdConexao).ativaSom("troca usuario");
         }
         public void FinalizarJogo(HistoricoModel historicoModel)
         {
             Usuario usuario = USUARIOS.FirstOrDefault(x => x.Login == historicoModel.LoginUsuario);
             Usuario user = contexto.Usuarios.FirstOrDefault(x => x.Id == usuario.Id);
-            Historico historico = new Historico(user, historicoModel.Venceu, historicoModel.PecasRestantes, historicoModel.PecasEliminadas);
-            contexto.Historicos.Add(historico);
-            contexto.SaveChanges();
+            Partida partida = SALAS.FirstOrDefault(x => x.Key == usuario.SalaHash).Value;
+            if (partida.HistoricoInserido < 2)
+            {
+                if (partida.HistoricoInserido == 0)
+                {
+                    Clients.Group(usuario.SalaHash).ativaSom("vitoria");
+                }
+                Historico historico = new Historico(user, historicoModel.Venceu, historicoModel.PecasRestantes, historicoModel.PecasEliminadas);
+                contexto.Historicos.Add(historico);
+                contexto.SaveChanges();
+                partida.HistoricoInserido++;
+            }
         }
 
         public override Task OnDisconnected(bool stopCalled)
