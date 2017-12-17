@@ -1,5 +1,5 @@
 angular.module('app')
-    .controller('JogoCtrl', function ($scope, authService, $location, $timeout, jogoService, $routeParams, $interval, pecaService, $rootScope, $sessionStorage, historicoService) {
+    .controller('JogoCtrl', function ($scope, authService, $location, $timeout, jogoService, $routeParams, $interval, pecaService, $rootScope, $sessionStorage, historicoService, toastr) {
         var vitoria = new Audio('../sounds/vitoria.mp3');
         var movimentacao = new Audio('../sounds/movimentacao_peca.mp3');
         var virandoJogador = new Audio('../sounds/v-jogador.mp3');
@@ -30,7 +30,7 @@ angular.module('app')
                 $scope.$apply();
             });
             $rootScope.$on('partidaInexistente', function (event, mensagem) {
-                alert(mensagem);
+                toastr.error(mensagem, 'Error');
                 $location.path('/home');
                 $scope.$apply();
             });
@@ -40,6 +40,13 @@ angular.module('app')
                 $timeout(function () {
                     jogoService.consultar($routeParams.urlSala);
                 }, 500);
+            });
+            $scope.$on('alterarTabuleiro', function(event, resposta){
+                if(resposta == 'Você venceu!'){
+                    toastr.success(resposta, 'Vitória');
+                    return;
+                }
+                toastr.error(mensagem, 'Error');                
             });
 
             $scope.$on('ativaSom', function(event, som){

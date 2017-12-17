@@ -79,11 +79,10 @@ namespace MultiCheckers.Api
 
             if (partida.ValidarFimJogo(tabuleiro.CorTurnoAtual))
             {
-                Clients.Group(salaHash).alterarTabuleiro("Você venceu!");
+                Clients.Caller.alterarTabuleiro("Você venceu!");
                 return;
             }
             Clients.Group(salaHash).ativaSom("movimentacao peca");
-            Clients.Group(salaHash).alterarTabuleiro(tabuleiro.CorTurnoAtual.ToString());
         }
 
         public void InserirUsuario(string login, string salaHash)
