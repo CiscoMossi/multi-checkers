@@ -6,7 +6,7 @@
 
 body {
     margin: 0;
-    height: 100vh;
+    height: 100%;
     background-image: url("images/background.jpg");
 }
 
@@ -30,19 +30,32 @@ body {
     padding: 3px;
     right: 5vw;
     top: 5vw;
-    min-height: 83vh;
+    min-height: 550px;
     background-color: #fff;
     border-radius: 5px;
+    z-index: 1;
 }
 
 td {
-    max-width: 10vw;
-    min-width: 12vw;
-    overflow-y: hidden;
+    width: 80px;
+    overflow: hidden;
+}
+
+td.nome {
+    max-width: 165px;
+    min-width: 165px;
 }
 
 tr:hover{
     background-color: #dddddd;
+}
+
+.usuario-leaderboard {
+    filter: drop-shadow(0 0 10px #209cee);
+}
+
+.button-leaderboard {
+    margin-top: 20%;
 }
 
 .sair{
@@ -255,6 +268,10 @@ tr:hover{
     height: 140px;
 }
 
+table {
+    border-collapse: collapse;
+}
+
 table.table {
     font-family: 'Coda', cursive;
     margin: 0;
@@ -280,7 +297,7 @@ table.table {
     top: 150px;
 }
 
-.delete.cadastro-button {
+* button.delete {
     position: absolute;
     top: 5px;
     right: 5px;
@@ -301,7 +318,8 @@ table.table {
 .botoes {
     position: absolute;
     bottom: 10px;
-    left: 40%;
+    left: 50%;
+    transform: translateX(-50%);
 }
 
 #anterior {
@@ -477,9 +495,43 @@ table.table {
         width: 12vw;
         height: 12vw;
     }
+
+    .usuario-home.box {
+        height: 20vh;
+        width: 350px;
+    }
+
+    .usuario-home.box * * .content{
+        height: 20vw;
+        width: 200px;
+        max-width: 200px;
+        left: 45%;
+    }
 }
 
 @media screen and (max-width: 750px){
+    .leaderboard{
+        position: absolute;
+        padding: 3px;
+        min-width: 263px;
+        top: 65vw;
+        left: 50vw;
+        transform: translateX(-50%);
+        background-color: #fff;
+        border-radius: 5px;
+        z-index: 1;
+    }
+    
+    td {
+        width: 20px;
+        overflow: hidden;
+    }
+    
+    td.nome {
+        max-width: 100px;
+        min-width: 100px;
+    }    
+    
     .box {
         max-width: 50%;
         position: fixed;
@@ -491,7 +543,8 @@ table.table {
 
     #usuario1 {
         top: 30px;
-        left: 36%;
+        left: 50%;
+        transform: translateX(-50%)
     }
 
     #usuario2 {
@@ -536,21 +589,35 @@ table.table {
 
     #usuario1 {
         top: 5vh;
-        left: 25%;
+        left: 50%;
+        transform: translateX(-50%)
     }
 
     #usuario2 {
         top: 78vh;
-        left: 25%;
+        left: 50%;
+        transform: translateX(-50%)
     }
 
     .content {
         word-wrap: break-word;
     }
+
+    .usuario-home.box {
+        height: 20vh;
+        width: 350px;
+    }
+
+    .usuario-home.box * * .content{
+        height: 20vw;
+        width: 200px;
+        max-width: 200px;
+        left: 45%;
+    }
 }
 
 @media screen and (max-width: 425px) {
-.url {
+    .url {
         position: fixed;
         left: 75vw;
         top: 15vh;
@@ -598,12 +665,14 @@ table.table {
     
     #usuario1 {
         top: 3.5vh;
-        left: 24%;
+        left: 50%;
+        transform: translateX(-50%)
     }
 
     #usuario2 {
         top: 78vh;
-        left: 24%;
+        left: 50%;
+        transform: translateX(-50%)
     }
 
     .tabuleiro {
@@ -639,6 +708,32 @@ table.table {
         -moz-box-shadow: 7px 10px 19px 0px rgba(0,0,0,0.59);
         box-shadow: 7px 10px 19px 0px rgba(0,0,0,0.59);
         z-index: 1;
+    }
+
+    .usuario-home.box {
+        height: 20vh;
+        width: 260px;
+    }
+
+    .usuario-home.box * * .content{
+        width: 130px;
+        max-width: 130px;
+        font-size: 100%;
+    }
+
+    .botoes {
+        position: absolute;
+        top: 7%;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    #anterior {
+        margin-right: 80px;
+    }
+
+    #proxima {
+
     }
 }
 
@@ -691,12 +786,14 @@ table.table {
     
     #usuario1 {
         top: 2vh;
-        left: 20%;
+        left: 50%;
+        transform: translateX(-50%)
     }
 
     #usuario2 {
         top: 80vh;
-        left: 20%;
+        left: 50%;
+        transform: translateX(-50%)
     }
 
     .media-left {

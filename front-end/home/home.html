@@ -1,4 +1,4 @@
-<div class="box sombra" id="usuario1">
+<div class="box sombra usuario-home" id="usuario1">
   <article class="media">
     <div class="media-left">
       <figure class="image tamanho">
@@ -8,11 +8,22 @@
     <div class="media-content">
       <div class="content">
         <p>
-          <div><strong>{{usuarioLogado.Login}}</strong></div>
-          <div><small><img src="images/icon.png" alt="pontos">{{usuarioLogado.pontos}} pontos</small></div>
-          <div><small>{{usuarioLogado.partidas}} partidas disputadas</small></div>
-          <div><small>{{usuarioLogado.vitorias}} partidas vencidas</small></div>
-          <div><small>{{usuarioLogado.pecasDestruidas}} peças destruídas</small></div>
+          <div>
+            <strong>{{usuarioLogado.Login}}</strong>
+          </div>
+          <div>
+            <small>
+              <img src="images/icon.png" alt="pontos">{{usuarioLogado.pontos}} pontos</small>
+          </div>
+          <div>
+            <small>{{usuarioLogado.partidas}} partidas disputadas</small>
+          </div>
+          <div>
+            <small>{{usuarioLogado.vitorias}} partidas vencidas</small>
+          </div>
+          <div>
+            <small>{{usuarioLogado.pecasDestruidas}} peças destruídas</small>
+          </div>
         </p>
       </div>
     </div>
@@ -23,19 +34,25 @@
   <a class="add custom-button-content" ng-click="gerarPartida()">Criar Sala</a>
 </div>
 
+<div class="custom-button button-leaderboard" ng-if="!statusLeaderboard">
+    <a class="add custom-button-content" ng-click="mostrarLeaderboard()">Mostrar Leaderboard</a>
+  </div>
 
-<div class="leaderboard sombra">
+<div class="leaderboard sombra" ng-if="statusLeaderboard">
+  <button class="delete" ng-click="mostrarLeaderboard()" ng-if="buttonResponsivo"></button>
   <p class="title has-text-info has-text-centered">Leaderboard</p>
   <table class="table">
     <thead>
       <tr>
-        <th><abbr>Usuário</abbr></th>
+        <th>Posição</th>
+        <th>Usuário</th>
         <th>Pontos</th>
       </tr>
     </thead>
     <tbody>
-      <tr ng-repeat="usuario in leaderboard">
-        <td>{{usuario.Login}}</th>
+      <tr ng-repeat="usuario in leaderboard" ng-class="{'usuario-leaderboard': usuario.Login == usuarioLogado.Login}">
+        <td>{{(leaderboard.indexOf(usuario) + 1) + (10 * (pagina - 1))}}</td>
+        <td class="nome">{{usuario.Login}}</td>
         <td>{{usuario.Pontos}}</td>
       </tr>
     </tbody>

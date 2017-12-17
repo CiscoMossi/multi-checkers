@@ -60,4 +60,19 @@ angular.module('app')
                 carregarLeaderBoard($scope.pagina);
             }
         }
+        
+        $scope.buttonResponsivo = document.body.scrollWidth <= 750;
+        $scope.statusLeaderboard = !$scope.buttonResponsivo;
+
+        function setButtonResponsive() {
+            $scope.buttonResponsivo = document.body.scrollWidth <= 750;
+        }
+        
+        window.onresize = function(){
+            $scope.buttonResponsivo = document.body.scrollWidth <= 750;
+        };
+
+        $scope.mostrarLeaderboard = function(){
+            $scope.statusLeaderboard = !$scope.statusLeaderboard;
+        }
     });
