@@ -62,12 +62,10 @@ namespace MultiCheckers.Api
 
             if ((Cor)cor != tabuleiro.CorTurnoAtual)
             {
-                Clients.Caller.alterarTabuleiro("Turno do adversário");
                 return;
             }
             if (!tabuleiro.AtualizarJogada(jogada))
             {
-                Clients.Caller.alterarTabuleiro("Jogada inválida");
                 return;
             }
             if (tabuleiro.Pecas.Count < numPecas)
@@ -79,7 +77,6 @@ namespace MultiCheckers.Api
 
             if (partida.ValidarFimJogo(tabuleiro.CorTurnoAtual))
             {
-                Clients.Caller.alterarTabuleiro("Você venceu!");
                 return;
             }
             Clients.Group(salaHash).ativaSom("movimentacao peca");
@@ -105,6 +102,7 @@ namespace MultiCheckers.Api
         {
             Clients.Client(jogador.IdConexao).infoJogador(jogador.Funcao);
             Clients.Client(jogador.IdConexao).ativaSom("troca usuario");
+            Clients.Client(jogador.IdConexao).alterarTabuleiro("Você é um jogador!");
         }
         public void FinalizarJogo(HistoricoModel historicoModel)
         {
