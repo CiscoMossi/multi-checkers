@@ -42,6 +42,12 @@
     <Reference Include="Castle.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
       <HintPath>..\packages\Castle.Core.4.2.1\lib\net45\Castle.Core.dll</HintPath>
     </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.AspNet.SignalR.Core, Version=2.2.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.SignalR.Core.2.2.2\lib\net45\Microsoft.AspNet.SignalR.Core.dll</HintPath>
     </Reference>
@@ -75,6 +81,7 @@
       <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
@@ -92,6 +99,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CleanUp.cs" />
     <Compile Include="MyHubTest.cs" />
     <Compile Include="PartidaTest.cs" />
     <Compile Include="TabuleiroTest.cs" />
@@ -100,6 +108,7 @@
     <Compile Include="UsuarioTest.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
@@ -110,6 +119,10 @@
     <ProjectReference Include="..\Dominio\MuiltCheckers.Dominio.csproj">
       <Project>{f5302aaa-0fc0-41bb-ab64-31ca7759cae6}</Project>
       <Name>MuiltCheckers.Dominio</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Infra\MuiltCheckers.Infra.csproj">
+      <Project>{60864180-23BF-40B2-BC87-1A4A3FA5EAC0}</Project>
+      <Name>MuiltCheckers.Infra</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

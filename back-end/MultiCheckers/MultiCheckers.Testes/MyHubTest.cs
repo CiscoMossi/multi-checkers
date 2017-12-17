@@ -6,12 +6,23 @@ using System.Dynamic;
 using Microsoft.CSharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Dominio;
+using Infra;
 
 namespace MultiCheckers.Testes
 {
     [TestClass]
     public class MyHubTest
     {
+        public MyHub hub;
+        public MultiCheckersContext context;
+        public MyHubTest()
+        {
+            context = new MultiCheckersContext("MultiCheckersTest");
+            CleanUp.LimparTabelas(context);
+            hub = new MyHub(context);
+            context.Usuarios.Add(new Usuario("testeeee", "testeeee@email.com", "12345"));
+            context.SaveChanges();
+        }
         [TestMethod]
         public void CriarSala()
         {
