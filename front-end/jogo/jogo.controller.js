@@ -4,6 +4,7 @@ angular.module('app')
         var movimentacao = new Audio('../sounds/movimentacao_peca.mp3');
         var virandoJogador = new Audio('../sounds/v-jogador.mp3');
         $scope.usuarioLogado = $localStorage.usuarioLogado;
+        $scope.acabou = false;
         
         if ($routeParams.urlSala == null || $routeParams.urlSala == undefined) {
             $location.path('/home');
@@ -87,16 +88,15 @@ angular.module('app')
                 } else {
                     $scope.corGanhadora = 1;
                 }
-                if (acabouPartida == false) {
+                if ($scope.acabou == false) {
                     if ($scope.corGanhadora == $sessionStorage.usuarioCor) {
                         jogoService.finalizaJogo({ "LoginUsuario": authService.getUsuario().Login, "Venceu": true, "PecasRestantes": $scope.quantidadeDePecasUsuario, "PecasEliminadas": 12 - $scope.quantidadeDePecasOponente });
                     } else if ($scope.corGanhadora != $sessionStorage.usuarioCor) {
                         jogoService.finalizaJogo({ "LoginUsuario": authService.getUsuario().Login, "Venceu": false, "PecasRestantes": $scope.quantidadeDePecasUsuario, "PecasEliminadas": 12 - $scope.quantidadeDePecasOponente });
                     }
-                    acabouPartida = true;
+                    $scope.acabou = true;
                 }
-                modal.style.display = "flex";
-                modal.style.justifyContent = "center";
+                $scope.acabou = true;
                 $scope.$apply();
             });
 
@@ -107,8 +107,6 @@ angular.module('app')
                     $scope.selecionada = peca;
             }
         }
-
-        var modal = document.getElementById('myModal');
 
         $scope.mostrar = false;
 
