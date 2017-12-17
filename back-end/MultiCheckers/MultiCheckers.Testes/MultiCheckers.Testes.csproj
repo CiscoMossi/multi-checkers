@@ -101,6 +101,8 @@
   <ItemGroup>
     <Compile Include="CleanUp.cs" />
     <Compile Include="HistoricoControllerTest.cs" />
+    <Compile Include="JogadorTest.cs" />
+    <Compile Include="HistoricoTest.cs" />
     <Compile Include="MyHubTest.cs" />
     <Compile Include="PartidaTest.cs" />
     <Compile Include="TabuleiroTest.cs" />
