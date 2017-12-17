@@ -109,6 +109,7 @@
     <Compile Include="TabuleiroTest.cs" />
     <Compile Include="PecaTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UsuarioControllerTest.cs" />
     <Compile Include="UsuarioTest.cs" />
   </ItemGroup>
   <ItemGroup>
