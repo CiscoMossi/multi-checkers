@@ -53,5 +53,34 @@ namespace MultiCheckers.Testes
             Assert.IsNotNull(result);
             Assert.IsNotInstanceOfType(result.GetType(), typeof(OkResult));
         }
+        [TestMethod]
+        public void Criar_Usuario()
+        {
+            //Arrange
+            UsuarioController controller = new UsuarioController(contexto);
+            UsuarioModel model = new UsuarioModel();
+            model.Email = "@@@";
+            model.Login = "Login";
+            model.Senha = "senha";
+            //Act
+            var result = controller.AdicionarUsuario(model);
+            //Assert
+            Assert.IsNotInstanceOfType(result.GetType(), typeof(BadRequestErrorMessageResult));
+        }
+        [TestMethod]
+        public void Nao_Criar_Usuario()
+        {
+            //Arrange
+            UsuarioController controller = new UsuarioController(contexto);
+            UsuarioModel model = new UsuarioModel();
+            model.Email = "teste@email.com";
+            model.Login = "teste";
+            model.Senha = "teste";
+            //Act
+            var result = controller.AdicionarUsuario(model);
+            //Assert
+            Assert.IsInstanceOfType(result, typeof(BadRequestErrorMessageResult));
+        }
+
     }
 }

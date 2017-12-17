@@ -139,16 +139,15 @@ namespace MultiCheckers.Testes
                     .Callback<string, string>((cid, groupToJoin) =>
                         groupsJoined.Add(groupToJoin));
             var hub = new MyHub(context);
-            string login = "testeeee";
-            bool sendCalled = false;
-            string resposta = null;
             var mockClients = new Mock<IHubCallerConnectionContext<dynamic>>();
             hub.Clients = mockClients.Object;
             hub.Context = new HubCallerContext(request: null,
                                          connectionId: connectionId);
             hub.Groups = groupManagerMock.Object;
             dynamic all = new ExpandoObject();
-
+            string login = "teste1";
+            bool sendCalled = false;
+            string resposta = null;
             string salaHashCriada = null;
             all.criarSala = new Action<string>((salaHash) => {
                 sendCalled = true;
@@ -165,9 +164,10 @@ namespace MultiCheckers.Testes
             Assert.IsTrue(sendCalled);
             Assert.IsNotNull(resposta);
             Assert.AreEqual("BRANCAS", resposta);
-        }/*
+
+        }
         [TestMethod]
-        public void AtualizarJogador()
+        public void Atualizar_Jogador()
         {
             var groupManagerMock = new Mock<IGroupManager>();
             var connectionId = Guid.NewGuid().ToString();
@@ -189,7 +189,18 @@ namespace MultiCheckers.Testes
             string resposta1 = null;
             string resposta2 = null;
             string resposta3 = null;
-            JogadorModel jogador = new JogadorModel(connectionId, "PRETAS");
+            string login = "teste1";
+            string salaHashCriada = null;
+            all.criarSala = new Action<string>((salaHash) => {
+                salaHashCriada = salaHash;
+            });
+            mockClients.Setup(m => m.Caller).Returns((ExpandoObject)all);
+            hub.CriarSala();
+            all.infoJogador = new Action<string>((resposta) => {
+                
+            });
+            hub.InserirUsuario(login, salaHashCriada);
+            mockClients.Setup(m => m.Caller).Returns((ExpandoObject)all);
             all.infoJogador = new Action<string>((resposta) => {
                 sendCalled1 = true;
                 resposta1 = resposta;
@@ -202,10 +213,56 @@ namespace MultiCheckers.Testes
                 sendCalled3 = true;
                 resposta3 = resposta;
             });
+            mockClients.Setup(m => m.Client(connectionId)).Returns((ExpandoObject)all);
+            JogadorModel jogador = new JogadorModel(connectionId, "BRANCAS");
             hub.AtualizarJogadores(jogador);
             Assert.IsTrue(sendCalled1);
             Assert.IsTrue(sendCalled2);
             Assert.IsTrue(sendCalled3);
-        }*/
+        }
+        [TestMethod]
+        public void Finalizar_Jogo()
+        {
+            var groupManagerMock = new Mock<IGroupManager>();
+            var connectionId = Guid.NewGuid().ToString();
+            var groupsJoined = new List<string>();
+            groupManagerMock.Setup(g => g.Add(connectionId, It.IsAny<string>()))
+                    .Returns(Task.FromResult<object>(null))
+                    .Callback<string, string>((cid, groupToJoin) =>
+                        groupsJoined.Add(groupToJoin));
+            var hub = new MyHub(context);
+            var mockClients = new Mock<IHubCallerConnectionContext<dynamic>>();
+            hub.Clients = mockClients.Object;
+            hub.Context = new HubCallerContext(request: null,
+                                         connectionId: connectionId);
+            hub.Groups = groupManagerMock.Object;
+            dynamic all = new ExpandoObject();
+            string login = "teste4";
+            string salaHashCriada = null;
+            bool sendCalled = false;
+            all.criarSala = new Action<string>((salaHash) => {
+                salaHashCriada = salaHash;
+            });
+            mockClients.Setup(m => m.Caller).Returns((ExpandoObject)all);
+            hub.CriarSala();
+            all.infoJogador = new Action<string>((jogador) => {
+            });
+            mockClients.Setup(m => m.Caller).Returns((ExpandoObject)all);
+            hub.InserirUsuario(login, salaHashCriada);
+            string mensagem = null;
+            var historico = new HistoricoModel();
+            historico.LoginUsuario = "teste4";
+            historico.PecasEliminadas = 12;
+            historico.PecasRestantes = 10;
+            historico.Venceu = true;
+            all.ativaSom = new Action<string>((resposta) => {
+                mensagem = resposta;
+                sendCalled = true;
+            });
+            mockClients.Setup(m => m.Group(salaHashCriada)).Returns((ExpandoObject)all);
+            hub.FinalizarJogo(historico);
+            Assert.IsTrue(sendCalled);
+            Assert.AreEqual("vitoria", mensagem);
+        }
     }
 }
