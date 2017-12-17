@@ -42,7 +42,7 @@ namespace MultiCheckers.Api
             Partida partida = SALAS.FirstOrDefault(s => s.Key == salaHash).Value;
             if (partida == null)
             {
-                Clients.Caller.infoJogador("Esta partida não existe.");
+                Clients.Caller.partidaInexistente("Esta partida não existe.");
                 return;
             }
             Clients.Group(salaHash).buscarJogo(partida);
