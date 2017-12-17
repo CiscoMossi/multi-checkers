@@ -23,6 +23,8 @@
   <a class="url-button custom-button-content" ng-click="mostrarUrl()" ng-show="!mostrar">Compartilhar Sala</a>
 </div>
 
+<span class="tag is-success" ng-if="usuarioLogado.Login !=  jogadorBrancas.Login && usuarioLogado.Login !=  jogadorPretas.Login">ESPECTADOR</span>
+
 <div class="notification url-input" ng-show="mostrar">
   <button class="delete" ng-click="mostrarUrl()"></button>
 
