@@ -504,7 +504,7 @@ table.table {
         height: 27.5vh;
         width: 350px;
         top: 5vh;
-
+        max-height: 170px;
     }
 
     .usuario-home.box * * .content{
