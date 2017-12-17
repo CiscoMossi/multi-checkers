@@ -52,10 +52,6 @@ tr:hover{
     background-color: #dddddd;
 }
 
-.usuario-leaderboard {
-    filter: drop-shadow(0 0 10px #209cee);
-}
-
 .button-leaderboard {
     margin-top: 10%;
 }
@@ -64,6 +60,10 @@ tr:hover{
     position: fixed;
     left: 20px;
     bottom: 20px;
+}
+
+.table tbody tr.is-selected {
+    background-color: #209cee;
 }
 
 .login {

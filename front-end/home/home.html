@@ -50,7 +50,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr ng-repeat="usuario in leaderboard" ng-class="{'usuario-leaderboard': usuario.Login == usuarioLogado.Login}">
+      <tr ng-repeat="usuario in leaderboard" ng-class="{'is-selected': usuario.Login == usuarioLogado.Login}">
         <td>{{(leaderboard.indexOf(usuario) + 1) + (10 * (pagina - 1))}}</td>
         <td class="nome">{{usuario.Login}}</td>
         <td>{{usuario.Pontos}}</td>
