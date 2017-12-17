@@ -1,6 +1,5 @@
 angular.module('app')
     .controller('JogoCtrl', function ($scope, authService, $location, $timeout, jogoService, $routeParams, $interval, pecaService, $rootScope, $sessionStorage, historicoService, $localStorage, toastr) {
-        var acabouPartida = false;
         var vitoria = new Audio('../sounds/vitoria.mp3');
         var movimentacao = new Audio('../sounds/movimentacao_peca.mp3');
         var virandoJogador = new Audio('../sounds/v-jogador.mp3');
