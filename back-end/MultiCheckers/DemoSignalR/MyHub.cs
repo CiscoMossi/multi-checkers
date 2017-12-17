@@ -18,7 +18,15 @@ namespace MultiCheckers.Api
     {
         private static Dictionary<string, Partida> SALAS = new Dictionary<string, Partida>();
         private static List<Usuario> USUARIOS = new List<Usuario>();
-        private IMultiCheckersContext contexto = new MultiCheckersContext();
+        private IMultiCheckersContext contexto;
+        public MyHub()
+        {
+            contexto = new MultiCheckersContext();
+        }
+        public MyHub(IMultiCheckersContext context)
+        {
+            contexto = context;
+        }
 
         public override Task OnConnected()
         {
@@ -138,6 +146,7 @@ namespace MultiCheckers.Api
                     if (partida.JogadorBrancas == null && partida.JogadorPretas == null && partida.Expectadores.Count == 0)
                     {
                         SALAS.Remove(usuario.SalaHash);
+                        return base.OnDisconnected(stopCalled);
                     }
                 }
                 this.Consultar(usuario.SalaHash);
