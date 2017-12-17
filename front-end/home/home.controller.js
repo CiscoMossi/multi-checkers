@@ -61,15 +61,15 @@ angular.module('app')
             }
         }
         
-        $scope.buttonResponsivo = document.body.scrollWidth <= 750;
+        setButtonResponsive();
         $scope.statusLeaderboard = !$scope.buttonResponsivo;
 
         function setButtonResponsive() {
-            $scope.buttonResponsivo = document.body.scrollWidth <= 750;
+            $scope.buttonResponsivo = document.body.scrollWidth <= 950;
         }
         
         window.onresize = function(){
-            $scope.buttonResponsivo = document.body.scrollWidth <= 750;
+            setButtonResponsive();
         };
 
         $scope.mostrarLeaderboard = function(){

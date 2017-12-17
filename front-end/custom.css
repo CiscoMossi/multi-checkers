@@ -1,13 +1,15 @@
 @import url('https://fonts.googleapis.com/css?family=Lobster|Coda');
 
 * {
-    box-sizing: border-box
+    box-sizing: border-box;
+    margin: 0;
 }
 
-body {
-    margin: 0;
-    height: 100%;
+html, body {
+    min-height: 100%;
+    overflow: auto;
     background-image: url("images/background.jpg");
+    height: 100%;
 }
 
 .main {
@@ -55,7 +57,7 @@ tr:hover{
 }
 
 .button-leaderboard {
-    margin-top: 20%;
+    margin-top: 10%;
 }
 
 .sair{
@@ -347,6 +349,8 @@ table.table {
     figure.image.tamanho{
         width: .5vw;
         height: .5vw;
+        min-width: 76px;
+        min-height: 76px;
     }
     
     .content {
@@ -497,8 +501,10 @@ table.table {
     }
 
     .usuario-home.box {
-        height: 20vh;
+        height: 27.5vh;
         width: 350px;
+        top: 5vh;
+
     }
 
     .usuario-home.box * * .content{
@@ -555,6 +561,19 @@ table.table {
     .content {
         word-wrap: break-word;
     }
+
+    .usuario-home.box {
+        height: 18.5vh;
+        width: 250px;
+    }
+
+    .usuario-home.box * * .content{
+        height: 20vw;
+        width: 200px;
+        max-width: 200px;
+        left: 45%;
+        font-size: 90%
+    }
 }
 
 @media screen and (max-width: 650px) {
@@ -570,7 +589,7 @@ table.table {
 
     .box {
         width: 50vw;
-        height: 30vw;
+        height: 22.5vw;
         -webkit-box-shadow: 7px 10px 19px 0px rgba(0,0,0,0.59);
         -moz-box-shadow: 7px 10px 19px 0px rgba(0,0,0,0.59);
         box-shadow: 7px 10px 19px 0px rgba(0,0,0,0.59);
@@ -583,8 +602,8 @@ table.table {
     }
 
     figure.image.tamanho{
-        width: 20vw;
-        height: 20vw;
+        width: 18vw;
+        height: 18vw;
     }
 
     #usuario1 {
@@ -601,6 +620,7 @@ table.table {
 
     .content {
         word-wrap: break-word;
+        font-size: 100%
     }
 
     .usuario-home.box {
@@ -711,7 +731,7 @@ table.table {
     }
 
     .usuario-home.box {
-        height: 20vh;
+        height: 27vh;
         width: 260px;
     }
 
@@ -730,10 +750,6 @@ table.table {
 
     #anterior {
         margin-right: 80px;
-    }
-
-    #proxima {
-
     }
 }
 
