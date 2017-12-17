@@ -838,6 +838,10 @@ table.table {
 }
 
 @media screen and (max-width: 320px) {
+    .titulo {
+        font-size: 300%;
+    }
+
     .url {
         position: fixed;
         left: 55vw;
