@@ -10,6 +10,7 @@ using Infra;
 using Microsoft.AspNet.SignalR;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using MultiCheckers.Api.Models;
 
 namespace MultiCheckers.Testes
 {
@@ -21,7 +22,10 @@ namespace MultiCheckers.Testes
         {
             context = new MultiCheckersContext("MultiCheckersTest");
             CleanUp.LimparTabelas(context);
-            context.Usuarios.Add(new Usuario("testeeee", "testeeee@email.com", "12345"));
+            context.Usuarios.Add(new Usuario("teste1", "testeeee@email.com", "12345"));
+            context.Usuarios.Add(new Usuario("teste2", "teste2@email.com", "teste"));
+            context.Usuarios.Add(new Usuario("teste3", "teste3@email.com", "teste"));
+            context.Usuarios.Add(new Usuario("teste4", "teste4@email.com", "teste"));
             context.SaveChanges();
 
         }
@@ -107,7 +111,7 @@ namespace MultiCheckers.Testes
         [TestMethod]
         public void Inserir_Usuario_Partida_Inexistente()
         {
-            string login = "testeeee";
+            string login = "teste1";
             string hashSala = "";
             bool sendCalled = false;
             string resposta = null;
@@ -161,6 +165,47 @@ namespace MultiCheckers.Testes
             Assert.IsTrue(sendCalled);
             Assert.IsNotNull(resposta);
             Assert.AreEqual("BRANCAS", resposta);
-        }
+        }/*
+        [TestMethod]
+        public void AtualizarJogador()
+        {
+            var groupManagerMock = new Mock<IGroupManager>();
+            var connectionId = Guid.NewGuid().ToString();
+            var groupsJoined = new List<string>();
+            groupManagerMock.Setup(g => g.Add(connectionId, It.IsAny<string>()))
+                    .Returns(Task.FromResult<object>(null))
+                    .Callback<string, string>((cid, groupToJoin) =>
+                        groupsJoined.Add(groupToJoin));
+            var hub = new MyHub(context);
+            var mockClients = new Mock<IHubCallerConnectionContext<dynamic>>();
+            hub.Clients = mockClients.Object;
+            hub.Context = new HubCallerContext(request: null,
+                                         connectionId: connectionId);
+            hub.Groups = groupManagerMock.Object;
+            dynamic all = new ExpandoObject();
+            bool sendCalled1 = false;
+            bool sendCalled2 = false;
+            bool sendCalled3 = false;
+            string resposta1 = null;
+            string resposta2 = null;
+            string resposta3 = null;
+            JogadorModel jogador = new JogadorModel(connectionId, "PRETAS");
+            all.infoJogador = new Action<string>((resposta) => {
+                sendCalled1 = true;
+                resposta1 = resposta;
+            });
+            all.ativaSom = new Action<string>((resposta) => {
+                sendCalled2 = true;
+                resposta2 = resposta;
+            });
+            all.alterarTabuleiro = new Action<string>((resposta) => {
+                sendCalled3 = true;
+                resposta3 = resposta;
+            });
+            hub.AtualizarJogadores(jogador);
+            Assert.IsTrue(sendCalled1);
+            Assert.IsTrue(sendCalled2);
+            Assert.IsTrue(sendCalled3);
+        }*/
     }
 }
