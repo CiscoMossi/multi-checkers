@@ -62,12 +62,12 @@ namespace MultiCheckers.Api
 
             if ((Cor)cor != tabuleiro.CorTurnoAtual)
             {
-                Clients.Group(salaHash).alterarTabuleiro("Turno do adversário");
+                Clients.Caller.alterarTabuleiro("Turno do adversário");
                 return;
             }
             if (!tabuleiro.AtualizarJogada(jogada))
             {
-                Clients.Group(salaHash).alterarTabuleiro("Jogada inválida");
+                Clients.Caller.alterarTabuleiro("Jogada inválida");
                 return;
             }
             if (tabuleiro.Pecas.Count < numPecas)

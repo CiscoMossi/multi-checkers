@@ -46,7 +46,7 @@ angular.module('app')
                     toastr.success(resposta, 'Vitória');
                     return;
                 }
-                toastr.error(mensagem, 'Error');                
+                toastr.error(resposta, 'Error');                
             });
 
             $scope.$on('ativaSom', function(event, som){
