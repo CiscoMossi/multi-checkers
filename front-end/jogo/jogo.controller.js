@@ -1,5 +1,9 @@
 angular.module('app')
     .controller('JogoCtrl', function ($scope, authService, $location, $timeout, jogoService, $routeParams, $interval, pecaService, $rootScope, $sessionStorage, historicoService) {
+        var vitoria = new Audio('../sounds/vitoria.mp3');
+        var movimentacao = new Audio('../sounds/movimentacao_peca.mp3');
+        //var virandoJogador = new Audio('../sounds/virando_jogador.mp3');
+        var virandoJogador = new Audio('../sounds/v-jogador.mp3');
         var acabouPartida = false;
         if ($routeParams.urlSala == null || $routeParams.urlSala == undefined) {
             $location.path('/home');
@@ -14,7 +18,7 @@ angular.module('app')
         function rodarJogo() {
             jogoService.insereUsuario(authService.getUsuario().Login, $routeParams.urlSala);
             $rootScope.$on('infoJogador', function (event, jogador) {
-
+                virandoJogador.play();
                 if (jogador == 'BRANCAS') {
                     $sessionStorage.usuarioCor = 0;
                 } else if (jogador == 'PRETAS') {
@@ -22,7 +26,9 @@ angular.module('app')
                 }
 
                 $scope.corJogador = $sessionStorage.usuarioCor;
-                jogoService.consultar($routeParams.urlSala);
+                $timeout(function(){
+                    jogoService.consultar($routeParams.urlSala);
+                }, 1000);
                 $scope.$apply();
             });
             $rootScope.$on('partidaInexistente', function (event, mensagem) {
@@ -40,6 +46,7 @@ angular.module('app')
 
 
             $scope.$on('buscarJogo', function (event, partida) {
+                movimentacao.play();
                 $scope.pecas = partida.Tabuleiro.Pecas;
                 $scope.brancas = $scope.pecas.filter(p => p.Cor == 0);
                 $scope.pretas = $scope.pecas.filter(p => p.Cor == 1);
@@ -80,6 +87,7 @@ angular.module('app')
             });
             $scope.corGanhadora;
             $scope.$on('fimJogo', function (event, mensagem) {
+                vitoria.play();
                 if (mensagem == "BRANCA") {
                     $scope.corGanhadora = 0;
                 } else {
