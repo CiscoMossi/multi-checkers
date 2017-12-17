@@ -26,6 +26,8 @@ namespace Dominio
 
         public Tabuleiro Tabuleiro { get; private set; }
 
+        public int HistoricoInserido = 0;
+
         public bool PartidaFinalizada { get; private set; }
 
         private void CriarTabuleiro()
@@ -72,51 +74,30 @@ namespace Dominio
             this.PartidaFinalizada = partida;
         }
 
+        public void TransformaJogadorNulo(Usuario usuario)
+        {
+            if (this.JogadorBrancas == usuario)
+            {
+                this.JogadorBrancas = null;
+            }
+            if (this.JogadorPretas == usuario)
+            {
+                this.JogadorPretas = null;
+            }
+        }
+
         public JogadorModel RemoverJogador(Usuario usuario)
         {
             if (Expectadores.Count > 0 && (this.JogadorBrancas == usuario || this.JogadorPretas == usuario))
             {
-                if (this.JogadorBrancas == usuario)
-                {
-                    this.JogadorBrancas = null;
-                }
-                if (this.JogadorPretas == usuario)
-                {
-                    this.JogadorPretas = null;
-                }
-                /*
-                if (this.JogadorBrancas.Equals(usuario))
-                {
-                    this.JogadorBrancas = null;
-                }
-                if (this.JogadorPretas.Equals(usuario))
-                {
-                    this.JogadorPretas = null;
-                }*/
-                
+                this.TransformaJogadorNulo(usuario);                 
                 string funcao = this.InserirUsuario(this.Expectadores[0]);
                 string idConexao = this.Expectadores[0].UserHash;
                 this.Expectadores.RemoveAt(0);
                 return new JogadorModel(idConexao, funcao);
             }else if (Expectadores.Count == 0)
             {
-                if (this.JogadorBrancas == usuario)
-                {
-                    this.JogadorBrancas = null;
-                }
-                if (this.JogadorPretas == usuario)
-                {
-                    this.JogadorPretas = null;
-                }
-                /*
-                if (this.JogadorBrancas.Equals(usuario))
-                {
-                    this.JogadorBrancas = null;
-                }
-                if (this.JogadorPretas.Equals(usuario))
-                {
-                    this.JogadorPretas = null;
-                }*/
+                this.TransformaJogadorNulo(usuario);
                 return null;
             }
             this.Expectadores.Remove(usuario);
