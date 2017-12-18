@@ -1,7 +1,7 @@
-angular.module('app').controller('LoginCtrl', function ($scope, authService, usuarioService, $sessionStorage) {
+angular.module('app').controller('LoginCtrl', function ($scope, authService, usuarioService, $sessionStorage, toastr) {
 
   $scope.auth = authService;
-  $scope.erroNoLogin = false;
+  $scope.mostrar = false;
 
   $scope.$on('isConnect', function (event, connect) {
     $sessionStorage.connect = connect;
@@ -10,29 +10,37 @@ angular.module('app').controller('LoginCtrl', function ($scope, authService, usu
 
   $scope.login = function (usuario) {
     if ($scope.formLogin.$invalid) {
+      toastr.error('Um ou mais campos inválidos.', 'Ops...');
       return;
     }
     authService.login(usuario)
       .then(
       function () {
-        $scope.erroNoLogin = false;
+        toastr.success('Login efetuado com sucesso.', '');
       },
       function (response) {
-        $scope.erroNoLogin = true;
+        toastr.error('Email ou senha inválido.', 'Ops...');
       });
   };
 
-  $scope.fecharCadastro = function () {
-    $scope.mostrarCadastro = false;
+  $scope.mostrarCadastro = function () {
+    $scope.mostrar = !$scope.mostrar;
   }
 
   $scope.cadastrar = function (usuario) {
     if (usuario.email == undefined || usuario.login == undefined || usuario.senha == undefined) {
-      $scope.mostrarCadastro = false;
+      toastr.error('Por favor, corrija as informações inválidas.', 'Ops...');
       return;
     }
-    usuarioService.cadastrar(usuario);
-    $scope.mostrarCadastro = false;
+    usuarioService.cadastrar(usuario).then(
+      function(){
+        toastr.success('Cadastro efetuado.', '');
+        $scope.mostrarCadastro();
+      },
+      function(response){
+        toastr.error(response.data.Message, 'Ops...');
+      }
+    );
   }
 
 });

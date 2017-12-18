@@ -9,7 +9,7 @@ function ($, $rootScope) {
             connection = $.hubConnection('http://multicheckers.azurewebsites.net/api/signalr');
             proxy = connection.createHubProxy('HubMessage');
             connection.start().done(function() {
-                console.log('Conectado');
+                
             });
             proxy.on('buscarJogo', function (tabuleiro) {
                 $rootScope.$broadcast('buscarJogo', tabuleiro);

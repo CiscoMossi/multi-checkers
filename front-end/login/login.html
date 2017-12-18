@@ -15,18 +15,17 @@
                     <input ng-model="usuario.senha" name="senha" class="input" type="password" placeholder="*****" ng-minlength="5" ng-maxlength="50" required  data-ng-class="{'is-danger':formLogin.senha.$invalid && formLogin.senha.$touched}">
                 </div>
             </div>
-            <span ng-show="erroNoLogin" class="help is-danger">Email ou Senha inválidos</span>
             <a class="button is-block is-info" ng-click="login(usuario)">Entrar</a>
         </form>
 
-        <a ng-click="mostrarCadastro = true">
+        <a ng-click="mostrarCadastro()">
             <small>Não possui uma conta? Cadastre-se!</small>
         </a>
     </div>
 </div>
-<div ng-if="mostrarCadastro" class="main">
+<div ng-if="mostrar" class="main">
     <div class="box in-the-middle sombra cadastro">
-        <button class="delete is-small" ng-click="fecharCadastro()"></button>
+        <button class="delete is-small" ng-click="mostrarCadastro()"></button>
         <form novalidate name="formCadastro">
             <div class="field">
                 <label for="email">Email*</label>
@@ -46,6 +45,7 @@
                 <label for="senha">Senha*</label>
                 <div class="control">
                     <input name="senha" ng-model="usuario.senha" class="input" type="password" placeholder="*****" ng-minlength="5" ng-maxlength="50" required  data-ng-class="{'is-danger':formCadastro.senha.$invalid && formCadastro.senha.$touched}">
+                    <span ng-show="formCadastro.senha.$invalid && formCadastro.senha.$touched" class="help is-danger">Sua senha deve ter pelo menos 5 dígitos.</span>
                 </div>
             </div>
             <a class="button is-block is-info" ng-click="cadastrar(usuario)">Cadastrar</a>

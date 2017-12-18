@@ -32,7 +32,7 @@ angular.module('app')
                 $scope.$apply();
             });
             $rootScope.$on('partidaInexistente', function (event, mensagem) {
-                toastr.error(mensagem, 'Error');
+                toastr.error(mensagem, 'Ops...');
                 $location.path('/home');
                 $scope.$apply();
             });
